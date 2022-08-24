@@ -4,5 +4,5 @@ import eu.pbenayoun.thatdmdbapp.repository.model.TMDBMovie
 import kotlinx.coroutines.flow.Flow
 
 interface TMDBRepository {
-    suspend fun getPopularMoviesFlow() : Flow<List<TMDBMovie>>
+    fun getPopularMoviesFlow() : Flow<List<TMDBMovie>>
 }

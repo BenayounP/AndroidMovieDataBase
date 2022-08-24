@@ -8,15 +8,14 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.shareIn
 
-class RetrofitTMDBRepository(private val TMDBDataSource: TMDBDataSource,
-                             private val externalScope : CoroutineScope,
+class RetrofitTMDBRepository(private val TMDBDataSource: TMDBDataSource
 ) : TMDBRepository {
-    override suspend fun getPopularMoviesFlow(): Flow<List<TMDBMovie>> {
+    override fun getPopularMoviesFlow(): Flow<List<TMDBMovie>> {
         return flow{
         val popularMovies = TMDBDataSource.getPopularMovies()
             if (popularMovies.size!=0){
                 emit(popularMovies)
             }
-        }.shareIn(externalScope,started = SharingStarted.WhileSubscribed())
+        }
     }
 }

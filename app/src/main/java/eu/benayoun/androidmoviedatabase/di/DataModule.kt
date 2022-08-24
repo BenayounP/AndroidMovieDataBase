@@ -16,23 +16,6 @@ import kotlinx.coroutines.SupervisorJob
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-// COROUTINE SCOPES
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class ApplicationScopeProvider
-
-@InstallIn(SingletonComponent::class)
-@Module
-object CoroutinesScopesModule {
-    @Singleton
-    @ApplicationScopeProvider
-    @Provides
-    fun providesCoroutineScope(): CoroutineScope {
-        return CoroutineScope(SupervisorJob() + Dispatchers.Default)
-    }
-}
-
-
 // DATA SOURCE
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
@@ -62,9 +45,8 @@ class RepositoriesModule {
     @Singleton
     @Provides
     fun providesRetrofitTMDBRepositoryProvider(
-        @RetrofitTMDBDataSourceProvider retrofitTMDBDataSource: RetrofitTMDBDataSource,
-        @ApplicationScopeProvider externalScope: CoroutineScope
+        @RetrofitTMDBDataSourceProvider TMDBDataSource: TMDBDataSource
     ): TMDBRepository {
-        return RetrofitTMDBRepository(retrofitTMDBDataSource, externalScope)
+        return RetrofitTMDBRepository(TMDBDataSource)
     }
 }

@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase
+package eu.benayoun.androidmoviedatabase.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

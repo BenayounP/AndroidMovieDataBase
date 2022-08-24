@@ -1,34 +1,29 @@
 package eu.benayoun.androidmoviedatabase.di
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import eu.benayoun.androidmoviedatabase.data.repository.RetrofitTMDBRepository
-import eu.benayoun.androidmoviedatabase.data.repository.TMDBRepository
-import eu.benayoun.androidmoviedatabase.data.source.TMDBDataSource
-import eu.benayoun.androidmoviedatabase.data.source.retrofit.RetrofitTMDBDataSource
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import eu.benayoun.androidmoviedatabase.data.repository.RetrofitTmdbRepository
+import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
+import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
+import eu.benayoun.androidmoviedatabase.data.source.retrofit.RetrofitTmdbDataSource
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
 // DATA SOURCE
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RetrofitTMDBDataSourceProvider
+annotation class RetrofitTmdbDataSourceProvider
 
 @Module
 @InstallIn(SingletonComponent::class)
 class DataSourceModule {
-    @RetrofitTMDBDataSourceProvider
+    @RetrofitTmdbDataSourceProvider
     @Singleton
     @Provides
-    fun providesTMDBDataSource() : TMDBDataSource {
-        return RetrofitTMDBDataSource()
+    fun providesTmdbDataSource() : TmdbDataSource {
+        return RetrofitTmdbDataSource()
     }
 }
 
@@ -36,17 +31,17 @@ class DataSourceModule {
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RetrofitTMDBRepositoryProvider
+annotation class RetrofitTmdbRepositoryProvider
 
 @Module
 @InstallIn(SingletonComponent::class)
 class RepositoriesModule {
-    @RetrofitTMDBRepositoryProvider
+    @RetrofitTmdbRepositoryProvider
     @Singleton
     @Provides
     fun providesRetrofitTMDBRepositoryProvider(
-        @RetrofitTMDBDataSourceProvider TMDBDataSource: TMDBDataSource
-    ): TMDBRepository {
-        return RetrofitTMDBRepository(TMDBDataSource)
+        @RetrofitTmdbDataSourceProvider TMDBDataSource: TmdbDataSource
+    ): TmdbRepository {
+        return RetrofitTmdbRepository(TMDBDataSource)
     }
 }

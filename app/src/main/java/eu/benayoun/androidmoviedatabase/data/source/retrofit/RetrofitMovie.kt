@@ -1,8 +1,8 @@
 package eu.benayoun.androidmoviedatabase.data.source.retrofit
 
 import com.google.gson.annotations.SerializedName
-import eu.pbenayoun.thatdmdbapp.repository.model.TMDBMovie
-import eu.pbenayoun.thatdmdbapp.repository.model.TMDBposterPathprefix
+import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
+import eu.pbenayoun.thatdmdbapp.repository.model.tmdbPosterPathprefix
 
 data class RetrofitMovie(
     @SerializedName("id") val id: Long,
@@ -13,7 +13,7 @@ data class RetrofitMovie(
     @SerializedName("vote_average") val rating: Float,
     @SerializedName("release_date") val releaseDate: String
 ){
-    fun mapToTMDBMovie() : TMDBMovie{
-        return TMDBMovie(id,title,TMDBposterPathprefix+posterPath,releaseDate)
+    fun mapToTmdbMovie() : TmdbMovie{
+        return TmdbMovie(id,title,tmdbPosterPathprefix+posterPath,releaseDate)
     }
 }

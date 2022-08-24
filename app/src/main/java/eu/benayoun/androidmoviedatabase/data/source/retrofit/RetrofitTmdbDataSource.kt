@@ -1,14 +1,12 @@
 package eu.benayoun.androidmoviedatabase.data.source.retrofit
 
-import eu.benayoun.androidmoviedatabase.data.source.TMDBDataSource
-import eu.pbenayoun.thatdmdbapp.repository.model.TMDBMovie
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
+import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RetrofitTMDBDataSource: TMDBDataSource {
+class RetrofitTmdbDataSource: TmdbDataSource {
     private val retrofitPopularMoviesService: RetrofitPopularMoviesService
 
     init {
@@ -20,17 +18,17 @@ class RetrofitTMDBDataSource: TMDBDataSource {
         retrofitPopularMoviesService = retrofit.create(RetrofitPopularMoviesService::class.java)
     }
 
-    override suspend fun getPopularMovies() : List<TMDBMovie>  {
+    override suspend fun getPopularMovies() : List<TmdbMovie>  {
         val response = retrofitPopularMoviesService.getPopularMovies()
-        var TMDBMovies : List<TMDBMovie>  = listOf()
+        var TmdbMovies : List<TmdbMovie>  = listOf()
         if (response.isSuccessful) {
             val retrofitMovies = response.body()?.retrofitMovies
             if (retrofitMovies!=null){
-                TMDBMovies= retrofitMovies.map{
-                        retrofitMovie -> retrofitMovie.mapToTMDBMovie()
+                TmdbMovies= retrofitMovies.map{
+                        retrofitMovie -> retrofitMovie.mapToTmdbMovie()
                 }
             }
         }
-        return TMDBMovies
+        return TmdbMovies
     }
 }

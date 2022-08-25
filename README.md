@@ -55,5 +55,8 @@ Added hilt and...project cannot compile. Seems to have some incompatibility betw
 #### 23/08/22
 Ok the repository is created and "ok" to create the Flooooooow (so much preparation before the fun)
 
-#### 23/08/22
-Flow works (yes with logs). Preparing Room for caching  
+#### 24/08/22
+Flow works (with logs). Preparing Room for caching  
+
+#### 25/08/22
+Caching works with Room. Next Step: Compose!

@@ -1,8 +1,9 @@
-package eu.benayoun.androidmoviedatabase.data.repository.room
+package eu.benayoun.androidmoviedatabase.data.repository.cache.room
 
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 
 @Entity(tableName = TmdbDataBase.DB_NAME)
@@ -20,4 +21,14 @@ class TmdbMovieEntity(
         posterUrl = tmdbMovie.posterUrl,
         releaseDate = tmdbMovie.releaseDate
     )
+
+    fun toTmdbMovie(): TmdbMovie {
+        return TmdbMovie(
+            id = this.id,
+            title = this.title,
+            posterUrl = this.posterUrl,
+            releaseDate = this.releaseDate
+        )
+    }
+
 }

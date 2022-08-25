@@ -7,6 +7,8 @@ import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import eu.benayoun.androidmoviedatabase.di.RetrofitTmdbRepositoryProvider
 import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,7 +16,7 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor (@RetrofitTmdbRepositoryProvider private val tmdbRepository: TmdbRepository) : ViewModel(){
    fun getPopularMoviesFlow() =
        viewModelScope.launch{
-           tmdbRepository.getPopularMoviesFlow().collect{ TmdbMovies : List<TmdbMovie> ->
+           tmdbRepository.getPopularMoviesFlow().flowOn(Dispatchers.IO).collect{ TmdbMovies : List<TmdbMovie> ->
                 for(tmdbMovie in TmdbMovies){
                     LogUtils.v("Movie: ${tmdbMovie.title}")
                 }

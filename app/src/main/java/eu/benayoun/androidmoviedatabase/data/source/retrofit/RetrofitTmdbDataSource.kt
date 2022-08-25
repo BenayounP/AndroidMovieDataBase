@@ -1,6 +1,7 @@
 package eu.benayoun.androidmoviedatabase.data.source.retrofit
 
 import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
+import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,16 +20,25 @@ class RetrofitTmdbDataSource: TmdbDataSource {
     }
 
     override suspend fun getPopularMovies() : List<TmdbMovie>  {
-        val response = retrofitPopularMoviesService.getPopularMovies()
+        LogUtils.e("---------- retrofit step1")
         var TmdbMovies : List<TmdbMovie>  = listOf()
-        if (response.isSuccessful) {
-            val retrofitMovies = response.body()?.retrofitMovies
-            if (retrofitMovies!=null){
-                TmdbMovies= retrofitMovies.map{
-                        retrofitMovie -> retrofitMovie.mapToTmdbMovie()
+        try {
+            val response = retrofitPopularMoviesService.getPopularMovies()
+            if (response.isSuccessful) {
+                LogUtils.e("---------- retrofit step3")
+                val retrofitMovies = response.body()?.retrofitMovies
+                if (retrofitMovies!=null){
+                    LogUtils.e("---------- retrofit step4")
+                    TmdbMovies= retrofitMovies.map{
+                            retrofitMovie -> retrofitMovie.mapToTmdbMovie()
+                    }
                 }
             }
+        }  catch (e: Exception) {
+            LogUtils.e("retrofit exception: ${e.localizedMessage}.")
         }
+
+        LogUtils.e("---------- retrofit end")
         return TmdbMovies
     }
 }

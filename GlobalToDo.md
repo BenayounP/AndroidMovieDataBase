@@ -4,4 +4,5 @@
 * Work on dark theme colors
 * Add a config screen to change theme (light or dark)
 * Change the "compose" package name?
+* Paging Data? 
 * * Compare code with [now in android](https://github.com/android/nowinandroid)

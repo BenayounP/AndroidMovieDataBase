@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.ui.compose.screens
+package eu.benayoun.androidmoviedatabase.ui.compose.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,18 +8,26 @@ import eu.benayoun.androidmoviedatabase.di.RetrofitTmdbRepositoryProvider
 import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor (@RetrofitTmdbRepositoryProvider private val tmdbRepository: TmdbRepository) : ViewModel(){
-   fun getPopularMoviesFlow() =
-       viewModelScope.launch{
-           tmdbRepository.getPopularMoviesFlow().flowOn(Dispatchers.IO).collect{ TmdbMovies : List<TmdbMovie> ->
-                for(tmdbMovie in TmdbMovies){
+    private val _movieListState = MutableStateFlow<List<TmdbMovie>>(listOf())
+    val movieListState : StateFlow<List<TmdbMovie>>
+    get() = _movieListState
+
+    fun getPopularMoviesFlow() =
+        viewModelScope.launch{
+            tmdbRepository.getPopularMoviesFlow().flowOn(Dispatchers.IO).collect{ tmdbMovies : List<TmdbMovie> ->
+                LogUtils.v("MFetch movies")
+                _movieListState.value=tmdbMovies
+                for(tmdbMovie in tmdbMovies){
                     LogUtils.v("Movie: ${tmdbMovie.title}")
                 }
-           }
-   }
+            }
+        }
 }

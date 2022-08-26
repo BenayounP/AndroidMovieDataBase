@@ -50,10 +50,10 @@ Began from data source. Some retrofit. Copy pasted some old code that worked wit
 Worked on retrofit and flow. Found some nice medium article. Created Bibliography and almost overengineered the app with a Flow to monitor internet connection status
 
 #### 22/08/22
-Added hilt and...project cannot compile. Seems to have some incompatibility between Compose Compiler and/or gradle and/or kotlin version. Tried "random" values (and look at how it was made on an recent project) to make it work! 
+Added Hilt and...project cannot compile. Seems to have some incompatibility between Compose Compiler and/or gradle and/or kotlin version. Tried "random" values (and look at how it was made on an recent project) to make it work! 
 
 #### 23/08/22
-Ok the repository is created and "ok" to create the Flooooooow (so much preparation before the fun)
+Repository created and "ok" to create the Flooooooow (so much preparation before the fun)
 
 #### 24/08/22
 Flow works (with logs). Preparing Room for caching  

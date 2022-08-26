@@ -20,15 +20,12 @@ class RetrofitTmdbDataSource: TmdbDataSource {
     }
 
     override suspend fun getPopularMovies() : List<TmdbMovie>  {
-        LogUtils.e("---------- retrofit step1")
         var TmdbMovies : List<TmdbMovie>  = listOf()
         try {
             val response = retrofitPopularMoviesService.getPopularMovies()
             if (response.isSuccessful) {
-                LogUtils.e("---------- retrofit step3")
                 val retrofitMovies = response.body()?.retrofitMovies
                 if (retrofitMovies!=null){
-                    LogUtils.e("---------- retrofit step4")
                     TmdbMovies= retrofitMovies.map{
                             retrofitMovie -> retrofitMovie.mapToTmdbMovie()
                     }
@@ -38,7 +35,6 @@ class RetrofitTmdbDataSource: TmdbDataSource {
             LogUtils.e("retrofit exception: ${e.localizedMessage}.")
         }
 
-        LogUtils.e("---------- retrofit end")
         return TmdbMovies
     }
 }

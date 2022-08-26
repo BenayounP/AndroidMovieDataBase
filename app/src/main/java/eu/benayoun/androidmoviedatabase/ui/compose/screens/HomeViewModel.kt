@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.ui
+package eu.benayoun.androidmoviedatabase.ui.compose.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor (@RetrofitTmdbRepositoryProvider private val tmdbRepository: TmdbRepository) : ViewModel(){
+class HomeViewModel @Inject constructor (@RetrofitTmdbRepositoryProvider private val tmdbRepository: TmdbRepository) : ViewModel(){
    fun getPopularMoviesFlow() =
        viewModelScope.launch{
            tmdbRepository.getPopularMoviesFlow().flowOn(Dispatchers.IO).collect{ TmdbMovies : List<TmdbMovie> ->

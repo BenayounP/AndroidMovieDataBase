@@ -8,3 +8,6 @@ import androidx.compose.ui.graphics.Color
 val vertAmelie = Color(0xFF006F1A)
 val vertFonceAmelie = Color(0xFF015E40)
 val orangeAmelie = Color(0xFFCA7900)
+val concrete= Color(0xFF95a5a6)
+val concrete2= Color(0xFF7f8c8d)
+val concrete3= Color(0xFF324B4D)

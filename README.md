@@ -41,7 +41,7 @@ This project is licensed under the [Apache License 2.0](https://opensource.org/l
 ## Dev Diary
 
 #### 16/08/22
-First day. Configured project and already some questions (Will i make many gradle modules?) 
+First day. Configured project and already some questions (Will I make many gradle modules?) 
 
 #### 17/08/22
 Began from data source. Some retrofit. Copy pasted some old code that worked with...coroutines, not flow!
@@ -60,3 +60,9 @@ Flow works (with logs). Preparing Room for caching
 
 #### 25/08/22
 Caching works with Room. Next Step: Compose!
+
+#### 26/08/22
+And Compose basically works (displaying title). Having the feeling that once bases are here (a good repository for example), things go faster
+
+#### 29/08/22
+Included Coil (so we can display movie posters) in few lines and....what? 10 minutes? 😯. And fought with colors for 1 hour...🤷

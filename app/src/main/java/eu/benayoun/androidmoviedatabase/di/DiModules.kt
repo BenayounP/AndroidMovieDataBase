@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import eu.benayoun.androidmoviedatabase.data.repository.RetrofitTmdbRepository
+import eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import eu.benayoun.androidmoviedatabase.data.repository.cache.TmdbCache
 import eu.benayoun.androidmoviedatabase.data.repository.cache.room.RoomTmdbCache
@@ -61,7 +61,7 @@ class RoomModule{
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RetrofitTmdbRepositoryProvider
+annotation class DefaultTmdbRepositoryProvider
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
@@ -78,13 +78,13 @@ class RepositoriesModule {
         return RoomTmdbCache(tmdbDao)
     }
 
-    @RetrofitTmdbRepositoryProvider
+    @DefaultTmdbRepositoryProvider
     @Singleton
     @Provides
     fun providesRetrofitTMDBRepositoryProvider(
         @RetrofitTmdbDataSourceProvider TMDBDataSource: TmdbDataSource,
         @RoomTmdbCacheProvider tmdbCache: TmdbCache
     ): TmdbRepository {
-        return RetrofitTmdbRepository(TMDBDataSource,tmdbCache)
+        return DefaultTmdbRepository(TMDBDataSource,tmdbCache)
     }
 }

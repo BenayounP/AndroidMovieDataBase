@@ -66,3 +66,6 @@ And Compose basically works (displaying title). Having the feeling that once bas
 
 #### 29/08/22
 Included Coil (so we can display movie posters) in few lines and....what? 10 minutes? 😯. And fought with colors for 1 hour...🤷
+
+#### 30/08/22
+What have I done? I wasn't satisfied by the way I processed the TMDB APi response. It was the movie list if ok and an empty list if not. Now I have a complex system of sealed class to  process success or failure and trace the reason (no internet, exception etc...).

@@ -23,11 +23,7 @@ class HomeViewModel @Inject constructor (@RetrofitTmdbRepositoryProvider private
     fun getPopularMoviesFlow() =
         viewModelScope.launch{
             tmdbRepository.getPopularMoviesFlow().flowOn(Dispatchers.IO).collect{ tmdbMovies : List<TmdbMovie> ->
-                LogUtils.v("MFetch movies")
                 _movieListState.value=tmdbMovies
-                for(tmdbMovie in tmdbMovies){
-                    LogUtils.v("Movie: ${tmdbMovie.title}")
-                }
             }
         }
 }

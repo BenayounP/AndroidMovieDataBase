@@ -19,16 +19,17 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import eu.benayoun.androidmoviedatabase.R
 import eu.benayoun.androidmoviedatabase.ui.theme.concrete
+import eu.benayoun.androidmoviedatabase.ui.theme.concrete3
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 
 @Composable
 fun MovieItem(tmdbMovie: TmdbMovie,
               modifier: Modifier = Modifier) {
-    Card(colors = CardDefaults.cardColors(
+    Card(
+        colors = CardDefaults.cardColors(
        containerColor = MaterialTheme.colorScheme.surface
        )
     ) {
-        Column() {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(tmdbMovie.posterUrl)
@@ -42,6 +43,6 @@ fun MovieItem(tmdbMovie: TmdbMovie,
             Text(modifier = Modifier.padding(start = 4.dp),
                 text = tmdbMovie.title
             )
-        }
+            Spacer(modifier = Modifier.height(8.dp))
     }
 }

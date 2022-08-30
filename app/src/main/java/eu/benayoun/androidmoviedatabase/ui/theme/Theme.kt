@@ -14,20 +14,21 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
+import eu.benayoun.androidmoviedatabase.utils.LogUtils
 
 private val DarkColorScheme = darkColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
     tertiary = orangeAmelie,
-    surface = concrete,
-    onSurface = concrete3
+    surface = concrete3,
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
     tertiary = orangeAmelie,
-    surface = concrete3
+    surface = concrete,
+    onSurface = concrete3
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

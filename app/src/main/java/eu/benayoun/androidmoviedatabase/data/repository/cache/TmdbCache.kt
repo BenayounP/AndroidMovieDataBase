@@ -9,6 +9,6 @@ import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 
 
 interface TmdbCache {
-    suspend fun getTmdbMovies(): List<TmdbMovie>
-    suspend fun saveTmdbMovies(movies: List<TmdbMovie>)
+    suspend fun getTmdbMovieList(): List<TmdbMovie>
+    suspend fun saveTmdbMovieList(movieList: List<TmdbMovie>)
 }

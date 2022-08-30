@@ -28,8 +28,8 @@ class DataSourceModule {
     @RetrofitTmdbDataSourceProvider
     @Singleton
     @Provides
-    fun providesTmdbDataSource() : TmdbDataSource {
-        return RetrofitTmdbDataSource()
+    fun providesTmdbDataSource(@ApplicationContext context: Context) : TmdbDataSource {
+        return RetrofitTmdbDataSource(context)
     }
 }
 

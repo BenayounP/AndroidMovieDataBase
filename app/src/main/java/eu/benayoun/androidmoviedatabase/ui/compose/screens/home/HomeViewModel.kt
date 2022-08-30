@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import eu.benayoun.androidmoviedatabase.di.RetrofitTmdbRepositoryProvider
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +21,7 @@ class HomeViewModel @Inject constructor (@RetrofitTmdbRepositoryProvider private
 
     fun getPopularMoviesFlow() =
         viewModelScope.launch{
-            tmdbRepository.getPopularMoviesFlow().flowOn(Dispatchers.IO).collect{ tmdbMovies : List<TmdbMovie> ->
+            tmdbRepository.getPopularMovieListFlow().flowOn(Dispatchers.IO).collect{ tmdbMovies : List<TmdbMovie> ->
                 _movieListState.value=tmdbMovies
             }
         }

@@ -19,16 +19,13 @@ import eu.benayoun.androidmoviedatabase.utils.LogUtils
 private val DarkColorScheme = darkColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
-    tertiary = orangeAmelie,
-    surface = concrete3,
+    tertiary = orangeAmelie
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
-    tertiary = orangeAmelie,
-    surface = concrete,
-    onSurface = concrete3
+    tertiary = orangeAmelie
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

@@ -18,7 +18,7 @@ fun  MovieGrid(tmdbMovieList: List<TmdbMovie>,modifier: Modifier = Modifier) {
     LazyVerticalGrid(columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(basicPading),
         horizontalArrangement = Arrangement.spacedBy(basicPading),
-        modifier = Modifier.padding(basicPading)
+        modifier = Modifier.padding(horizontal = basicPading)
     ) {
         items(items = tmdbMovieList){tmdbMovie ->
             MovieItem(tmdbMovie)

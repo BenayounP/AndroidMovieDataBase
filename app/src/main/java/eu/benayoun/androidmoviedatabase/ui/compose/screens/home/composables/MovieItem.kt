@@ -25,24 +25,20 @@ import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 @Composable
 fun MovieItem(tmdbMovie: TmdbMovie,
               modifier: Modifier = Modifier) {
-    Card(
-        colors = CardDefaults.cardColors(
-       containerColor = MaterialTheme.colorScheme.surface
-       )
-    ) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(tmdbMovie.posterUrl)
-                    .crossfade(true)
-                    .build(),
-                placeholder = painterResource(R.drawable.ic_baseline_movie),
-                contentDescription = "",
-                contentScale = ContentScale.FillWidth
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(modifier = Modifier.padding(start = 4.dp),
-                text = tmdbMovie.title
-            )
-            Spacer(modifier = Modifier.height(8.dp))
+    Column() {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(tmdbMovie.posterUrl)
+                .crossfade(true)
+                .build(),
+            placeholder = painterResource(R.drawable.ic_baseline_movie),
+            contentDescription = "",
+            contentScale = ContentScale.FillWidth
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(modifier = Modifier.padding(start = 4.dp),
+            text = tmdbMovie.title
+        )
+        Spacer(modifier = Modifier.height(8.dp))
     }
 }

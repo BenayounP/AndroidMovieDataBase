@@ -4,9 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import eu.benayoun.androidmoviedatabase.data.source.TmdbAPIError
+import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
+import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse
 import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
-import eu.benayoun.androidmoviedatabase.data.source.TmdbAPIResponse
 import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,11 +25,14 @@ class RetrofitTmdbDataSource(val context: Context): TmdbDataSource {
     }
 
     override suspend fun getPopularMovies() : TmdbAPIResponse {
+        LogUtils.v("retrofit step 1: check internet connectivity")
         if (!isNetworkConnected(context)){
             return TmdbAPIResponse.Error(TmdbAPIError.NoInternet())
         }
+        LogUtils.v("retrofit step 2: get movies via API")
         try {
             val response = retrofitPopularMoviesService.getPopularMovies()
+            LogUtils.v("retrofit step 3: process response")
             if (response.isSuccessful) {
                 val retrofitMovies = response.body()?.retrofitMovies
                 if (retrofitMovies!=null){
@@ -45,11 +48,12 @@ class RetrofitTmdbDataSource(val context: Context): TmdbDataSource {
                 return TmdbAPIResponse.Error(TmdbAPIError.ToolError())
             }
         }  catch (e: Exception) {
+            LogUtils.v("retrofit step 3: process EXCEPTION")
             return TmdbAPIResponse.Error(TmdbAPIError.Exception(e.localizedMessage))
         }
     }
 
-    fun isNetworkConnected(context: Context): Boolean {
+    private fun isNetworkConnected(context: Context): Boolean {
         // register activity with the connectivity manager service
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 

@@ -9,11 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.HomeViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.MovieGrid
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     viewModel.getPopularMoviesFlow()
+    viewModel.getTmdbOriginFlow()
     Surface(
     modifier = Modifier.fillMaxSize(),
     color = MaterialTheme.colorScheme.background

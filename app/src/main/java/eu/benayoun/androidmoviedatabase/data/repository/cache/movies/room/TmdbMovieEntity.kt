@@ -1,9 +1,8 @@
-package eu.benayoun.androidmoviedatabase.data.repository.cache.room
+package eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room
 
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 
 @Entity(tableName = TmdbDataBase.DB_NAME)

@@ -1,9 +1,9 @@
-package eu.benayoun.androidmoviedatabase.data.repository.cache.room
+package eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room
 
 import android.content.Context
-import androidx.room.*
-import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
-
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 
 @Database(entities = [TmdbMovieEntity::class], version = 1)

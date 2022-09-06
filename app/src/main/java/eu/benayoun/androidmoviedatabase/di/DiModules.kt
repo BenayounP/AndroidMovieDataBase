@@ -8,10 +8,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
+import eu.benayoun.androidmoviedatabase.data.repository.cache.RoomDataStoreTmdbCache
 import eu.benayoun.androidmoviedatabase.data.repository.cache.TmdbCache
-import eu.benayoun.androidmoviedatabase.data.repository.cache.room.RoomTmdbCache
-import eu.benayoun.androidmoviedatabase.data.repository.cache.room.TmdbDao
-import eu.benayoun.androidmoviedatabase.data.repository.cache.room.TmdbDataBase
+import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.TmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.datastore.DataStoreTmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDao
+import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDataBase
 import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.retrofit.RetrofitTmdbDataSource
 import javax.inject.Qualifier
@@ -65,17 +67,29 @@ annotation class DefaultTmdbRepositoryProvider
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
+annotation class DataStoreTmdbMetaDataCacheProvider
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
 annotation class RoomTmdbCacheProvider
 
 @Module
 @InstallIn(SingletonComponent::class)
 class RepositoriesModule {
+    @DataStoreTmdbMetaDataCacheProvider
+    @Singleton
+    @Provides
+    fun providesDataStoreTmdbMetaDataCache(@ApplicationContext appContext: Context) : TmdbMetaDataCache
+    {
+        return DataStoreTmdbMetaDataCache(appContext)
+    }
+
     @RoomTmdbCacheProvider
     @Singleton
     @Provides
-    fun providesRoomTmdbCache(@TmdbDaoProvider tmdbDao: TmdbDao) :TmdbCache
+    fun providesRoomDataStoreTmdbCache(@TmdbDaoProvider tmdbDao: TmdbDao, @DataStoreTmdbMetaDataCacheProvider tmdbMetaDataCache : TmdbMetaDataCache) : TmdbCache
     {
-        return RoomTmdbCache(tmdbDao)
+        return RoomDataStoreTmdbCache(tmdbDao, tmdbMetaDataCache)
     }
 
     @DefaultTmdbRepositoryProvider

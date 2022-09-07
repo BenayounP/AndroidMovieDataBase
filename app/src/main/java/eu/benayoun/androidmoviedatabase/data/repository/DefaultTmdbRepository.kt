@@ -1,6 +1,7 @@
 package eu.benayoun.androidmoviedatabase.data.repository
 
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbOrigin
 import eu.benayoun.androidmoviedatabase.data.repository.cache.TmdbCache
 import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
@@ -14,6 +15,7 @@ class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
 ) : TmdbRepository {
     override suspend fun getPopularMovieListFlow(): Flow<List<TmdbMovie>> {
         return flow{
+            var lastInternetSuccessTimeStamp : Long=-1
             var tmdbOrigin : TmdbOrigin
             var tmdbPopularMovieList : List<TmdbMovie> = listOf()
             // Step 1: try to get data on TMDB Server
@@ -24,6 +26,7 @@ class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
             if (tmdbAPIResponse is TmdbAPIResponse.Success){
                 LogUtils.v("Step 2: There is data: save data in cache")
                 tmdbOrigin = TmdbOrigin.Internet()
+                lastInternetSuccessTimeStamp = System.currentTimeMillis()
                 tmdbPopularMovieList = tmdbAPIResponse.tmdbMovieList
                 tmdbCache.saveTmdbMovieList(tmdbPopularMovieList)
             }
@@ -38,10 +41,12 @@ class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
 
             // Step 4: emit
             LogUtils.v("Step 4: Emit")
-            tmdbCache.saveTmdbOrigin(tmdbOrigin)
+            tmdbCache.saveTmdbMetaData(TmdbMetadata(tmdbOrigin,lastInternetSuccessTimeStamp))
             emit(tmdbPopularMovieList)
         }
     }
 
-    override suspend fun getTmdbOriginFlow(): Flow<TmdbOrigin>  = tmdbCache.loadTmdbOrigin()
+    override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbCache.getTmdbMetaDataFlow()
+
+
 }

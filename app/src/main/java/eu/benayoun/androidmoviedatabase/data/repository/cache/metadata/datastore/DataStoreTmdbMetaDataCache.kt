@@ -5,6 +5,7 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.dataStore
 import eu.benayoun.androidmoviedatabase.TmdbMetadataSerialized
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbOrigin
 import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.TmdbMetaDataCache
 import kotlinx.coroutines.flow.Flow
@@ -25,13 +26,14 @@ class DataStoreTmdbMetaDataCache(appContext: Context) :
     TmdbMetaDataCache {
     private  val tmdbOriginDataStore = appContext.tmdbOriginDataStore
 
-    override fun getTmdbOriginFlow(): Flow<TmdbOrigin> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
-        mapToOrigin(tmdbMetadataSerialized)
+    override fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
+        TmdbMetadata(mapToOrigin(tmdbMetadataSerialized),tmdbMetadataSerialized.lastInternetSuccessTimeStamp)
     }
 
-    override suspend fun saveTmdbOrigin(tmdbOrigin: TmdbOrigin){
+    override suspend fun saveTmdbMetaData(tmdbMetadata: TmdbMetadata){
         tmdbOriginDataStore.updateData{tmdbMetadataSerialized: TmdbMetadataSerialized ->
            val builder = tmdbMetadataSerialized.toBuilder()
+            val tmdbOrigin = tmdbMetadata.tmdbOrigin
             when(tmdbOrigin){
                 is TmdbOrigin.Internet -> builder.lastInternetSuccessTimeStamp = System.currentTimeMillis()
                 is TmdbOrigin.Cache -> processTmdbAPIError(tmdbOrigin.tmdbAPIError,builder)

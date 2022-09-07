@@ -1,5 +1,6 @@
 package eu.benayoun.androidmoviedatabase.data.repository.cache
 
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbOrigin
 import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.TmdbMetaDataCache
 import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDao
@@ -19,9 +20,7 @@ class RoomDataStoreTmdbCache(private val tmdbDao: TmdbDao, private val tmdbMetaD
         tmdbDao.insertAll(movieList.map{ TmdbMovieEntity(it) })
     }
 
-    override suspend fun saveTmdbOrigin(tmdbOrigin: TmdbOrigin) {
-        tmdbMetaDataCache.saveTmdbOrigin(tmdbOrigin)
-    }
+    override fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbMetaDataCache.getTmdbMetaDataFlow()
 
-    override suspend fun loadTmdbOrigin(): Flow<TmdbOrigin> = tmdbMetaDataCache.getTmdbOriginFlow()
+    override suspend fun saveTmdbMetaData(tmdbMetadata: TmdbMetadata) = tmdbMetaDataCache.saveTmdbMetaData(tmdbMetadata)
 }

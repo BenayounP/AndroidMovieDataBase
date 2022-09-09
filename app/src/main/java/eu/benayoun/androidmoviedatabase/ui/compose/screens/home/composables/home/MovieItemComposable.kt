@@ -14,11 +14,13 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import eu.benayoun.androidmoviedatabase.R
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding2
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 
 @Composable
-fun MovieItem(tmdbMovie: TmdbMovie,
-              modifier: Modifier = Modifier) {
+fun MovieItemComposable(tmdbMovie: TmdbMovie,
+                        modifier: Modifier = Modifier) {
     Column() {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -29,10 +31,10 @@ fun MovieItem(tmdbMovie: TmdbMovie,
             contentDescription = "Movie Poster",
             contentScale = ContentScale.FillWidth
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(modifier = Modifier.padding(start = 4.dp),
+        Spacer(modifier = Modifier.height(padding1))
+        Text(modifier = Modifier.padding(start = padding2),
             text = tmdbMovie.title
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(padding1))
     }
 }

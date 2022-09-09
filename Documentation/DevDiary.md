@@ -41,3 +41,6 @@ And the cache with both room and datasource works (basically)?. Just forgot to f
 
 ## 07/08/22
 (no code yesterday) Fully implement timestamp for last successful connection ! No I have to display it on homeScreen   
+
+## 08/08/22
+Worked yesterday and today on displaying data on the screen with compose. Miss `dimens.xml` badly

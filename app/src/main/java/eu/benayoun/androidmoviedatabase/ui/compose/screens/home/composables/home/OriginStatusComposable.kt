@@ -3,23 +3,31 @@ package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.hom
 import android.text.format.DateFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbOrigin
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
 import java.util.*
 
 @Composable
-fun OriginStatus(tmdbMetadata: TmdbMetadata,
-    modifier: Modifier = Modifier) {
-    Row(modifier.background(getBackgroundColor(tmdbMetadata))){
-        Text(getMetadataText(tmdbMetadata))
+fun OriginStatusComposable(tmdbMetadata: TmdbMetadata,
+                           modifier: Modifier = Modifier) {
+    Row(modifier
+        .fillMaxWidth()
+        .background(getBackgroundColor(tmdbMetadata))
+    ){
+        Text(text = getMetadataText(tmdbMetadata),
+            Modifier.fillMaxWidth().padding(horizontal = padding1),
+            color = Color.White)
     }
-
 }
 
 @Composable
@@ -29,7 +37,7 @@ private fun getBackgroundColor(tmdbMetadata: TmdbMetadata) : Color {
     }
     else
     {
-        MaterialTheme.colorScheme.background
+        MaterialTheme.colorScheme.primary
     }
 }
 
@@ -39,7 +47,7 @@ private fun getMetadataText(tmdbMetadata: TmdbMetadata) : String{
     when(tmdbOrigin){
         is TmdbOrigin.Internet -> textBuilder.append("Origin: Internet!")
         is TmdbOrigin.Cache -> {
-            textBuilder.append("Origin: Cache. Cause: ")
+            textBuilder.append("Origin: Cache.\nCause: ")
             val tmdbAPIError = tmdbOrigin.tmdbAPIError
             val cause : String = when(tmdbAPIError){
                 is TmdbAPIError.NoInternet -> "NoInternet"
@@ -52,7 +60,7 @@ private fun getMetadataText(tmdbMetadata: TmdbMetadata) : String{
         }
         is TmdbOrigin.Unknown -> textBuilder.append("Unknown")
     }
-    textBuilder.append(". last internet timestamp: ${getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)}")
+    textBuilder.append("\nLast internet update: ${getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)}")
     return textBuilder.toString()
 }
 

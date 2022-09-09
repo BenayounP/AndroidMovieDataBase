@@ -7,20 +7,18 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
 import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 
 @Composable
-fun  MovieGrid(tmdbMovieList: List<TmdbMovie>,modifier: Modifier = Modifier) {
-   val basicPading = 8.dp
-
+fun  MovieGridComposable(tmdbMovieList: List<TmdbMovie>, modifier: Modifier = Modifier) {
     LazyVerticalGrid(columns = GridCells.Fixed(2),
-        verticalArrangement = Arrangement.spacedBy(basicPading),
-        horizontalArrangement = Arrangement.spacedBy(basicPading),
-        modifier = Modifier.padding(horizontal = basicPading)
+        verticalArrangement = Arrangement.spacedBy(padding1),
+        horizontalArrangement = Arrangement.spacedBy(padding1),
+        modifier = Modifier.padding(horizontal = padding1)
     ) {
         items(items = tmdbMovieList){tmdbMovie ->
-            MovieItem(tmdbMovie)
+            MovieItemComposable(tmdbMovie)
         }
     }
 }

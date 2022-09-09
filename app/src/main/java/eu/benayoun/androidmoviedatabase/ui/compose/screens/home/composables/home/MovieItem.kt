@@ -26,7 +26,7 @@ fun MovieItem(tmdbMovie: TmdbMovie,
                 .crossfade(true)
                 .build(),
             placeholder = painterResource(R.drawable.ic_baseline_movie),
-            contentDescription = "",
+            contentDescription = "Movie Poster",
             contentScale = ContentScale.FillWidth
         )
         Spacer(modifier = Modifier.height(8.dp))

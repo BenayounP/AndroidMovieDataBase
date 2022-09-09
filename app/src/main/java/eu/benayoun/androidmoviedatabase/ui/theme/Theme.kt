@@ -6,21 +6,30 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
+
+// Interesting resource : Material Theming in Compose
+// https://developer.android.com/jetpack/compose/themes/material
+
 private val DarkColorScheme = darkColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
-    tertiary = orangeAmelie
+    tertiary = orangeAmelie,
+    error = lowAlphaRed900,
+    onError = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
-    tertiary = orangeAmelie
+    tertiary = orangeAmelie,
+    error = red700,
+    onError = Color.White
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -32,6 +41,7 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     */
 )
+
 
 @Composable
 fun AndroidMovieDataBaseTheme(

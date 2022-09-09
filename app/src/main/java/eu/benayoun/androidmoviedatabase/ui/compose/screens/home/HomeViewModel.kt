@@ -26,6 +26,10 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
     val movieListState : StateFlow<List<TmdbMovie>>
     get() = _movieListState
 
+    private val _tmdbMetadataState = MutableStateFlow(TmdbMetadata())
+    val tmdbMetadataState : StateFlow<TmdbMetadata>
+    get() = _tmdbMetadataState
+
     fun getPopularMoviesFlow() =
         viewModelScope.launch{
             tmdbRepository.getPopularMovieListFlow().flowOn(Dispatchers.IO).collect{ tmdbMovieList : List<TmdbMovie> ->
@@ -36,33 +40,7 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
     fun getTmdbOriginFlow() =
         viewModelScope.launch {
             tmdbRepository.getTmdbMetaDataFlow().flowOn(Dispatchers.IO).collect {tmdbMetadata : TmdbMetadata ->
-                // Log data origin and cause
-                val logMessageBuilder = StringBuilder()
-                val tmdbOrigin = tmdbMetadata.tmdbOrigin
-                when(tmdbOrigin){
-                    is TmdbOrigin.Internet -> logMessageBuilder.append("Origin: Internet!")
-                    is TmdbOrigin.Cache -> {
-                        logMessageBuilder.append("Origin: Cache. Cause: ")
-                        val tmdbAPIError = tmdbOrigin.tmdbAPIError
-                        val cause : String = when(tmdbAPIError){
-                            is TmdbAPIError.NoInternet -> "NoInternet"
-                            is TmdbAPIError.ToolError -> "ToolError"
-                            is TmdbAPIError.NoData -> "NoData"
-                            is TmdbAPIError.Exception -> "Exception: ${tmdbAPIError.localizedMessage}"
-                            is TmdbAPIError.Unknown -> "Unknown"
-                        }
-                        logMessageBuilder.append(cause)
-                    }
-                    is TmdbOrigin.Unknown -> logMessageBuilder.append("Unknown")
-                }
-                logMessageBuilder.append(". last internet timestamp: ${getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)}")
-                LogUtils.v(logMessageBuilder.toString())
+                _tmdbMetadataState.value = tmdbMetadata
             }
         }
-
-    private fun getReadableTimeStamp(timeStamp : Long): String{
-        val cal: Calendar = Calendar.getInstance()
-        cal.setTimeInMillis(timeStamp)
-       return DateFormat.format("hh:mm:ss", cal).toString()
-    }
 }

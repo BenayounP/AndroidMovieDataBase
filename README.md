@@ -30,7 +30,7 @@ This app uses:
 * UI:
   * [Compose](https://developer.android.com/jetpack/compose)
 * Tests :
-  * Simulate device for local tests: [Roboelectric](http://robolectric.org/)
+  * Simulate device for local tests: [Robolectric](http://robolectric.org/)
   * Assert tooling: [Google Truth](https://github.com/google/truth)
 
 ## Disclaimer

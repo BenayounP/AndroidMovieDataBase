@@ -44,3 +44,9 @@ And the cache with both room and datasource works (basically)?. Just forgot to f
 
 ## 08/08/22
 Worked yesterday and today on displaying data on the screen with compose. Miss `dimens.xml` badly
+
+## 12/08/22
+Worked on documentation. So many "where do I put this information"?
+
+## 13/08/22
+Created gradle module. I feel like I'm lost in the middle of a move....

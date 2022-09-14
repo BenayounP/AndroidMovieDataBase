@@ -3,8 +3,8 @@
 ## Disclaimer
 This is the "main" bibliography. You should also see references that help me directly in the code. 
 
-## Bibliography
-* How to use retrofit with room and especially flow
+## Links
+* How to use retrofit with Room and especially flow
   * [Medium post](https://narendrasinhdodiya.medium.com/android-architecture-mvvm-with-coroutines-retrofit-hilt-kotlin-flow-room-48e67ca3b2c8)
   * [Github repository](https://github.com/devnarendra08/DemoTMDB)
 * How to handle flow and state in ViewModel and Composables
@@ -14,3 +14,5 @@ This is the "main" bibliography. You should also see references that help me dir
   * [GitHub repository](https://github.com/skydoves/TheMovies)
 * All about Proto Data Source
   * [Medium post](https://medium.com/androiddevelopers/all-about-proto-datastore-1b1af6cd2879)
+* How to create a multi module app
+  * [Personal blog from Nikola K.](https://cinnamon.agency/blog/post/multi_module_apps_with_kotlin_and_dagger) 

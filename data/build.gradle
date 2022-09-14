@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id "kotlin-kapt"
+    id "com.google.protobuf" version "0.8.17"
+}
+
+android {
+    compileSdk rootProject.ext.compileSdk
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        // For IMDB API KEY
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        def tmdb_api_key = properties.getProperty("tmdb_api_key")
+        buildConfigField "String", "TMDB_API_KEY", tmdb_api_key
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    // ** CORE **
+    implementation "androidx.core:core-ktx:$androidx_core_version"
+
+    // ** DI **
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // ** DATA **
+
+    // DATASOURCE
+    // Retrofit
+    // https://github.com/square/retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // REPOSITORY
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // DataStore
+    implementation  "androidx.datastore:datastore:1.0.0"
+    implementation  "com.google.protobuf:protobuf-javalite:3.21.5"
+
+    // utils
+    implementation project(path: ':utils')
+
+    // ** TESTS **
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.14.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}

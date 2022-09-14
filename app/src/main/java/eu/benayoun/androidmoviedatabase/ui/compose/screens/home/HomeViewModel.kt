@@ -3,10 +3,9 @@ package eu.benayoun.androidmoviedatabase.ui.compose.screens.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
+import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import eu.benayoun.androidmoviedatabase.di.DefaultTmdbRepositoryProvider
-import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,8 +20,8 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
     val movieListState : StateFlow<List<TmdbMovie>>
     get() = _movieListState
 
-    private val _tmdbMetadataState = MutableStateFlow(TmdbMetadata())
-    val tmdbMetadataState : StateFlow<TmdbMetadata>
+    private val _tmdbMetadataState = MutableStateFlow(eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata())
+    val tmdbMetadataState : StateFlow<eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata>
     get() = _tmdbMetadataState
 
     fun getPopularMoviesFlow() =
@@ -34,7 +33,7 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
 
     fun getTmdbOriginFlow() =
         viewModelScope.launch {
-            tmdbRepository.getTmdbMetaDataFlow().flowOn(Dispatchers.IO).collect {tmdbMetadata : TmdbMetadata ->
+            tmdbRepository.getTmdbMetaDataFlow().flowOn(Dispatchers.IO).collect {tmdbMetadata : eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata ->
                 _tmdbMetadataState.value = tmdbMetadata
             }
         }

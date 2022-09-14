@@ -7,8 +7,9 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
-import eu.pbenayoun.thatdmdbapp.repository.model.TmdbMovie
+
 
 @Composable
 fun  MovieGridComposable(tmdbMovieList: List<TmdbMovie>, modifier: Modifier = Modifier) {

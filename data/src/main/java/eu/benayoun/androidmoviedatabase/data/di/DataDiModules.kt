@@ -6,12 +6,18 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
+import eu.benayoun.androidmoviedatabase.data.repository.cache.RoomDataStoreTmdbCache
+import eu.benayoun.androidmoviedatabase.data.repository.cache.TmdbCache
+import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.TmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.datastore.DataStoreTmdbMetaDataCache
 import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDao
 import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDataBase
 import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.retrofit.RetrofitTmdbDataSource
 import javax.inject.Qualifier
 import javax.inject.Singleton
+
 
 // DATA SOURCE
 @Qualifier
@@ -24,7 +30,7 @@ class DataSourceModule {
     @RetrofitTmdbDataSourceProvider
     @Singleton
     @Provides
-    fun providesTmdbDataSource(@ApplicationContext context: Context) : TmdbDataSource {
+    internal fun providesTmdbDataSource(@ApplicationContext context: Context) : TmdbDataSource {
         return RetrofitTmdbDataSource(context)
     }
 }
@@ -41,13 +47,60 @@ class RoomModule{
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): TmdbDataBase =
+    internal fun provideDatabase(@ApplicationContext context: Context): TmdbDataBase =
         TmdbDataBase.create(context)
 
     @Singleton
     @TmdbDaoProvider
     @Provides
-    fun providesTmdbDao(tmdbDataBase: TmdbDataBase): TmdbDao {
+    internal fun providesTmdbDao(tmdbDataBase: TmdbDataBase): TmdbDao {
         return tmdbDataBase.tmdbDao()
+    }
+}
+
+// REPOSITORY
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class DefaultTmdbRepositoryProvider
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class DataStoreTmdbMetaDataCacheProvider
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class RoomTmdbCacheProvider
+
+@Module
+@InstallIn(SingletonComponent::class)
+class RepositoriesModule {
+    @DataStoreTmdbMetaDataCacheProvider
+    @Singleton
+    @Provides
+    internal fun providesDataStoreTmdbMetaDataCache(@ApplicationContext appContext: Context) : TmdbMetaDataCache
+    {
+        return DataStoreTmdbMetaDataCache(appContext)
+    }
+
+    @RoomTmdbCacheProvider
+    @Singleton
+    @Provides
+    internal fun providesRoomDataStoreTmdbCache(@TmdbDaoProvider tmdbDao: TmdbDao, @DataStoreTmdbMetaDataCacheProvider tmdbMetaDataCache : TmdbMetaDataCache) : TmdbCache
+    {
+        return RoomDataStoreTmdbCache(tmdbDao, tmdbMetaDataCache)
+    }
+
+    @DefaultTmdbRepositoryProvider
+    @Singleton
+    @Provides
+    internal fun providesRetrofitTMDBRepositoryProvider(
+        @RetrofitTmdbDataSourceProvider TMDBDataSource: TmdbDataSource,
+        @RoomTmdbCacheProvider tmdbCache: TmdbCache
+    ): TmdbRepository {
+        return eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository(
+            TMDBDataSource,
+            tmdbCache
+        )
     }
 }

@@ -8,7 +8,7 @@ import eu.benayoun.androidmoviedatabase.TmdbMetadataSerialized
 import java.io.InputStream
 import java.io.OutputStream
 
-object TmdbMetadataSerializer: Serializer<TmdbMetadataSerialized> {
+internal object TmdbMetadataSerializer: Serializer<TmdbMetadataSerialized> {
     override val defaultValue: TmdbMetadataSerialized
         get() = TmdbMetadataSerialized.getDefaultInstance()
 

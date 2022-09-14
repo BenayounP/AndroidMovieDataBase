@@ -4,7 +4,7 @@ import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import kotlinx.coroutines.flow.Flow
 
 
-interface TmdbCache {
+internal interface TmdbCache {
 
     // Movie List
     suspend fun getTmdbMovieList(): List<TmdbMovie>

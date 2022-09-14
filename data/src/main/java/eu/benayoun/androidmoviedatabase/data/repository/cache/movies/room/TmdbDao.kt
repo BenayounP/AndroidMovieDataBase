@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface TmdbDao{
+internal interface TmdbDao{
     @Query("SELECT * FROM tmdbDataBase order by releaseDate DESC")
     fun getAll(): List<TmdbMovieEntity>
 

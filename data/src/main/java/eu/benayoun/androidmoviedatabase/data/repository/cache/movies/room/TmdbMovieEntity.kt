@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 
 @Entity(tableName = TmdbDataBase.DB_NAME)
-class TmdbMovieEntity(
+internal class TmdbMovieEntity(
     @NonNull
     @PrimaryKey
     val id: Long,

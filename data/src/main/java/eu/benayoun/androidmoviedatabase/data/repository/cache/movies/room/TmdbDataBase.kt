@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [TmdbMovieEntity::class], version = 1)
-abstract class TmdbDataBase : RoomDatabase() {
+internal abstract class TmdbDataBase : RoomDatabase() {
     companion object {
         const val DB_NAME = "tmdbDataBase"
 

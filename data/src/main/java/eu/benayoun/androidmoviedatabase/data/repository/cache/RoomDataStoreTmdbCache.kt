@@ -6,7 +6,7 @@ import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDa
 import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbMovieEntity
 import kotlinx.coroutines.flow.Flow
 
-class RoomDataStoreTmdbCache(private val tmdbDao: TmdbDao, private val tmdbMetaDataCache: TmdbMetaDataCache) :
+internal class RoomDataStoreTmdbCache(private val tmdbDao: TmdbDao, private val tmdbMetaDataCache: TmdbMetaDataCache) :
     TmdbCache {
     override suspend fun getTmdbMovieList(): List<TmdbMovie> {
         return tmdbDao.getAll().map{

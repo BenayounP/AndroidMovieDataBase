@@ -3,9 +3,9 @@ package eu.benayoun.androidmoviedatabase.ui.compose.screens.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import eu.benayoun.androidmoviedatabase.data.di.DefaultTmdbRepositoryProvider
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
-import eu.benayoun.androidmoviedatabase.di.DefaultTmdbRepositoryProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

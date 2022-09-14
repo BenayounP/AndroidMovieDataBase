@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.tmdbPosterPathprefix
 
-data class RetrofitMovie(
+internal data class RetrofitMovie(
     @SerializedName("id") val id: Long,
     @SerializedName("title") val title: String,
     @SerializedName("overview") val overview: String,

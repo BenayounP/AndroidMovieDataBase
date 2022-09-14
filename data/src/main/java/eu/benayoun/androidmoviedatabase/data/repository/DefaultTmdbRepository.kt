@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
+internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                             private val tmdbCache: TmdbCache
 ) : eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository {
     override suspend fun getPopularMovieListFlow(): Flow<List<TmdbMovie>> {

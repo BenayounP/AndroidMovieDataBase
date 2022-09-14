@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RetrofitTmdbDataSource(val context: Context): TmdbDataSource {
+internal class RetrofitTmdbDataSource(val context: Context): TmdbDataSource {
     private val retrofitPopularMoviesService: RetrofitPopularMoviesService
 
     init {

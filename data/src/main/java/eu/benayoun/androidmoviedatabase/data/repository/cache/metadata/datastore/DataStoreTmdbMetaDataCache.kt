@@ -19,7 +19,7 @@ private val Context.tmdbOriginDataStore by dataStore(
     )
 )
 
-class DataStoreTmdbMetaDataCache(appContext: Context) :
+internal class DataStoreTmdbMetaDataCache(appContext: Context) :
     TmdbMetaDataCache {
     private  val tmdbOriginDataStore = appContext.tmdbOriginDataStore
 

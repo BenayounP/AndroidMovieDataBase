@@ -14,8 +14,9 @@ message TmdbMetadataSerialized {
   int64 lastInternetSuccessTimeStamp=4; // mapped to Long in Java/Kotlin
 
   enum TmdbOriginEnum {
-    TMDB_ORIGIN_INTERNET=0;
-    TMDB_ORIGIN_CACHE=1;
+    TMDB_ORIGIN_NONE=0;
+    TMDB_ORIGIN_INTERNET=1;
+    TMDB_ORIGIN_CACHE=2;
   }
 
   enum TmdbAPIErrorEnum{

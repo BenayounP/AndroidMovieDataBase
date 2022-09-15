@@ -12,5 +12,5 @@ interface TmdbRepository {
     suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata>
 
     // update data
-    suspend fun updateTmdbMovies()
+    fun updateTmdbMovies()
 }

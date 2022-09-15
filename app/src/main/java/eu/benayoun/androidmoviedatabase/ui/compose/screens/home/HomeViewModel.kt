@@ -39,7 +39,5 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
             }
         }
 
-    fun updateTmdbMovies()= viewModelScope.launch(Dispatchers.IO) {
-        tmdbRepository.updateTmdbMovies()
-    }
+    fun updateTmdbMovies()= tmdbRepository.updateTmdbMovies()
 }

@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.utils.LogUtils
+import kotlinx.coroutines.sync.Mutex
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,6 +15,7 @@ internal class RetrofitTmdbDataSource(val context: Context): TmdbDataSource {
     private val retrofitPopularMoviesService: RetrofitPopularMoviesService
 
     init {
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -23,14 +25,14 @@ internal class RetrofitTmdbDataSource(val context: Context): TmdbDataSource {
     }
 
     override suspend fun getPopularMovies() : eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse {
-        LogUtils.v("retrofit step 1: check internet connectivity")
+        LogUtils.v("    Retrofit step 1: check internet connectivity")
         if (!isNetworkConnected(context)){
             return eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse.Error(eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError.NoInternet())
         }
-        LogUtils.v("retrofit step 2: get movies via API")
+        LogUtils.v("    Retrofit step 2: get movies via API")
         try {
             val response = retrofitPopularMoviesService.getPopularMovies()
-            LogUtils.v("retrofit step 3: process response")
+            LogUtils.v("    Retrofit step 3: process response")
             if (response.isSuccessful) {
                 val retrofitMovies = response.body()?.retrofitTmdbMovies
                 if (retrofitMovies!=null){

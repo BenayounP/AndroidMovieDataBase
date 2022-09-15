@@ -7,14 +7,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
-import eu.benayoun.androidmoviedatabase.data.repository.cache.RoomDataStoreTmdbCache
-import eu.benayoun.androidmoviedatabase.data.repository.cache.TmdbCache
-import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.TmdbMetaDataCache
-import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.datastore.DataStoreTmdbMetaDataCache
-import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDao
-import eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room.TmdbDataBase
-import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
-import eu.benayoun.androidmoviedatabase.data.source.retrofit.RetrofitTmdbDataSource
+import eu.benayoun.androidmoviedatabase.data.source.local.RoomDataStoreTmdbCache
+import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
+import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.source.local.metadata.datastore.DataStoreTmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDao
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDataBase
+import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
+import eu.benayoun.androidmoviedatabase.data.source.network.retrofit.RetrofitTmdbDataSource
 import javax.inject.Qualifier
 import javax.inject.Singleton
 

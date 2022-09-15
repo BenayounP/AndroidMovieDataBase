@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.data.source.retrofit
+package eu.benayoun.androidmoviedatabase.data.source.network.retrofit
 
 import eu.benayoun.androidmoviedatabase.BuildConfig
 import retrofit2.Response

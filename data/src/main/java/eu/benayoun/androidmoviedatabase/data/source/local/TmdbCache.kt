@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.data.repository.cache
+package eu.benayoun.androidmoviedatabase.data.source.local
 
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 internal interface TmdbCache {
 
     // Movie List
-    suspend fun getTmdbMovieList(): List<TmdbMovie>
+    suspend fun getTmdbMovieList(): Flow<List<TmdbMovie>>
     suspend fun saveTmdbMovieList(movieList: List<TmdbMovie>)
 
     // Meta Data

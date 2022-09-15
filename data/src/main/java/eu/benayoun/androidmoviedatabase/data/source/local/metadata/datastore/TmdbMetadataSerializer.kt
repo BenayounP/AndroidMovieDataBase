@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.datastore
+package eu.benayoun.androidmoviedatabase.data.source.local.metadata.datastore
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer

@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room
+package eu.benayoun.androidmoviedatabase.data.source.local.movies.room
 
 import androidx.annotation.NonNull
 import androidx.room.Entity
@@ -21,7 +21,7 @@ internal class TmdbMovieEntity(
         releaseDate = tmdbMovie.releaseDate
     )
 
-    fun toTmdbMovie(): TmdbMovie {
+    fun asTmdbMovie(): TmdbMovie {
         return TmdbMovie(
             id = this.id,
             title = this.title,

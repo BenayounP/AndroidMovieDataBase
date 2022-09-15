@@ -1,11 +1,12 @@
-package eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.datastore
+package eu.benayoun.androidmoviedatabase.data.source.local.metadata.datastore
 
 import android.content.Context
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.dataStore
 import eu.benayoun.androidmoviedatabase.TmdbMetadataSerialized
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
-import eu.benayoun.androidmoviedatabase.data.repository.cache.metadata.TmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -24,15 +25,15 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context) :
     TmdbMetaDataCache {
     private  val tmdbOriginDataStore = appContext.tmdbOriginDataStore
 
-    override fun getTmdbMetaDataFlow(): Flow<eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
-        eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata(
+    override fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
+        TmdbMetadata(
             mapToOrigin(
                 tmdbMetadataSerialized
             ), tmdbMetadataSerialized.lastInternetSuccessTimeStamp
         )
     }
 
-    override suspend fun saveTmdbMetaData(tmdbMetadata: eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata){
+    override suspend fun saveTmdbMetaData(tmdbMetadata: TmdbMetadata){
         tmdbOriginDataStore.updateData{tmdbMetadataSerialized: TmdbMetadataSerialized ->
            val builder = tmdbMetadataSerialized.toBuilder()
             val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
@@ -49,7 +50,7 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context) :
 
     // internal cooking
 
-    private fun extractTmdbSourceEnum(tmdbSourceStatus : eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus) : TmdbMetadataSerialized.TmdbOriginEnum{
+    private fun extractTmdbSourceEnum(tmdbSourceStatus : TmdbSourceStatus) : TmdbMetadataSerialized.TmdbOriginEnum{
         return when (tmdbSourceStatus){
             is TmdbSourceStatus.None -> TmdbMetadataSerialized.TmdbOriginEnum.TMDB_ORIGIN_NONE
             is TmdbSourceStatus.Internet -> TmdbMetadataSerialized.TmdbOriginEnum.TMDB_ORIGIN_INTERNET
@@ -59,7 +60,7 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context) :
 
     }
 
-    private fun mapToOrigin(tmdbMetadataSerialized: TmdbMetadataSerialized) : eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus {
+    private fun mapToOrigin(tmdbMetadataSerialized: TmdbMetadataSerialized) : TmdbSourceStatus {
         return when(tmdbMetadataSerialized.tmdbOriginEnum){
             TmdbMetadataSerialized.TmdbOriginEnum.TMDB_ORIGIN_NONE -> TmdbSourceStatus.None()
             TmdbMetadataSerialized.TmdbOriginEnum.TMDB_ORIGIN_INTERNET -> TmdbSourceStatus.Internet()

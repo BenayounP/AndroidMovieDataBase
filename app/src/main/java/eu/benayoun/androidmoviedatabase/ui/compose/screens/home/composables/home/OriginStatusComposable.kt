@@ -11,12 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
 import java.util.*
 
 @Composable
-fun OriginStatusComposable(tmdbMetadata: eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata,
+fun OriginStatusComposable(tmdbMetadata: TmdbMetadata,
                            modifier: Modifier = Modifier) {
     Row(modifier
         .fillMaxWidth()
@@ -29,8 +30,8 @@ fun OriginStatusComposable(tmdbMetadata: eu.benayoun.androidmoviedatabase.data.m
 }
 
 @Composable
-private fun getBackgroundColor(tmdbMetadata: eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata) : Color {
-    return if (tmdbMetadata.tmdbSourceStatus is eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus.Cache){
+private fun getBackgroundColor(tmdbMetadata: TmdbMetadata) : Color {
+    return if (tmdbMetadata.tmdbSourceStatus is TmdbSourceStatus.Cache){
         MaterialTheme.colorScheme.error
     }
     else
@@ -39,12 +40,11 @@ private fun getBackgroundColor(tmdbMetadata: eu.benayoun.androidmoviedatabase.da
     }
 }
 
-private fun getMetadataText(tmdbMetadata: eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata) : String{
+private fun getMetadataText(tmdbMetadata: TmdbMetadata) : String{
     val textBuilder = StringBuilder()
     val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
     when(tmdbOrigin){
         is TmdbSourceStatus.None ->  textBuilder.append("None (yet)")
-        is TmdbSourceStatus.Processing -> textBuilder.append("Processing")
         is TmdbSourceStatus.Internet -> textBuilder.append("Origin: Internet!")
         is TmdbSourceStatus.Cache -> {
             textBuilder.append("Origin: Cache.\nCause: ")

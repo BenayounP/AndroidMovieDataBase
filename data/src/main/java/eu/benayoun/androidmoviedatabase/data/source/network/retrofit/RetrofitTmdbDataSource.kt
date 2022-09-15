@@ -1,10 +1,10 @@
-package eu.benayoun.androidmoviedatabase.data.source.retrofit
+package eu.benayoun.androidmoviedatabase.data.source.network.retrofit
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import eu.benayoun.androidmoviedatabase.data.source.TmdbDataSource
+import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -32,10 +32,10 @@ internal class RetrofitTmdbDataSource(val context: Context): TmdbDataSource {
             val response = retrofitPopularMoviesService.getPopularMovies()
             LogUtils.v("retrofit step 3: process response")
             if (response.isSuccessful) {
-                val retrofitMovies = response.body()?.retrofitMovies
+                val retrofitMovies = response.body()?.retrofitTmdbMovies
                 if (retrofitMovies!=null){
                     return eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse.Success(retrofitMovies.map{
-                            retrofitMovie -> retrofitMovie.mapToTmdbMovie()
+                            retrofitMovie -> retrofitMovie.asTmdbMovie()
                     })
                 }
                 else {

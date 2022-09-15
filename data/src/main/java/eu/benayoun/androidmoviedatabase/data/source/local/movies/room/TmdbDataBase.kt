@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.data.repository.cache.movies.room
+package eu.benayoun.androidmoviedatabase.data.source.local.movies.room
 
 import android.content.Context
 import androidx.room.Database

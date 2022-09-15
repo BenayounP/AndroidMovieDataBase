@@ -16,6 +16,7 @@ import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     viewModel.getPopularMoviesFlow()
     viewModel.getTmdbOriginFlow()
+    viewModel.updateTmdbMovies()
     Surface(
     modifier = Modifier.fillMaxSize(),
     color = MaterialTheme.colorScheme.background
@@ -24,6 +25,5 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             OriginStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value)
             MovieGridComposable(tmdbMovieList = viewModel.movieListState.collectAsState().value)
         }
-
     }
 }

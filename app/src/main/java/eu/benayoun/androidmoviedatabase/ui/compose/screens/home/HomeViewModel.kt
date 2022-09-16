@@ -6,7 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import eu.benayoun.androidmoviedatabase.data.di.DefaultTmdbRepositoryProvider
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
+import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,6 +27,10 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
     val tmdbMetadataState : StateFlow<TmdbMetadata>
     get() = _tmdbMetadataState
 
+    private val _tmdbUpdateStatus = MutableStateFlow<TmdbUpdateStatus>(TmdbUpdateStatus.Off())
+    val tmdbUpdateStatus : StateFlow<TmdbUpdateStatus>
+    get() = _tmdbUpdateStatus
+
     fun getPopularMoviesFlow() =
         viewModelScope.launch{
             tmdbRepository.getPopularMovieListFlow().flowOn(Dispatchers.IO).collect{ tmdbMovieList : List<TmdbMovie> ->
@@ -39,5 +45,15 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
             }
         }
 
+    fun getTmdbUpdateStatusFlow() =
+        viewModelScope.launch {
+            tmdbRepository.getTmdbUpdateStatusFlow().flowOn(Dispatchers.IO).collect{
+                tmdbUpdateStatus : TmdbUpdateStatus ->
+                LogUtils.v("Update status: $tmdbUpdateStatus")
+                _tmdbUpdateStatus.value = tmdbUpdateStatus
+            }
+        }
+
     fun updateTmdbMovies()= tmdbRepository.updateTmdbMovies()
+
 }

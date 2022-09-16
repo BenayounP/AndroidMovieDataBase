@@ -2,6 +2,7 @@ package eu.benayoun.androidmoviedatabase.data.repository
 
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import kotlinx.coroutines.flow.Flow
 
 
@@ -13,4 +14,5 @@ interface TmdbRepository {
 
     // update data
     fun updateTmdbMovies()
+    suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus>
 }

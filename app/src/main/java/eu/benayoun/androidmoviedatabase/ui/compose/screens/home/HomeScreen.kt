@@ -16,6 +16,7 @@ import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     viewModel.getPopularMoviesFlow()
     viewModel.getTmdbOriginFlow()
+    viewModel.getTmdbUpdateStatusFlow()
     viewModel.updateTmdbMovies()
     Surface(
     modifier = Modifier.fillMaxSize(),

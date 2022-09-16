@@ -61,4 +61,5 @@ Created gradle module. I feel like I'm lost in the middle of a move....
 * Did some cleaning and I came across this official Google article: [Build an offline-first app](https://developer.android.com/topic/architecture/data-layer/offline-first)
 -> 🤯. Ok the process I used to fetch and save data was "totally" wrong...
 
-
+### 15/09/22
+Now that I have the skeleton of the app it's easier (and funnier) to change/add things. Now we have a proper offlin firts app system. Playing with a refresh status now. 

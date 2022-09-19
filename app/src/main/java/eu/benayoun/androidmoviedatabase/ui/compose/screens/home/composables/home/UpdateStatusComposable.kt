@@ -10,13 +10,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import eu.benayoun.androidmoviedatabase.R
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
+import eu.benayoun.androidmoviedatabase.ui.theme.BackgroundAndContentColor
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeColors
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import java.util.*
 
 @Composable
@@ -24,29 +26,30 @@ fun UpdateStatusComposable(
     tmdbUpdateStatus : TmdbUpdateStatus,
     tmdbMetadata: TmdbMetadata,
     modifier: Modifier = Modifier) {
+    var backgroundAndContentColor = getBackgroundAndContentColor(tmdbUpdateStatus, tmdbMetadata)
     Row(
         modifier
             .fillMaxWidth()
-            .background(getBackgroundColor(tmdbUpdateStatus,tmdbMetadata))
+            .background(backgroundAndContentColor.background)
     ){
         Text(text = getMetadataText(tmdbUpdateStatus,tmdbMetadata),
             Modifier
                 .fillMaxWidth()
                 .padding(horizontal = padding1),
-            color = Color.White)
+            color = backgroundAndContentColor.content)
     }
 }
 
 @Composable
-private fun getBackgroundColor(tmdbUpdateStatus: TmdbUpdateStatus,tmdbMetadata: TmdbMetadata) : Color {
+private fun getBackgroundAndContentColor(tmdbUpdateStatus: TmdbUpdateStatus,tmdbMetadata: TmdbMetadata) : BackgroundAndContentColor {
     if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) return ComposeColors.updating()
     else
         return if (tmdbMetadata.tmdbSourceStatus is TmdbSourceStatus.Cache){
-        MaterialTheme.colorScheme.error
+        ComposeColors.problem()
     }
     else
     {
-        MaterialTheme.colorScheme.primary
+        ComposeColors.success()
     }
 }
 
@@ -57,23 +60,22 @@ private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: T
     else {
         val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
         when (tmdbOrigin) {
-            is TmdbSourceStatus.None -> textBuilder.append("None (yet)")
-            is TmdbSourceStatus.Internet -> textBuilder.append("Origin: Internet!")
+            is TmdbSourceStatus.None -> textBuilder.append(stringResource(R.string.source_status_none))
+            is TmdbSourceStatus.Internet -> null // nothing to do
             is TmdbSourceStatus.Cache -> {
-                textBuilder.append("Origin: Cache.\n\nCause: ")
-                val tmdbAPIError = tmdbOrigin.tmdbAPIError
-                val cause: String = when (tmdbAPIError) {
-                    is TmdbAPIError.NoInternet -> "NoInternet"
-                    is TmdbAPIError.ToolError -> "ToolError"
-                    is TmdbAPIError.NoData -> "NoData"
-                    is TmdbAPIError.Exception -> "Exception: ${tmdbAPIError.localizedMessage}"
-                    is TmdbAPIError.Unknown -> "Unknown"
+                textBuilder.append(stringResource(R.string.source_status_cache))
+                val cause: String = when (val tmdbAPIError = tmdbOrigin.tmdbAPIError) {
+                    is TmdbAPIError.NoInternet -> stringResource(R.string.source_status_no_internet)
+                    is TmdbAPIError.ToolError -> stringResource(R.string.source_status_tool_error)
+                    is TmdbAPIError.NoData -> stringResource(R.string.source_status_no_data)
+                    is TmdbAPIError.Exception -> stringResource(R.string.source_status_exception,tmdbAPIError.localizedMessage)
+                    is TmdbAPIError.Unknown -> stringResource(R.string.source_status_unknown)
                 }
-                textBuilder.append(cause)
+                textBuilder.append(cause+ "\n")
             }
-            is TmdbSourceStatus.Unknown -> textBuilder.append("Unknown")
+            is TmdbSourceStatus.Unknown -> textBuilder.append(stringResource(R.string.source_status_unknown))
         }
-        textBuilder.append("\nLast internet update: ${getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)}")
+        textBuilder.append(stringResource(R.string.source_status_last_update,getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)))
     }
     return textBuilder.toString()
 }
@@ -81,5 +83,5 @@ private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: T
 private fun getReadableTimeStamp(timeStamp : Long): String{
     val cal: Calendar = Calendar.getInstance()
     cal.setTimeInMillis(timeStamp)
-    return DateFormat.format("hh:mm:ss", cal).toString()
+    return DateFormat.format("hh:mm", cal).toString()
 }

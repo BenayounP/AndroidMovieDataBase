@@ -1,3 +1,16 @@
 <resources>
+    <!-- GLOBAL -->
     <string name="app_name">AndroidMovieDataBase</string>
+
+    <!-- HOME SCREEN -->
+
+    <!-- STATUS -->
+    <string name="source_status_none">No Data (yet)</string>
+    <string name="source_status_cache">Data from cache.\n\nCause:</string>
+    <string name="source_status_no_internet">No Internet connection</string>
+    <string name="source_status_tool_error">Tool (retrofit) problem</string>
+    <string name="source_status_no_data">No data from TMDB</string>
+    <string name="source_status_exception">Exception: %1$s</string>
+    <string name="source_status_unknown">Unknown 🤔</string>
+    <string name="source_status_last_update">Last internet update: %1$s</string>
 </resources>

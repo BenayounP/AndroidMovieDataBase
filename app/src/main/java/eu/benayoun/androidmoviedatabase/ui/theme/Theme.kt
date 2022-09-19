@@ -20,16 +20,13 @@ private val DarkColorScheme = darkColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
     tertiary = orangeAmelie,
-    error = lowAlphaRed900,
-    onError = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = vertAmelie,
     secondary = vertFonceAmelie,
     tertiary = orangeAmelie,
-    error = red700,
-    onError = Color.White
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

@@ -11,8 +11,9 @@ interface TmdbRepository {
     // Flows
     suspend fun getPopularMovieListFlow() : Flow<List<TmdbMovie>>
     suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata>
+    suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus>
 
     // update data
     fun updateTmdbMovies()
-    suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus>
+
 }

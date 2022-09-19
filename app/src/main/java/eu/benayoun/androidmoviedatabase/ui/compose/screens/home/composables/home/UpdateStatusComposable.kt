@@ -39,8 +39,7 @@ fun UpdateStatusComposable(
 
 @Composable
 private fun getBackgroundColor(tmdbUpdateStatus: TmdbUpdateStatus,tmdbMetadata: TmdbMetadata) : Color {
-    LogUtils.v("Update status: ${if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) "updating" else "Off"}")
-    if (tmdbUpdateStatus == TmdbUpdateStatus.Updating()) return ComposeColors.updating()
+    if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) return ComposeColors.updating()
     else
         return if (tmdbMetadata.tmdbSourceStatus is TmdbSourceStatus.Cache){
         MaterialTheme.colorScheme.error
@@ -51,28 +50,31 @@ private fun getBackgroundColor(tmdbUpdateStatus: TmdbUpdateStatus,tmdbMetadata: 
     }
 }
 
+@Composable
 private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: TmdbMetadata) : String{
     val textBuilder = StringBuilder()
-    if (tmdbUpdateStatus == TmdbUpdateStatus.Updating()) textBuilder.append("UPDATING\n\n")
-    val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
-    when(tmdbOrigin){
-        is TmdbSourceStatus.None ->  textBuilder.append("None (yet)")
-        is TmdbSourceStatus.Internet -> textBuilder.append("Origin: Internet!")
-        is TmdbSourceStatus.Cache -> {
-            textBuilder.append("Origin: Cache.\n\nCause: ")
-            val tmdbAPIError = tmdbOrigin.tmdbAPIError
-            val cause : String = when(tmdbAPIError){
-                is TmdbAPIError.NoInternet -> "NoInternet"
-                is TmdbAPIError.ToolError -> "ToolError"
-                is TmdbAPIError.NoData -> "NoData"
-                is TmdbAPIError.Exception -> "Exception: ${tmdbAPIError.localizedMessage}"
-                is TmdbAPIError.Unknown -> "Unknown"
+    if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) textBuilder.append("UPDATING\n\n")
+    else {
+        val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
+        when (tmdbOrigin) {
+            is TmdbSourceStatus.None -> textBuilder.append("None (yet)")
+            is TmdbSourceStatus.Internet -> textBuilder.append("Origin: Internet!")
+            is TmdbSourceStatus.Cache -> {
+                textBuilder.append("Origin: Cache.\n\nCause: ")
+                val tmdbAPIError = tmdbOrigin.tmdbAPIError
+                val cause: String = when (tmdbAPIError) {
+                    is TmdbAPIError.NoInternet -> "NoInternet"
+                    is TmdbAPIError.ToolError -> "ToolError"
+                    is TmdbAPIError.NoData -> "NoData"
+                    is TmdbAPIError.Exception -> "Exception: ${tmdbAPIError.localizedMessage}"
+                    is TmdbAPIError.Unknown -> "Unknown"
+                }
+                textBuilder.append(cause)
             }
-            textBuilder.append(cause)
+            is TmdbSourceStatus.Unknown -> textBuilder.append("Unknown")
         }
-        is TmdbSourceStatus.Unknown -> textBuilder.append("Unknown")
+        textBuilder.append("\nLast internet update: ${getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)}")
     }
-    textBuilder.append("\nLast internet update: ${getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)}")
     return textBuilder.toString()
 }
 

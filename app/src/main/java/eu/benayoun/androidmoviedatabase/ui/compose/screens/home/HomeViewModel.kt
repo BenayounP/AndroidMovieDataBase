@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import eu.benayoun.androidmoviedatabase.data.di.DefaultTmdbRepositoryProvider
+import eu.benayoun.androidmoviedatabase.data.di.DefaultTmdbRepositoryWithFalseDataSourceProvider
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
@@ -53,6 +54,7 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
             }
         }
 
-    fun updateTmdbMovies()= tmdbRepository.updateTmdbMovies()
-
+    fun updateTmdbMovies(){
+        if (_tmdbUpdateStatus.value is TmdbUpdateStatus.Off) tmdbRepository.updateTmdbMovies()
+    }
 }

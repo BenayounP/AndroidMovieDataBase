@@ -28,7 +28,8 @@ This app uses:
     * Data Base: [Room](https://developer.android.com/jetpack/androidx/releases/room)
     * Other cache:  [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
 * UI:
-  * [Compose](https://developer.android.com/jetpack/compose)
+  * Global system: [Compose](https://developer.android.com/jetpack/compose)
+  * Image loading: [Coil](https://coil-kt.github.io/coil/compose/)
 * Tests :
   * Simulate device for local tests: [Robolectric](http://robolectric.org/)
   * Assert tooling: [Google Truth](https://github.com/google/truth)

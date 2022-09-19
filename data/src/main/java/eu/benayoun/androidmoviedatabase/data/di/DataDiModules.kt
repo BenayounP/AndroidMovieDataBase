@@ -13,6 +13,7 @@ import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataC
 import eu.benayoun.androidmoviedatabase.data.source.local.metadata.datastore.DataStoreTmdbMetaDataCache
 import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDao
 import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDataBase
+import eu.benayoun.androidmoviedatabase.data.source.network.FakeTmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.network.retrofit.RetrofitTmdbDataSource
 import kotlinx.coroutines.MainScope
@@ -25,14 +26,25 @@ import javax.inject.Singleton
 @Retention(AnnotationRetention.RUNTIME)
 annotation class RetrofitTmdbDataSourceProvider
 
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class FakeTmdbDataSourceProvider
+
 @Module
 @InstallIn(SingletonComponent::class)
 class DataSourceModule {
     @RetrofitTmdbDataSourceProvider
     @Singleton
     @Provides
-    internal fun providesTmdbDataSource(@ApplicationContext context: Context) : TmdbDataSource {
+    internal fun providesRetrofitTmdbDataSource(@ApplicationContext context: Context) : TmdbDataSource {
         return RetrofitTmdbDataSource(context)
+    }
+
+    @FakeTmdbDataSourceProvider
+    @Singleton
+    @Provides
+    internal fun providesFakeTmdbDataSource() : TmdbDataSource {
+        return FakeTmdbDataSource()
     }
 }
 
@@ -67,6 +79,10 @@ annotation class DefaultTmdbRepositoryProvider
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
+annotation class DefaultTmdbRepositoryWithFalseDataSourceProvider
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
 annotation class DataStoreTmdbMetaDataCacheProvider
 
 @Qualifier
@@ -95,8 +111,22 @@ class RepositoriesModule {
     @DefaultTmdbRepositoryProvider
     @Singleton
     @Provides
-    internal fun providesRetrofitTMDBRepositoryProvider(
+    internal fun providesdefaultRetrofitTMDBRepositoryProvider(
         @RetrofitTmdbDataSourceProvider TMDBDataSource: TmdbDataSource,
+        @RoomTmdbCacheProvider tmdbCache: TmdbCache
+    ): TmdbRepository {
+        return eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository(
+            TMDBDataSource,
+            tmdbCache,
+            externalScope = MainScope()
+        )
+    }
+
+    @DefaultTmdbRepositoryWithFalseDataSourceProvider
+    @Singleton
+    @Provides
+    internal fun providesdefaultRetrofitTMDBRepositoryWithFalseDataSourceProviderProvider(
+        @FakeTmdbDataSourceProvider TMDBDataSource: TmdbDataSource,
         @RoomTmdbCacheProvider tmdbCache: TmdbCache
     ): TmdbRepository {
         return eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository(

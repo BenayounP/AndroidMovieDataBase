@@ -49,7 +49,6 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryProvider private 
         viewModelScope.launch {
             tmdbRepository.getTmdbUpdateStatusFlow().flowOn(Dispatchers.IO).collect{
                 tmdbUpdateStatus : TmdbUpdateStatus ->
-                LogUtils.v("Update status: $tmdbUpdateStatus")
                 _tmdbUpdateStatus.value = tmdbUpdateStatus
             }
         }

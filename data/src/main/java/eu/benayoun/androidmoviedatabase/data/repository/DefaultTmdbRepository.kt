@@ -45,7 +45,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                 LogUtils.v("Step 1: try to get data on TMDB Server")
                 var tmdbAPIResponse = tmdbDataSource.getPopularMovies()
 
-                // Step 2 Success : save films in db and update metadat
+                // Step 2 Success : save films in db and update metadata
                 if (tmdbAPIResponse is TmdbAPIResponse.Success) {
                     LogUtils.v("Step 2 SUCCESS: save data")
                     tmdbSourceStatus = TmdbSourceStatus.Internet()
@@ -75,9 +75,4 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
             )
         )
     }
-
-
-
-
-
 }

@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.HomeViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.MovieGridComposable
-import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.OriginStatusComposable
+import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.UpdateStatusComposable
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
@@ -23,7 +23,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     color = MaterialTheme.colorScheme.background
     ) {
         Column(){
-            OriginStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value)
+            UpdateStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value, tmdbUpdateStatus = viewModel.tmdbUpdateStatus.collectAsState().value)
             MovieGridComposable(tmdbMovieList = viewModel.movieListState.collectAsState().value)
         }
     }

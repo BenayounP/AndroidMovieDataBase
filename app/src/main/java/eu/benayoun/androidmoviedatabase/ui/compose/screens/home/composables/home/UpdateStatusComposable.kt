@@ -13,25 +13,36 @@ import androidx.compose.ui.graphics.Color
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeColors
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
+import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import java.util.*
 
 @Composable
-fun OriginStatusComposable(tmdbMetadata: TmdbMetadata,
-                           modifier: Modifier = Modifier) {
-    Row(modifier
-        .fillMaxWidth()
-        .background(getBackgroundColor(tmdbMetadata))
+fun UpdateStatusComposable(
+    tmdbUpdateStatus : TmdbUpdateStatus,
+    tmdbMetadata: TmdbMetadata,
+    modifier: Modifier = Modifier) {
+    Row(
+        modifier
+            .fillMaxWidth()
+            .background(getBackgroundColor(tmdbUpdateStatus,tmdbMetadata))
     ){
-        Text(text = getMetadataText(tmdbMetadata),
-            Modifier.fillMaxWidth().padding(horizontal = padding1),
+        Text(text = getMetadataText(tmdbUpdateStatus,tmdbMetadata),
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = padding1),
             color = Color.White)
     }
 }
 
 @Composable
-private fun getBackgroundColor(tmdbMetadata: TmdbMetadata) : Color {
-    return if (tmdbMetadata.tmdbSourceStatus is TmdbSourceStatus.Cache){
+private fun getBackgroundColor(tmdbUpdateStatus: TmdbUpdateStatus,tmdbMetadata: TmdbMetadata) : Color {
+    LogUtils.v("Update status: ${if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) "updating" else "Off"}")
+    if (tmdbUpdateStatus == TmdbUpdateStatus.Updating()) return ComposeColors.updating()
+    else
+        return if (tmdbMetadata.tmdbSourceStatus is TmdbSourceStatus.Cache){
         MaterialTheme.colorScheme.error
     }
     else
@@ -40,14 +51,15 @@ private fun getBackgroundColor(tmdbMetadata: TmdbMetadata) : Color {
     }
 }
 
-private fun getMetadataText(tmdbMetadata: TmdbMetadata) : String{
+private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: TmdbMetadata) : String{
     val textBuilder = StringBuilder()
+    if (tmdbUpdateStatus == TmdbUpdateStatus.Updating()) textBuilder.append("UPDATING\n\n")
     val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
     when(tmdbOrigin){
         is TmdbSourceStatus.None ->  textBuilder.append("None (yet)")
         is TmdbSourceStatus.Internet -> textBuilder.append("Origin: Internet!")
         is TmdbSourceStatus.Cache -> {
-            textBuilder.append("Origin: Cache.\nCause: ")
+            textBuilder.append("Origin: Cache.\n\nCause: ")
             val tmdbAPIError = tmdbOrigin.tmdbAPIError
             val cause : String = when(tmdbAPIError){
                 is TmdbAPIError.NoInternet -> "NoInternet"

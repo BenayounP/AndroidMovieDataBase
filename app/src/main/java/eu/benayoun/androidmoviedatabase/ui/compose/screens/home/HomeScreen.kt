@@ -11,22 +11,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.HomeViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.MovieGridComposable
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.UpdateStatusComposable
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     viewModel.getPopularMoviesFlow()
     viewModel.getTmdbOriginFlow()
     viewModel.getTmdbUpdateStatusFlow()
-    viewModel.updateTmdbMovies()
     Surface(
     modifier = Modifier.fillMaxSize(),
     color = MaterialTheme.colorScheme.background
     ) {
         Column(){
             UpdateStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value, tmdbUpdateStatus = viewModel.tmdbUpdateStatus.collectAsState().value)
-            fun onOverScroll()= viewModel.updateTmdbMovies()
-            MovieGridComposable(tmdbMovieList = viewModel.movieListState.collectAsState().value,::onOverScroll)
+            fun onPullToRefresh()= viewModel.updateTmdbMovies()
+            MovieGridComposable(tmdbMovieList = viewModel.movieListState.collectAsState().value,::onPullToRefresh)
         }
     }
 }

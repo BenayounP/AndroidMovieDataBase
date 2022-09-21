@@ -13,4 +13,7 @@
     <string name="source_status_exception">Exception :  %1$s</string>
     <string name="source_status_unknown">Inconnue 🤔</string>
     <string name="source_status_last_update">Dernière MAJ: %1$s</string>
+
+    <!-- MOVIE -->
+    <string name="content_description_poster">Poster du film</string>
 </resources>

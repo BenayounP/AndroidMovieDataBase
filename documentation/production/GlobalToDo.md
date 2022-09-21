@@ -10,7 +10,7 @@
 * Paging Data from TMDB API?
 
 ## UI
-* Translate all texts and...contenDescription!
+* Translate all texts and...contentDescription!
 * colors
   * Work on dark theme colors
   * add new color like [here](https://stackoverflow.com/questions/65994303/how-to-add-extra-colors-into-materialtheme-in-android-jetpack-compose)

@@ -10,46 +10,53 @@ import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.pad
 
 
 @Composable
-fun  MovieGridComposable(tmdbMovieList: List<TmdbMovie>, onOverscroll: () -> Unit) {
+fun  MovieGridComposable(tmdbMovieList: List<TmdbMovie>, onPullToRefresh: () -> Unit) {
     val gridState = rememberLazyGridState()
-    updateOnOverScroll(gridState,onOverscroll)
-
-    LazyVerticalGrid(state = gridState, columns = GridCells.Fixed(2),
+    updateOnPullToRefresh(gridState,onPullToRefresh)
+    LazyVerticalGrid(columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(padding1),
         horizontalArrangement = Arrangement.spacedBy(padding1),
-        modifier = Modifier.padding(horizontal = padding1)
+        modifier = Modifier
+            .padding(horizontal = padding1),
+        state = gridState
     ) {
+
         items(items = tmdbMovieList){tmdbMovie ->
             MovieItemComposable(tmdbMovie)
         }
     }
 }
 
+
 @Composable
-fun updateOnOverScroll(gridState : LazyGridState, onOverscroll: () -> Unit){
-    val isOverScrolling = isOverScrolling(gridState = gridState)
-    if (isOverScrolling){
-        onOverscroll()
+fun updateOnPullToRefresh(gridState : LazyGridState, onPullToRefresh: () -> Unit){
+    if (gridState.isPullingToRefresh()){
+        onPullToRefresh()
     }
 }
 
-@Composable
-private fun isOverScrolling(gridState : LazyGridState) : Boolean {
-    val isScrollingDown = gridState.isScrollingDown()
-    val firstVisibleItemScrollOffset = gridState.firstVisibleItemScrollOffset
-    val isScrolling = gridState.isScrollInProgress
-    return firstVisibleItemScrollOffset==0 && isScrolling && !isScrollingDown
-}
 
 @Composable
-private fun LazyGridState.isScrollingDown(): Boolean {
-    var previousScrollOffset by remember(this) { mutableStateOf(firstVisibleItemScrollOffset) }
-    return remember(this) {
-        derivedStateOf {
-            previousScrollOffset < firstVisibleItemScrollOffset
-            .also {
-                previousScrollOffset = firstVisibleItemScrollOffset
-            }
-        }
-    }.value
+private fun LazyGridState.isPullingToRefresh(): Boolean {
+    val currentScrollOffset = firstVisibleItemScrollOffset
+    val isScrolling = isScrollInProgress
+
+    var oldScrollOffset by remember(this) { mutableStateOf(currentScrollOffset) }
+    var wasScrolling by remember(this) { mutableStateOf(false) }
+
+    //tests
+    // LogUtils.v("******************************************")
+    val firstItemIsDisplayed = firstVisibleItemIndex ==0
+    val isStuckOnTop = firstItemIsDisplayed && currentScrollOffset==0 && oldScrollOffset ==0
+    // LogUtils.v("isStuckOnTop:$firstItemIsDisplayed|$oldScrollOffset|$currentScrollOffset -> $isStuckOnTop")
+    val isBeginningToPull= isScrolling && !wasScrolling
+    // LogUtils.v("isBeginningToPull:$wasScrolling|$isScrolling -> $isBeginningToPull")
+    val isPullingToRefresh = isStuckOnTop && isBeginningToPull
+    // LogUtils.v("isPullingToRefresh: $isPullingToRefresh")
+
+    // update values
+    oldScrollOffset = currentScrollOffset
+    wasScrolling = isScrolling
+    return isPullingToRefresh
+
 }

@@ -2,15 +2,16 @@ package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.hom
 
 import android.text.format.DateFormat
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import eu.benayoun.androidmoviedatabase.R
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
@@ -29,14 +30,18 @@ fun UpdateStatusComposable(
     var backgroundAndContentColor = getBackgroundAndContentColor(tmdbUpdateStatus, tmdbMetadata)
     Row(
         modifier
+            .padding(padding1)
             .fillMaxWidth()
-            .background(backgroundAndContentColor.background)
+            .background(backgroundAndContentColor.background),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+
     ){
         Text(text = getMetadataText(tmdbUpdateStatus,tmdbMetadata),
-            Modifier
-                .fillMaxWidth()
+            modifier = Modifier
                 .padding(horizontal = padding1),
-            color = backgroundAndContentColor.content)
+            color = backgroundAndContentColor.content,
+            textAlign = TextAlign.Center)
     }
 }
 
@@ -45,19 +50,21 @@ private fun getBackgroundAndContentColor(tmdbUpdateStatus: TmdbUpdateStatus,tmdb
     if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) return ComposeColors.updating()
     else
         return if (tmdbMetadata.tmdbSourceStatus is TmdbSourceStatus.Cache){
-        ComposeColors.problem()
-    }
-    else
-    {
-        ComposeColors.success()
-    }
+            ComposeColors.problem()
+        }
+        else
+        {
+            ComposeColors.success()
+        }
 }
 
 @Composable
 private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: TmdbMetadata) : String{
     val textBuilder = StringBuilder()
-    if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) textBuilder.append("UPDATING\n\n")
+    // UPDATING
+    if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) textBuilder.append("UPDATING")
     else {
+        // Data from internet or cache
         val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
         when (tmdbOrigin) {
             is TmdbSourceStatus.None -> textBuilder.append(stringResource(R.string.source_status_none))

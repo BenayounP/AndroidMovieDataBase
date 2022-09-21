@@ -64,7 +64,9 @@ Created gradle module. I feel like I'm lost in the middle of a move....
 ### 15/09/22
 Now that I have the skeleton of the app it's easier (and funnier) to change/add things. Now we have a proper offlin firts app system. Playing with a refresh status now. 
 
-
 ### 19/09/22
-Did some important work on the app update display and to implements an update when user overscroll(you down scroll when movie grid is already at the first element).\
-It's quite fascinating that when you have the good foundation the functionality implementation is so faaaast
+Did some important work on the app update display and to implements an update when user ~~overscroll(you down scroll when movie grid is already at the first element)~~ pull to refresh\
+It's quite fascinating that when you have the good foundation the functionality implementation is so faaaast.
+
+### 20/09/22
+My own pull to refresh system bugs and I fought against the `Modifier.pointerInput` ... and I lost...for today!

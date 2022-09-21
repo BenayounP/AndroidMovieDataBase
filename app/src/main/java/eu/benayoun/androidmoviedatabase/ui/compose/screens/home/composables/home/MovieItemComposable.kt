@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,12 +12,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import eu.benayoun.androidmoviedatabase.R
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding2
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding3
 
 
 @Composable
@@ -32,10 +36,16 @@ fun MovieItemComposable(tmdbMovie: TmdbMovie,
             contentDescription = stringResource(R.string.content_description_poster),
             contentScale = ContentScale.FillWidth
         )
-        Spacer(modifier = Modifier.height(padding1))
-        Text(modifier = Modifier.padding(start = padding2),
-            text = tmdbMovie.title
+        Spacer(modifier = Modifier.height(padding3))
+        Text(
+            modifier = Modifier.padding(start = padding2),
+            text = tmdbMovie.title,
+            style = MaterialTheme.typography.titleMedium
         )
-        Spacer(modifier = Modifier.height(padding1))
+        Text(
+            modifier = Modifier.padding(start = padding2),
+            text = tmdbMovie.releaseDate,
+            style = MaterialTheme.typography.titleSmall
+        )
     }
 }

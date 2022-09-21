@@ -7,5 +7,6 @@ class ComposeDimensions {
         // paddings
         val padding1 = 8.dp
         val padding2 = 4.dp
+        val padding3 = 2.dp
     }
 }

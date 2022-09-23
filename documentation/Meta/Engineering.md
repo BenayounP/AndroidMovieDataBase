@@ -16,7 +16,7 @@ I explain here my choices.
 
 ### Step2: just a log with a movie title
 
-### Step3: just a complete layers walktrough with log
+### Step3: "just" complete layers walktrough with log
 
 ### Step 4: Display moviiiiies
 
@@ -26,8 +26,16 @@ I explain here my choices.
 
 
 ## Some choices I had to take
-
 ### UI
 #### Compose
 * I had to create Dimensions class to handle global dimensions (padding1, Padding2)
 * I had to create Color class to handle global colors with light and dark theme
+
+## Some thought
+
+### this simple app took more than one month!
+One week "just" for create the skeleton architecture
+
+### Compose is great but teh paint is still wet
+
+### Flow works like a charm

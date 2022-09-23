@@ -70,3 +70,9 @@ It's quite fascinating that when you have the good foundation the functionality 
 
 ### 20/09/22
 My own pull to refresh system bugs and I fought against the `Modifier.pointerInput` ... and I lost...for today!
+
+### 21/09/2022
+Battled almost all day with the pull to refresh system and I won! 🍷
+
+### 23/09/2022
+Found a nice medium post about life cycle and allow app to refresh screen onResume. Began to work on tests and fake classes in data Layer

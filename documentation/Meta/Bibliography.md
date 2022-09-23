@@ -26,3 +26,5 @@ This is the "main" bibliography. You should also see references that help me dir
 ### UI
 * How to handle flow and state in ViewModel and Composables
   * [Medium post](https://proandroiddev.com/better-handling-states-between-viewmodel-and-composable-7ca14af379cb)
+* How to handle **Lifecycle** in ViewModel and Composables
+  * [Medium post](https://betterprogramming.pub/jetpack-compose-with-lifecycle-aware-composables-7bd5d6793e0)

@@ -80,7 +80,7 @@ private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: T
                     is TmdbAPIError.Exception -> stringResource(R.string.source_status_exception,tmdbAPIError.localizedMessage)
                     is TmdbAPIError.Unknown -> stringResource(R.string.source_status_unknown)
                 }
-                textBuilder.append(cause+ "\n")
+                textBuilder.append(" $cause\n")
             }
             is TmdbSourceStatus.Unknown -> textBuilder.append(stringResource(R.string.source_status_unknown))
         }

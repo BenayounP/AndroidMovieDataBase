@@ -43,7 +43,7 @@ class DataSourceModule {
     @FakeTmdbDataSourceProvider
     @Singleton
     @Provides
-    internal fun providesFakeTmdbDataSource() : TmdbDataSource {
+    internal fun providesFakeTmdbDataSource() : FakeTmdbDataSource {
         return FakeTmdbDataSource()
     }
 }
@@ -79,7 +79,7 @@ annotation class DefaultTmdbRepositoryProvider
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class DefaultTmdbRepositoryWithFalseDataSourceProvider
+annotation class DefaultTmdbRepositoryWithFakeDataSourceProvider
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
@@ -122,11 +122,11 @@ class RepositoriesModule {
         )
     }
 
-    @DefaultTmdbRepositoryWithFalseDataSourceProvider
+    @DefaultTmdbRepositoryWithFakeDataSourceProvider
     @Singleton
     @Provides
     internal fun providesdefaultRetrofitTMDBRepositoryWithFalseDataSourceProviderProvider(
-        @FakeTmdbDataSourceProvider TMDBDataSource: TmdbDataSource,
+        @FakeTmdbDataSourceProvider TMDBDataSource: FakeTmdbDataSource,
         @RoomTmdbCacheProvider tmdbCache: TmdbCache
     ): TmdbRepository {
         return eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository(

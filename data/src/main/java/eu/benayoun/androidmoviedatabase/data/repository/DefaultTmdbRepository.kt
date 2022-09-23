@@ -28,8 +28,10 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
 
     override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbCache.getTmdbMetaDataFlow()
 
-    override suspend fun getPopularMovieListFlow(): Flow<List<TmdbMovie>> =
-        tmdbCache.getTmdbMovieList()
+    override suspend fun getPopularMovieListFlow(): Flow<List<TmdbMovie>> {
+        return tmdbCache.getTmdbMovieList()
+    }
+
 
     override suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus> = refreshFlow
 

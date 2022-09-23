@@ -1,28 +1,75 @@
 package eu.benayoun.androidmoviedatabase.data.source.network
 
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
+import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse
 import kotlinx.coroutines.delay
 
 class FakeTmdbDataSource: TmdbDataSource {
+    private var delayInMs : Long = 0
+    private var nextResponseIsSuccess = true
+    private var tmdbAPIError = TmdbAPIError.Unknown() as TmdbAPIError
+    private val defaultList = generateDefaultList()
 
-    var delayInMs : Long = 5000
 
+    // interface implementation
+    override suspend fun getPopularMovies(): TmdbAPIResponse {
+        delay(delayInMs)
+        return if (nextResponseIsSuccess) getSuccessResponse()
+        else getErrorResponse()
+    }
 
-    fun setdelay(newDelayInMs: Long){
+    //***
+    // set fake data
+    //***
+    fun setDelayinMs(newDelayInMs: Long){
         delayInMs = newDelayInMs
     }
 
-    override suspend fun getPopularMovies(): TmdbAPIResponse {
-                return getSuccessResponse()
+    fun setSuccessResponse(){
+        nextResponseIsSuccess=true
     }
+
+    // errors
+
+    fun setNoInternetErrorResponse(){
+        nextResponseIsSuccess=false
+        tmdbAPIError = TmdbAPIError.NoInternet()
+    }
+
+    fun setToolErrorResponse(){
+        nextResponseIsSuccess=false
+        tmdbAPIError = TmdbAPIError.ToolError()
+    }
+
+    fun setNoDataErrorResponse(){
+        nextResponseIsSuccess=false
+        tmdbAPIError = TmdbAPIError.NoData()
+    }
+
+    fun setExceptionErrorResponse(localizedMessage: String){
+        nextResponseIsSuccess=false
+        tmdbAPIError = TmdbAPIError.Exception(localizedMessage)
+    }
+
+    fun setUnknownErrorResponse(){
+        nextResponseIsSuccess=false
+        tmdbAPIError = TmdbAPIError.Unknown()
+    }
+
+    // ***
+    // private cooking
+    // ***
 
     private suspend fun getSuccessResponse() : TmdbAPIResponse {
-        delay(delayInMs)
-        return TmdbAPIResponse.Success(getDefaultList())
+        return TmdbAPIResponse.Success(defaultList)
     }
 
-    private fun getDefaultList() : List<TmdbMovie> = listOf(
+    private suspend fun getErrorResponse() : TmdbAPIResponse {
+        return TmdbAPIResponse.Error(tmdbAPIError)
+    }
+
+    private fun generateDefaultList() : List<TmdbMovie> = listOf(
         TmdbMovie(id=532639, title="Pinocchio", posterUrl="https://image.tmdb.org/t/p/original/h32gl4a3QxQWNiNaR4Fc1uvLBkV.jpg", releaseDate="2022-09-07"),
         TmdbMovie(id=921360, title="Wire Room", posterUrl="https://image.tmdb.org/t/p/original/b9ykj4v8ykjRoGB7SpI1OuxblNU.jpg", releaseDate="2022-09-02"),
         TmdbMovie(id=773867, title="Seoul Vibe", posterUrl="https://image.tmdb.org/t/p/original/ffX0TL3uKerLXACkuZGWhAPMbAq.jpg", releaseDate="2022-08-26"),

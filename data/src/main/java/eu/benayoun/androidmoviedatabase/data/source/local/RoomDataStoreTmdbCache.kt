@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 
 internal class RoomDataStoreTmdbCache(private val tmdbDao: TmdbDao, private val tmdbMetaDataCache: TmdbMetaDataCache) :
     TmdbCache {
-    override suspend fun getTmdbMovieList(): Flow<List<TmdbMovie>> {
+    override suspend fun getTmdbMovieListFlow(): Flow<List<TmdbMovie>> {
         return tmdbDao.getAllMovies().map{
             it.map(TmdbMovieEntity::asTmdbMovie)
         }

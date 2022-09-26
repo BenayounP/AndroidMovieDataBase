@@ -12,6 +12,9 @@ I explain here my choices.
 
 ## How I did it from scratch
 
+### Some thought
+This "simple" app needed many research, a lot of back and forth and so would have been very difficult to do in the classic way: "here's your Jira ticket, see you tomorrow for next step"
+
 ### Step1: create architecture skeleton
 
 ### Step2: just a log with a movie title
@@ -33,9 +36,13 @@ I explain here my choices.
 
 ## Some thought
 
-### this simple app took more than one month!
+### This simple app took more than one month!
 One week "just" for create the skeleton architecture
 
-### Compose is great but teh paint is still wet
+### Compose is great but the paint is still wet
 
-### Flow works like a charm
+### Flow works like a charm (if you don't test it)
+
+### My work was essentially to create ans uses classes
+In another words I didn't do any low level algorithms/kotlin language. I didn't need to optimize some sorting algorithm but fight with the many variations of Flow. 
+

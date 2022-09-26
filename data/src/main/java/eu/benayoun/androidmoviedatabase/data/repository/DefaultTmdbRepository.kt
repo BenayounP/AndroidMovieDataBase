@@ -11,8 +11,7 @@ import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -24,22 +23,23 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
 ) : TmdbRepository {
 
     private val popularMoviesMutex = Mutex()
-    private val refreshFlow = MutableSharedFlow<TmdbUpdateStatus>()
+
+    private val _updateFlow = MutableStateFlow<TmdbUpdateStatus>(TmdbUpdateStatus.Off())
 
     override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbCache.getTmdbMetaDataFlow()
 
     override suspend fun getPopularMovieListFlow(): Flow<List<TmdbMovie>> {
-        return tmdbCache.getTmdbMovieList()
+        return tmdbCache.getTmdbMovieListFlow()
     }
 
 
-    override suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus> = refreshFlow
+    override suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus> = _updateFlow
 
     override fun updateTmdbMovies() {
         externalScope.launch(Dispatchers.IO) {
             popularMoviesMutex.withLock() {
                 // we are updating and we say it!
-                refreshFlow.emit(TmdbUpdateStatus.Updating())
+                _updateFlow.value=TmdbUpdateStatus.Updating()
 
                 var lastInternetSuccessTimeStamp: Long = -1
                 var tmdbSourceStatus: TmdbSourceStatus
@@ -65,7 +65,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                     saveMetaData(tmdbSourceStatus, lastInternetSuccessTimeStamp)
                 }
                 // we stop updating and we say it!
-                refreshFlow.emit(TmdbUpdateStatus.Off())
+                _updateFlow.value=TmdbUpdateStatus.Off()
             }
         }
     }

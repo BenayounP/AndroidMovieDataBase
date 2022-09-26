@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 internal interface TmdbCache {
 
     // Movie List
-    suspend fun getTmdbMovieList(): Flow<List<TmdbMovie>>
+    suspend fun getTmdbMovieListFlow(): Flow<List<TmdbMovie>>
     suspend fun saveTmdbMovieList(movieList: List<TmdbMovie>)
 
     // Meta Data

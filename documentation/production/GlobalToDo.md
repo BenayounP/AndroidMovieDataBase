@@ -9,7 +9,12 @@
 * Paging Data from TMDB API?
 
 ## UI
-* Add a config screen to change theme (light or dark)
+* Add round corners to `UpdateStatusComposable`
+* Add a config screen to change theme (light or dark)?
+
+## Tests
+* Remove unused `AndroidLocalTest`? 
+* Use lib [Turbine](https://github.com/cashapp/turbine) to test Flow?
 
 
 

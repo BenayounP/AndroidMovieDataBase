@@ -62,7 +62,7 @@ Created gradle module. I feel like I'm lost in the middle of a move....
 -> 🤯. Ok the process I used to fetch and save data was "totally" wrong...
 
 ### 15/09/22
-Now that I have the skeleton of the app it's easier (and funnier) to change/add things. Now we have a proper offlin firts app system. Playing with a refresh status now. 
+Now that I have the skeleton of the app it's easier (and funnier) to change/add things. Now we have a proper _offline first_ app system. Playing with a refresh status now. 
 
 ### 19/09/22
 Did some important work on the app update display and to implements an update when user ~~overscroll(you down scroll when movie grid is already at the first element)~~ pull to refresh\
@@ -76,3 +76,6 @@ Battled almost all day with the pull to refresh system and I won! 🍷
 
 ### 23/09/2022
 Found a nice medium post about life cycle and allow app to refresh screen onResume. Began to work on tests and fake classes in data Layer
+
+### 26/09/22
+And I tried to test my data classes so I needed to test some flow methos. Not easy at all....(maybe Turbine can help?)

@@ -28,3 +28,10 @@ This is the "main" bibliography. You should also see references that help me dir
   * [Medium post](https://proandroiddev.com/better-handling-states-between-viewmodel-and-composable-7ca14af379cb)
 * How to handle **Lifecycle** in ViewModel and Composables
   * [Medium post](https://betterprogramming.pub/jetpack-compose-with-lifecycle-aware-composables-7bd5d6793e0)
+
+### Tests
+* Testing flows in Android
+  * [Android developers post](https://developer.android.com/kotlin/flow/test)
+  * [Medium post introducing lib Turbine](https://medium.com/google-developer-experts/unit-testing-kotlin-flow-76ea5f4282c5)
+* Test Dispatchers
+  * [Android developers post](https://developer.android.com/kotlin/coroutines/test#testdispatchers)

@@ -18,8 +18,8 @@
 * Add a config screen to change theme (light or dark)?
 
 ## Tests
-* Remove unused `AndroidLocalTest`? 
 * Use lib [Turbine](https://github.com/cashapp/turbine) to test Flow?
+* Test Room DB and data store (with robolectric!)
 
 
 

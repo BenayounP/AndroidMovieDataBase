@@ -33,28 +33,28 @@ class FakeTmdbDataSource: TmdbDataSource {
     // errors
 
     fun setNoInternetErrorResponse(){
-        nextResponseIsSuccess=false
-        tmdbAPIError = TmdbAPIError.NoInternet()
+        setErrorResponse(TmdbAPIError.NoInternet())
     }
 
     fun setToolErrorResponse(){
-        nextResponseIsSuccess=false
-        tmdbAPIError = TmdbAPIError.ToolError()
+        setErrorResponse(TmdbAPIError.ToolError())
     }
 
     fun setNoDataErrorResponse(){
-        nextResponseIsSuccess=false
-        tmdbAPIError = TmdbAPIError.NoData()
+        setErrorResponse(TmdbAPIError.NoData())
     }
 
     fun setExceptionErrorResponse(localizedMessage: String){
-        nextResponseIsSuccess=false
-        tmdbAPIError = TmdbAPIError.Exception(localizedMessage)
+        setErrorResponse(TmdbAPIError.Exception(localizedMessage))
     }
 
     fun setUnknownErrorResponse(){
+       setErrorResponse(TmdbAPIError.Unknown())
+    }
+
+    fun setErrorResponse(tmdbAPIError: TmdbAPIError){
         nextResponseIsSuccess=false
-        tmdbAPIError = TmdbAPIError.Unknown()
+        this.tmdbAPIError = tmdbAPIError
     }
 
     // ***

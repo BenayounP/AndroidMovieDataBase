@@ -16,6 +16,7 @@ import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDataBa
 import eu.benayoun.androidmoviedatabase.data.source.network.FakeTmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.network.retrofit.RetrofitTmdbDataSource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -118,7 +119,8 @@ class RepositoriesModule {
         return eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository(
             TMDBDataSource,
             tmdbCache,
-            externalScope = MainScope()
+            externalScope = MainScope(),
+            dispatcher = Dispatchers.IO
         )
     }
 
@@ -132,7 +134,8 @@ class RepositoriesModule {
         return eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository(
             TMDBDataSource,
             tmdbCache,
-            externalScope = MainScope()
+            externalScope = MainScope(),
+            dispatcher = Dispatchers.IO
         )
     }
 }

@@ -32,6 +32,10 @@ This is the "main" bibliography. You should also see references that help me dir
 ### Tests
 * Testing flows in Android
   * [Android developers post](https://developer.android.com/kotlin/flow/test)
-  * [Medium post introducing lib Turbine](https://medium.com/google-developer-experts/unit-testing-kotlin-flow-76ea5f4282c5)
+  * [Medium post introducing library Turbine](https://medium.com/google-developer-experts/unit-testing-kotlin-flow-76ea5f4282c5)
+  * [Turbine Library](https://github.com/cashapp/turbine)
 * Test Dispatchers
   * [Android developers post](https://developer.android.com/kotlin/coroutines/test#testdispatchers)
+* Posts that helped me to avoid crashs in local test while using `android.util.Log` 🤷
+  * [Medium post](https://medium.com/@gal_41749/android-unitests-and-log-class-9546b6480006) that resolves it with...one class!
+  * [Stack overflow](https://stackoverflow.com/a/69634728/1859993) to add `@JvmStatic`

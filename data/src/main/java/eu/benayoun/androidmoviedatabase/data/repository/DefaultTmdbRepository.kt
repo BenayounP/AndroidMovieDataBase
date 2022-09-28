@@ -8,6 +8,7 @@ import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.utils.LogUtils
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,8 @@ import kotlinx.coroutines.sync.withLock
 
 internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                                      private val tmdbCache: TmdbCache,
-                                     private val externalScope: CoroutineScope
+                                     private val externalScope: CoroutineScope,
+                                     private val dispatcher: CoroutineDispatcher
 ) : TmdbRepository {
 
     private val popularMoviesMutex = Mutex()
@@ -36,7 +38,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
     override suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus> = _updateFlow
 
     override fun updateTmdbMovies() {
-        externalScope.launch(Dispatchers.IO) {
+        externalScope.launch(dispatcher) {
             popularMoviesMutex.withLock() {
                 // we are updating and we say it!
                 _updateFlow.value=TmdbUpdateStatus.Updating()

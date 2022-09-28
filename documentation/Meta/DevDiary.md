@@ -78,4 +78,4 @@ Battled almost all day with the pull to refresh system and I won! 🍷
 Found a nice medium post about life cycle and allow app to refresh screen onResume. Began to work on tests and fake classes in data Layer
 
 ### 26/09/22
-And I tried to test my data classes so I needed to test some flow methos. Not easy at all....(maybe Turbine can help?)
+And I tried to test my data classes so I needed to test some Flow methods. Not easy at all....(maybe [Turbine](https://github.com/cashapp/turbine) can help?)

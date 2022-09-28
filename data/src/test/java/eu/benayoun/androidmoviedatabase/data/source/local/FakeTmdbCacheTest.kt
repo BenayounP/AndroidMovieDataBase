@@ -3,6 +3,8 @@ package eu.benayoun.androidmoviedatabase.data.source.local
 import com.google.common.truth.Truth
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.fake.FakeTmdbMovieListGenerator
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -37,9 +39,25 @@ class FakeTmdbCacheTest {
 
         // Assert
         Truth.assertThat(testList.size).isEqualTo(expectedList.size)
+        for (index in testList.indices){
+            Truth.assertThat(testList[index]).isEqualTo(expectedList[index])
+        }
     }
 
     @Test
-    fun saveTmdbMetaData() {
+    fun saveTmdbMetaData()  = runTest(UnconfinedTestDispatcher()){
+        // Arrange
+        val expectedLastInternetSuccessTimeStamp = 4200L
+        var expectedTmdbMetaData= TmdbMetadata(TmdbSourceStatus.None(),expectedLastInternetSuccessTimeStamp)
+        var testTmdbMetaData = TmdbMetadata()
+
+        // Act
+        fakeTmdbCache.saveTmdbMetaData(expectedTmdbMetaData)
+        fakeTmdbCache.getTmdbMetaDataFlow().take(1).collect{
+            testTmdbMetaData=it
+        }
+
+        // Assert
+        Truth.assertThat(testTmdbMetaData).isEqualTo(expectedTmdbMetaData)
     }
 }

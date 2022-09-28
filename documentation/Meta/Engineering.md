@@ -46,3 +46,8 @@ One week "just" for create the skeleton architecture
 ### My work was essentially to create ans uses classes
 In another words I didn't do any low level algorithms/kotlin language. I didn't need to optimize some sorting algorithm but fight with the many variations of Flow. 
 
+## How I implemented some principles
+
+### DDD
+
+### SOLID

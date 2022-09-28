@@ -8,12 +8,12 @@ option java_multiple_files = true;
 
 
 message TmdbMetadataSerialized {
-  TmdbOriginEnum tmdbOriginEnum =1;
+  TmdbSourceEnum tmdbSourceEnum =1;
   TmdbAPIErrorEnum tmdbAPIError =2;
   string exceptionLocalizedMessage=3;
   int64 lastInternetSuccessTimeStamp=4; // mapped to Long in Java/Kotlin
 
-  enum TmdbOriginEnum {
+  enum TmdbSourceEnum {
     TMDB_ORIGIN_NONE=0;
     TMDB_ORIGIN_INTERNET=1;
     TMDB_ORIGIN_CACHE=2;

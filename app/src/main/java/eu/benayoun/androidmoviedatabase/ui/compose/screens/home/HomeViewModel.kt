@@ -9,7 +9,6 @@ import eu.benayoun.androidmoviedatabase.data.di.DefaultTmdbRepositoryWithFakeDat
 import eu.benayoun.androidmoviedatabase.data.di.FakeTmdbDataSourceProvider
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
-import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import eu.benayoun.androidmoviedatabase.data.source.network.FakeTmdbDataSource
@@ -38,20 +37,27 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryWithFakeDataSourc
     val tmdbUpdateStatus : StateFlow<TmdbUpdateStatus>
     get() = _tmdbUpdateStatus
 
+    var fakeResultIsSuccess: Boolean = true
+
     init{
         getFlows()
         fakeTmdbDataSource.setDelayinMs(1000)
-        fakeTmdbDataSource.setSuccessResponse()
     }
 
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
-        LogUtils.v("ON RESUME")
         updateTmdbMovies()
     }
 
     fun updateTmdbMovies(){
-        if (_tmdbUpdateStatus.value is TmdbUpdateStatus.Off) tmdbRepository.updateTmdbMovies()
+        if (_tmdbUpdateStatus.value is TmdbUpdateStatus.Off){
+            when (fakeResultIsSuccess){
+                true-> fakeTmdbDataSource.setSuccessResponse()
+                false -> fakeTmdbDataSource.setExceptionErrorResponse("FUCK")
+            }
+            fakeResultIsSuccess=!fakeResultIsSuccess
+            tmdbRepository.updateTmdbMovies()
+        }
     }
 
     // INTERNAL COOKING
@@ -72,6 +78,7 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryWithFakeDataSourc
         viewModelScope.launch {
             tmdbRepository.getTmdbMetaDataFlow().flowOn(Dispatchers.IO)
                 .collect { tmdbMetadata: TmdbMetadata ->
+                    LogUtils.v("new state in view model: ${tmdbMetadata.tmdbSourceStatus}")
                     _tmdbMetadataState.value = tmdbMetadata
                 }
         }

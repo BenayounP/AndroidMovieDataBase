@@ -14,7 +14,6 @@
 * Paging Data from TMDB API?
 
 ## UI
-* Add round corners to `UpdateStatusComposable`
 * Add a config screen to change theme (light or dark)?
 
 ## Tests

@@ -47,12 +47,10 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                 var tmdbSourceStatus: TmdbSourceStatus
                 var tmdbPopularMovieList: List<TmdbMovie>
                 // Step 1: try to get data on TMDB Server
-                LogUtils.v("Step 1: try to get data on TMDB Server")
                 var tmdbAPIResponse = tmdbDataSource.getPopularMovies()
 
                 // Step 2 Success : save films in db and update metadata
                 if (tmdbAPIResponse is TmdbAPIResponse.Success) {
-                    LogUtils.v("Step 2 SUCCESS: save data")
                     tmdbSourceStatus = TmdbSourceStatus.Internet()
                     lastInternetSuccessTimeStamp = System.currentTimeMillis()
                     tmdbPopularMovieList = tmdbAPIResponse.tmdbMovieList
@@ -61,7 +59,6 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                 }
                 //Step 2 failure : No data from Internet, just update metadate
                 else {
-                    LogUtils.v("Step 2: FAILURE")
                     val tmdbAPIError = (tmdbAPIResponse as TmdbAPIResponse.Error).tmdbAPIError
                     tmdbSourceStatus = TmdbSourceStatus.Cache(tmdbAPIError)
                     saveMetaData(tmdbSourceStatus, lastInternetSuccessTimeStamp)

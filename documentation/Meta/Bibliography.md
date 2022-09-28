@@ -20,8 +20,8 @@ This is the "main" bibliography. You should also see references that help me dir
   * [GitHub repository](https://github.com/skydoves/TheMovies)
 
 ### Local data
-* **ALL** about Proto Data Source
-  * [Medium post](https://medium.com/androiddevelopers/all-about-proto-datastore-1b1af6cd2879
+* **ALL** about Proto DataStore
+  * [Medium post](https://medium.com/androiddevelopers/all-about-proto-datastore-1b1af6cd2879)
 
 ### UI
 * How to handle flow and state in ViewModel and Composables

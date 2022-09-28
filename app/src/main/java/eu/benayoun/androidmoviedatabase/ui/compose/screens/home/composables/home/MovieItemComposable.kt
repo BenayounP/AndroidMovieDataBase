@@ -12,15 +12,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import eu.benayoun.androidmoviedatabase.R
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
-import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
-import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding2
-import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding3
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding2
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding3
 
 
 @Composable

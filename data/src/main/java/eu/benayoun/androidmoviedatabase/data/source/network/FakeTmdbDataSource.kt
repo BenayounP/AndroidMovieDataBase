@@ -48,9 +48,8 @@ class FakeTmdbDataSource: TmdbDataSource {
         setErrorResponse(TmdbAPIError.Exception(localizedMessage))
     }
 
-    fun setUnknownErrorResponse(){
-       setErrorResponse(TmdbAPIError.Unknown())
-    }
+    // F.Y.I there is no setUnknownErrorResponse()
+    // because this value is not generated when you fetch data from the web but when you can't have data from data source
 
     fun setErrorResponse(tmdbAPIError: TmdbAPIError){
         nextResponseIsSuccess=false

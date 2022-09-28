@@ -1,11 +1,13 @@
 package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home
 
 import android.text.format.DateFormat
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +22,8 @@ import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.ui.theme.BackgroundAndContentColor
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeColors
-import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding1
+import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import java.util.*
 
 @Composable
@@ -33,7 +36,9 @@ fun UpdateStatusComposable(
         modifier
             .padding(padding1)
             .fillMaxWidth()
-            .background(backgroundAndContentColor.background),
+            .background(color = backgroundAndContentColor.background,
+                shape = RoundedCornerShape(padding1)
+            ),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
 
@@ -67,13 +72,14 @@ private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: T
     if (tmdbUpdateStatus is TmdbUpdateStatus.Updating) textBuilder.append("UPDATING")
     else {
         // Data from internet or cache
-        val tmdbOrigin = tmdbMetadata.tmdbSourceStatus
-        when (tmdbOrigin) {
+        val tmdbSourceStatus = tmdbMetadata.tmdbSourceStatus
+        LogUtils.v("new tmdbSourceStatus in composable: ${tmdbSourceStatus.toString()}")
+        when (tmdbSourceStatus) {
             is TmdbSourceStatus.None -> textBuilder.append(stringResource(R.string.source_status_none))
             is TmdbSourceStatus.Internet -> null // nothing to do
             is TmdbSourceStatus.Cache -> {
                 textBuilder.append(stringResource(R.string.source_status_cache))
-                val cause: String = when (val tmdbAPIError = tmdbOrigin.tmdbAPIError) {
+                val cause: String = when (val tmdbAPIError = tmdbSourceStatus.tmdbAPIError) {
                     is TmdbAPIError.NoInternet -> stringResource(R.string.source_status_no_internet)
                     is TmdbAPIError.ToolError -> stringResource(R.string.source_status_tool_error)
                     is TmdbAPIError.NoData -> stringResource(R.string.source_status_no_data)

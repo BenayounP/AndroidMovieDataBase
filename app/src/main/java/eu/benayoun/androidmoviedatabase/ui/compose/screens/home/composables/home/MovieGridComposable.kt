@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
-import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.Companion.padding1
+import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding1
 
 
 @Composable

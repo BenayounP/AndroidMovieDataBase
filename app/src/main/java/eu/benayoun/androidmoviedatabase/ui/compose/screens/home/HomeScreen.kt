@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.HomeViewModel
+import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.model.HomeViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.MovieGridComposable
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.UpdateStatusComposable
 

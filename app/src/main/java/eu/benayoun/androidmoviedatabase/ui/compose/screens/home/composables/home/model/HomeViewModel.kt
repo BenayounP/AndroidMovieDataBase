@@ -1,18 +1,14 @@
-package eu.benayoun.androidmoviedatabase.ui.compose.screens.home
+package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.model
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import eu.benayoun.androidmoviedatabase.data.di.DefaultTmdbRepositoryWithFakeDataSourceProvider
-import eu.benayoun.androidmoviedatabase.data.di.FakeTmdbDataSourceProvider
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
-import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
-import eu.benayoun.androidmoviedatabase.data.source.network.FakeTmdbDataSource
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
+import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.model.RepositoryProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,9 +18,9 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryWithFakeDataSourceProvider private val tmdbRepository: TmdbRepository,
-                                         @FakeTmdbDataSourceProvider private val fakeTmdbDataSource: FakeTmdbDataSource
-                                         ) : ViewModel(), DefaultLifecycleObserver {
+class HomeViewModel @Inject constructor(private val repositoryProvider: RepositoryProvider) : ViewModel(), DefaultLifecycleObserver {
+    private val tmdbRepository = repositoryProvider.providesRepository()
+
     private val _movieListState = MutableStateFlow<List<TmdbMovie>>(listOf())
     val movieListState : StateFlow<List<TmdbMovie>>
     get() = _movieListState
@@ -37,12 +33,9 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryWithFakeDataSourc
     val tmdbUpdateStatus : StateFlow<TmdbUpdateStatus>
     get() = _tmdbUpdateStatus
 
-    var fakeResultIsSuccess: Boolean = true
-
     init{
-        LogUtils.v("FAKE")
+        repositoryProvider.onInit()
         getFlows()
-        fakeTmdbDataSource.setDelayinMs(1000)
     }
 
     override fun onResume(owner: LifecycleOwner) {
@@ -52,11 +45,7 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryWithFakeDataSourc
 
     fun updateTmdbMovies(){
         if (_tmdbUpdateStatus.value is TmdbUpdateStatus.Off){
-            when (fakeResultIsSuccess){
-                true-> fakeTmdbDataSource.setSuccessResponse()
-                false -> fakeTmdbDataSource.setExceptionErrorResponse("FUCK")
-            }
-            fakeResultIsSuccess=!fakeResultIsSuccess
+            repositoryProvider.onUpdateTmdbMovies()
             tmdbRepository.updateTmdbMovies()
         }
     }

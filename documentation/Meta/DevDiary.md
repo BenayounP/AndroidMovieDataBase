@@ -30,11 +30,10 @@ And Compose basically works (displaying title). Having the feeling that once bas
 Included Coil (so we can display movie posters) in few lines and....what? 10 minutes? 😯. And fought with colors for 1 hour...🤷
 
 ### 30/08/22
-What have I done? I wasn't satisfied by the way I processed the TMDB APi response. It was the movie list if ok and an empty list if not. Now I have a complex system of sealed class to  process success or failure and trace the reason (no internet, exception etc...).
+What have I done? I wasn't satisfied by the way I processed the TMDB API response. It was the movie list if ok and an empty list if not. Now I have a complex system of sealed class to  process success or failure and trace the reason (no internet, exception etc...).
 
-### 30/08/22
+### 31/08/22
 What have I done? (bis) Ok I had to save some meta data (the current source data for movies: Internet or cache for example). And If I try Proto dataSource?
-
 
 ## September 2022
 
@@ -79,3 +78,6 @@ Found a nice medium post about life cycle and allow app to refresh screen onResu
 
 ### 26/09/22
 And I tried to test my data classes so I needed to test some Flow methods. Not easy at all....(maybe [Turbine](https://github.com/cashapp/turbine) can help?)
+
+### 27/09/22
+Ok, Turbine wasn't needed (for now). Finalized to test the main data class `DefaultTmdbRepository`. Did some QA tests using fake datasource and fixed some bugs in...DataStore(🤷). The app is almost ready to be presented to the world!

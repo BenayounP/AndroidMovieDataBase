@@ -20,14 +20,32 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
+    flavorDimensions "reality"
+    productFlavors {
+        fake {
+            dimension "reality"
+        }
+        prod{
+            dimension "reality"
+        }
+    }
+
+    sourceSets {
+        fake {
+            java.srcDirs = ['fake/java']
+        }
+
+    }
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

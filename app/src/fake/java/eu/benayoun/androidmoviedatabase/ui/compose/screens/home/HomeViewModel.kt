@@ -40,6 +40,7 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryWithFakeDataSourc
     var fakeResultIsSuccess: Boolean = true
 
     init{
+        LogUtils.v("FAKE")
         getFlows()
         fakeTmdbDataSource.setDelayinMs(1000)
     }
@@ -78,7 +79,6 @@ class HomeViewModel @Inject constructor (@DefaultTmdbRepositoryWithFakeDataSourc
         viewModelScope.launch {
             tmdbRepository.getTmdbMetaDataFlow().flowOn(Dispatchers.IO)
                 .collect { tmdbMetadata: TmdbMetadata ->
-                    LogUtils.v("new state in view model: ${tmdbMetadata.tmdbSourceStatus}")
                     _tmdbMetadataState.value = tmdbMetadata
                 }
         }

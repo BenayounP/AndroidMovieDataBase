@@ -73,7 +73,6 @@ private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: T
     else {
         // Data from internet or cache
         val tmdbSourceStatus = tmdbMetadata.tmdbSourceStatus
-        LogUtils.v("new tmdbSourceStatus in composable: ${tmdbSourceStatus.toString()}")
         when (tmdbSourceStatus) {
             is TmdbSourceStatus.None -> textBuilder.append(stringResource(R.string.source_status_none))
             is TmdbSourceStatus.Internet -> null // nothing to do

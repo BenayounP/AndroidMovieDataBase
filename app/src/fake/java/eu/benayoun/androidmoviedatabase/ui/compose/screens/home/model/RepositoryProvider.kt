@@ -15,7 +15,6 @@ class RepositoryProvider @Inject constructor (@DefaultTmdbRepositoryWithFakeData
     fun providesRepository() : TmdbRepository = tmdbRepository
 
     fun onInit(){
-        LogUtils.v("FAKE")
         fakeTmdbDataSource.setDelayinMs(1000)
     }
 

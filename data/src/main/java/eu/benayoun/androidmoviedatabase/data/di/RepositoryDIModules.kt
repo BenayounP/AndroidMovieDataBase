@@ -7,72 +7,20 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
+import eu.benayoun.androidmoviedatabase.data.source.di.FakeTmdbDataSourceProvider
+import eu.benayoun.androidmoviedatabase.data.source.di.RetrofitTmdbDataSourceProvider
+import eu.benayoun.androidmoviedatabase.data.source.di.TmdbDaoProvider
 import eu.benayoun.androidmoviedatabase.data.source.local.RoomDataStoreTmdbCache
 import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
 import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
 import eu.benayoun.androidmoviedatabase.data.source.local.metadata.datastore.DataStoreTmdbMetaDataCache
 import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDao
-import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDataBase
 import eu.benayoun.androidmoviedatabase.data.source.network.FakeTmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
-import eu.benayoun.androidmoviedatabase.data.source.network.retrofit.RetrofitTmdbDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import javax.inject.Qualifier
 import javax.inject.Singleton
-
-
-// DATA SOURCE
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class RetrofitTmdbDataSourceProvider
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class FakeTmdbDataSourceProvider
-
-@Module
-@InstallIn(SingletonComponent::class)
-class DataSourceModule {
-    @RetrofitTmdbDataSourceProvider
-    @Singleton
-    @Provides
-    internal fun providesRetrofitTmdbDataSource(@ApplicationContext context: Context) : TmdbDataSource {
-        return RetrofitTmdbDataSource(context)
-    }
-
-    @FakeTmdbDataSourceProvider
-    @Singleton
-    @Provides
-    internal fun providesFakeTmdbDataSource() : FakeTmdbDataSource {
-        return FakeTmdbDataSource()
-    }
-}
-
-// CACHE
-
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class TmdbDaoProvider
-
-@InstallIn(SingletonComponent::class)
-@Module
-class RoomModule{
-
-    @Provides
-    @Singleton
-    internal fun provideDatabase(@ApplicationContext context: Context): TmdbDataBase =
-        TmdbDataBase.create(context)
-
-    @Singleton
-    @TmdbDaoProvider
-    @Provides
-    internal fun providesTmdbDao(tmdbDataBase: TmdbDataBase): TmdbDao {
-        return tmdbDataBase.tmdbDao()
-    }
-}
-
-// REPOSITORY
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
@@ -112,7 +60,7 @@ class RepositoriesModule {
     @DefaultTmdbRepositoryProvider
     @Singleton
     @Provides
-    internal fun providesdefaultRetrofitTMDBRepositoryProvider(
+    internal fun providesDefaultRetrofitTMDBRepositoryProvider(
         @RetrofitTmdbDataSourceProvider TMDBDataSource: TmdbDataSource,
         @RoomTmdbCacheProvider tmdbCache: TmdbCache
     ): TmdbRepository {
@@ -127,7 +75,7 @@ class RepositoriesModule {
     @DefaultTmdbRepositoryWithFakeDataSourceProvider
     @Singleton
     @Provides
-    internal fun providesdefaultRetrofitTMDBRepositoryWithFalseDataSourceProviderProvider(
+    internal fun providesDefaultRetrofitTMDBRepositoryWithFalseDataSourceProviderProvider(
         @FakeTmdbDataSourceProvider TMDBDataSource: FakeTmdbDataSource,
         @RoomTmdbCacheProvider tmdbCache: TmdbCache
     ): TmdbRepository {

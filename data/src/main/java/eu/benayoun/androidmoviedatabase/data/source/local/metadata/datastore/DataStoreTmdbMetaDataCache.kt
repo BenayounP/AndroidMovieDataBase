@@ -36,7 +36,6 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context) :
     }
 
     override suspend fun saveTmdbMetaData(tmdbMetadata: TmdbMetadata){
-        LogUtils.v("Save data in data store: ${tmdbMetadata.tmdbSourceStatus.toString()}")
         tmdbOriginDataStore.updateData{tmdbMetadataSerialized: TmdbMetadataSerialized ->
             val builder = tmdbMetadataSerialized.toBuilder()
             val tmdbSourceStatus = tmdbMetadata.tmdbSourceStatus

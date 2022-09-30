@@ -5,7 +5,10 @@ import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse
 import eu.benayoun.androidmoviedatabase.data.model.fake.FakeTmdbMovieListGenerator
 import kotlinx.coroutines.delay
 
-class FakeTmdbDataSource: TmdbDataSource {
+// beforeGettingPopularMovies is used in fake flavor
+// to modify behavior on each call of getPopularMovies
+
+internal class FakeTmdbDataSource(val beforeGettingPopularMovies: () -> Unit={}): TmdbDataSource {
     private var delayInMs : Long = 0
     private var nextResponseIsSuccess = true
     private var tmdbAPIError = TmdbAPIError.Unknown() as TmdbAPIError
@@ -14,6 +17,7 @@ class FakeTmdbDataSource: TmdbDataSource {
 
     // interface implementation
     override suspend fun getPopularMovies(): TmdbAPIResponse {
+        beforeGettingPopularMovies()
         delay(delayInMs)
         return if (nextResponseIsSuccess) getSuccessResponse()
         else getErrorResponse()
@@ -22,7 +26,7 @@ class FakeTmdbDataSource: TmdbDataSource {
     //***
     // set fake data
     //***
-    fun setDelayinMs(newDelayInMs: Long){
+    fun setDelayInMs(newDelayInMs: Long){
         delayInMs = newDelayInMs
     }
 

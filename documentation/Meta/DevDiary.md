@@ -81,3 +81,10 @@ And I tried to test my data classes so I needed to test some Flow methods. Not e
 
 ### 27/09/22
 Ok, Turbine wasn't needed (for now). Finalized to test the main data class `DefaultTmdbRepository`. Did some QA tests using fake datasource and fixed some bugs in...DataStore(🤷). The app is almost ready to be presented to the world!
+
+### 30/09/22
+Oops, forgot to write on previous days.
+
+I worked on flavors. Surprisingly I wasn't worked many time with this concept. 
+
+Used it to do a `fake` flavor to handle a FakeDatasource to easier some QA. 

@@ -5,10 +5,11 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import eu.benayoun.androidmoviedatabase.data.di.TmdbRepositoryProvider
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
-import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.model.RepositoryProvider
+import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,8 +19,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repositoryProvider: RepositoryProvider) : ViewModel(), DefaultLifecycleObserver {
-    private val tmdbRepository = repositoryProvider.providesRepository()
+class HomeViewModel @Inject constructor(@TmdbRepositoryProvider private val tmdbRepository: TmdbRepository) : ViewModel(), DefaultLifecycleObserver {
 
     private val _movieListState = MutableStateFlow<List<TmdbMovie>>(listOf())
     val movieListState : StateFlow<List<TmdbMovie>>
@@ -34,7 +34,6 @@ class HomeViewModel @Inject constructor(private val repositoryProvider: Reposito
     get() = _tmdbUpdateStatus
 
     init{
-        repositoryProvider.onInit()
         getFlows()
     }
 
@@ -45,7 +44,6 @@ class HomeViewModel @Inject constructor(private val repositoryProvider: Reposito
 
     fun updateTmdbMovies(){
         if (_tmdbUpdateStatus.value is TmdbUpdateStatus.Off){
-            repositoryProvider.onUpdateTmdbMovies()
             tmdbRepository.updateTmdbMovies()
         }
     }

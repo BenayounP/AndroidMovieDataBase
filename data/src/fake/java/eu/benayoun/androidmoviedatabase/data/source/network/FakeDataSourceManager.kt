@@ -6,13 +6,13 @@ internal class FakeDataSourceManager() {
     private var fakeResultIsSuccess: Boolean = true
     val fakeTmdbDataSource = FakeTmdbDataSource(::beforeGettingPopularMovies)
     init{
-        fakeTmdbDataSource.setDelayInMs(1000)
+        fakeTmdbDataSource.setDelayInMs(2000)
     }
 
     private fun beforeGettingPopularMovies(){
         when (fakeResultIsSuccess){
             true-> fakeTmdbDataSource.setSuccessResponse()
-            false -> fakeTmdbDataSource.setExceptionErrorResponse("FUCK")
+            false -> fakeTmdbDataSource.setNoInternetErrorResponse()
         }
         fakeResultIsSuccess=!fakeResultIsSuccess
     }

@@ -1,7 +1,10 @@
-__[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+# AMDB (Android Movie Data Base)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
-# AMDB (Android Movie Data Base)
+<p align="center">
+  <img alt="Light" src="./documentation/assets/app_demo.gif" width="60%">
+</p>
 
 ### TLDR
 AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/3). 
@@ -9,7 +12,7 @@ AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/
 It's a personal project to be up to date on Android latest "official" tools for a simple but realistic app
 
 ### Quick user manual
-The app is minimal, you can find more details in the [user manual](./documentation/manual/UserManual.md). 
+The app is minimal, you can find more details in the [user manual](./documentation/manual/QuickUserManual.md). 
 
 ### HowTo
 You need to do some few manipulations to compile and use the app. More details in the [HowTo](./documentation/technical/HowTo.md) document. 

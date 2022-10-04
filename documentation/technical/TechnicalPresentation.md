@@ -1,6 +1,6 @@
 #Technical Presentation
 
-I recommend you to try the app or at least to read the [Quick User Manual](../manual/UserManual.md) before reading this documentation!
+I recommend you to try the app or at least to read the [Quick User Manual](../manual/QuickUserManual.md) before reading this documentation!
 
 ### From user Journey to Implementation
 * The application basically fetches data from [TMDB API](https://developers.themoviedb.org/3) with retrofit. 

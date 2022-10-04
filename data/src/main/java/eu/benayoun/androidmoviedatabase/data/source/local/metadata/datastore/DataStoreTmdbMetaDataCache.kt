@@ -8,7 +8,6 @@ import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

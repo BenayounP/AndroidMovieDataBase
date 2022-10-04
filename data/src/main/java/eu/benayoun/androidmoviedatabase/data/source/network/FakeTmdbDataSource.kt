@@ -5,7 +5,7 @@ import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse
 import eu.benayoun.androidmoviedatabase.data.model.fake.FakeTmdbMovieListGenerator
 import kotlinx.coroutines.delay
 
-// beforeGettingPopularMovies is used in fake flavor
+// parameter beforeGettingPopularMovies is used in fake flavor
 // to modify behavior on each call of getPopularMovies
 
 internal class FakeTmdbDataSource(val beforeGettingPopularMovies: () -> Unit={}): TmdbDataSource {

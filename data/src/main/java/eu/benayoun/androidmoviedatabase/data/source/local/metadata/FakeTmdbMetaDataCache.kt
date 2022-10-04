@@ -4,7 +4,7 @@ import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class FakeTmdbMetaDataCache : TmdbMetaDataCache {
+internal class FakeTmdbMetaDataCache : TmdbMetaDataCache {
     private val _tmdbMetaDataFlow = MutableStateFlow<TmdbMetadata>(TmdbMetadata())
 
     override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = _tmdbMetaDataFlow

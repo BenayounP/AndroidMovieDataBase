@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.utils.LogUtils
-import kotlinx.coroutines.sync.Mutex
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

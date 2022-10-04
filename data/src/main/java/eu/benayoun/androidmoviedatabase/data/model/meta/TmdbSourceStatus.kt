@@ -1,6 +1,5 @@
 package eu.benayoun.androidmoviedatabase.data.model.meta
 
-import android.os.Build.VERSION_CODES.S
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 
 // meta data about the movie data

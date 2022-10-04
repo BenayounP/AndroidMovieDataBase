@@ -1,9 +1,11 @@
 package eu.benayoun.androidmoviedatabase.data.source.di
 
 import android.content.Context
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
@@ -17,13 +19,14 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
+
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
-annotation class TmdbDataStoreRoomMoviesCacheProvider
+internal annotation class TmdbDataStoreRoomMoviesCacheProvider
 
 @InstallIn(SingletonComponent::class)
 @Module
-class LocalSourcesDIModules{
+internal class LocalSourcesDIModules{
 
     // METADATA
     @Singleton
@@ -59,5 +62,4 @@ class LocalSourcesDIModules{
     internal fun providesTmdbDataStoreRoomMoviesCache(tmdbMoviesCache: TmdbMoviesCache, tmdbMetaDataCache: TmdbMetaDataCache): TmdbCache {
         return TmdbCache(tmdbMoviesCache,tmdbMetaDataCache)
     }
-
 }

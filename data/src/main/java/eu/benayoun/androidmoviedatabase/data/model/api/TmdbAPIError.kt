@@ -1,7 +1,5 @@
 package eu.benayoun.androidmoviedatabase.data.model.api
 
-import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
-
 sealed class TmdbAPIError(){
     class NoInternet() : eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError()
     class ToolError() : eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError() // for retrofit errors for example

@@ -7,13 +7,22 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface TmdbRepository {
+    /***
+     * Flows
+     */
 
-    // Flows
+    // the flow with the popular movies to be displayed
     suspend fun getPopularMovieListFlow() : Flow<List<TmdbMovie>>
+    // the flow with metadata:
+    // - data sources web or the cache (when online for example)
+    // - last internet update
     suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata>
+
+    // a simple flow that indicates if update on internet is on the way
     suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus>
 
-    // update data
+    /**
+     * Update data
+     */
     fun updateTmdbMovies()
-
 }

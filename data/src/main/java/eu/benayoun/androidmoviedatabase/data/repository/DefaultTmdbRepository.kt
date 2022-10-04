@@ -3,14 +3,12 @@ package eu.benayoun.androidmoviedatabase.data.repository
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIResponse
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
-import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
+import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

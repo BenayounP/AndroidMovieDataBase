@@ -11,11 +11,11 @@ import javax.inject.Singleton
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class TmdbDataSourceProvider
+internal annotation class TmdbDataSourceProvider
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataSourceModule {
+internal class DataSourceModule {
     @TmdbDataSourceProvider
     @Singleton
     @Provides

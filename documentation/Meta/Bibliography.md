@@ -1,7 +1,7 @@
 # Bibliography
 
 ## Disclaimer
-This is the "main" bibliography. You should also see references that help me directly in the code. 
+This is the "main" bibliography. You should also see references that helped me directly in the code. 
 
 ## Links
 
@@ -10,6 +10,10 @@ This is the "main" bibliography. You should also see references that help me dir
   * [Personal blog from Nikola K.](https://cinnamon.agency/blog/post/multi_module_apps_with_kotlin_and_dagger)
 * How to create an offline first app :
   * [Android developers post](https://developer.android.com/topic/architecture/data-layer/offline-first)
+
+### Dependency Injection
+* How to use @Injects, @Binds and @Provides with Hilt
+  * [Medium post](https://www.valueof.io/blog/inject-provides-binds-dependencies-dagger-hilt)
 
 ### Data source
 * How to use retrofit with Room and especially flow

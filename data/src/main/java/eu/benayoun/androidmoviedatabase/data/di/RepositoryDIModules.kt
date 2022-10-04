@@ -1,16 +1,12 @@
 package eu.benayoun.androidmoviedatabase.data.di
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import eu.benayoun.androidmoviedatabase.data.source.di.TmdbDataStoreRoomMoviesCacheProvider
 import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
-import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
-import eu.benayoun.androidmoviedatabase.data.source.local.metadata.datastore.DataStoreTmdbMetaDataCache
 import eu.benayoun.androidmoviedatabase.data.source.network.TmdbDataSource
 import eu.benayoun.androidmoviedatabase.data.source.network.di.TmdbDataSourceProvider
 import kotlinx.coroutines.Dispatchers

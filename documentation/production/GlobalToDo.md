@@ -11,11 +11,6 @@
 
 ## Data
 * Paging Data from TMDB API?
-* Try to make "all" classes internal?
-
-## DI
-* Replace `@provides` by `@binds` when necessary like [here](https://www.valueof.io/blog/inject-provides-binds-dependencies-dagger-hilt)
-
 
 ## UI
 * Add a config screen to change theme (light or dark)?

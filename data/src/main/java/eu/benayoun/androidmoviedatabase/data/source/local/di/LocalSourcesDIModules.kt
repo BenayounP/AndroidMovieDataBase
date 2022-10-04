@@ -6,30 +6,58 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDao
-import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.TmdbDataBase
+import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
+import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.source.local.metadata.datastore.DataStoreTmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.TmdbMoviesCache
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.RoomTmdbMoviesCache
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.internal.TmdbRoomDao
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.room.internal.TmdbRoomDataBase
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
-
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
-annotation class TmdbDaoProvider
+annotation class TmdbDataStoreRoomMoviesCacheProvider
 
 @InstallIn(SingletonComponent::class)
 @Module
-class RoomModule{
+class LocalSourcesDIModules{
 
-    @Provides
+    // METADATA
     @Singleton
-    internal fun provideDatabase(@ApplicationContext context: Context): TmdbDataBase =
-        TmdbDataBase.create(context)
-
-    @Singleton
-    @TmdbDaoProvider
     @Provides
-    internal fun providesTmdbDao(tmdbDataBase: TmdbDataBase): TmdbDao {
-        return tmdbDataBase.tmdbDao()
+    internal fun providesDataStoreTmdbMetaDataCache(@ApplicationContext appContext: Context) : TmdbMetaDataCache
+    {
+        return DataStoreTmdbMetaDataCache(appContext)
     }
+
+    // MOVIES
+
+    @Provides
+    @Singleton
+    internal fun provideRoomDatabase(@ApplicationContext context: Context): TmdbRoomDataBase =
+        TmdbRoomDataBase.create(context)
+
+    @Singleton
+    @Provides
+    internal fun providesRoomTmdbDao(tmdbRoomDataBase: TmdbRoomDataBase): TmdbRoomDao {
+        return tmdbRoomDataBase.tmdbDao()
+    }
+
+    @Singleton
+    @Provides
+    internal fun providesTmdbRoomMoviesCache(tmdbRoomDao: TmdbRoomDao): TmdbMoviesCache {
+        return RoomTmdbMoviesCache(tmdbRoomDao)
+    }
+
+    // CACHE
+    @Singleton
+    @Provides
+    @TmdbDataStoreRoomMoviesCacheProvider
+    internal fun providesTmdbDataStoreRoomMoviesCache(tmdbMoviesCache: TmdbMoviesCache, tmdbMetaDataCache: TmdbMetaDataCache): TmdbCache {
+        return TmdbCache(tmdbMoviesCache,tmdbMetaDataCache)
+    }
+
 }

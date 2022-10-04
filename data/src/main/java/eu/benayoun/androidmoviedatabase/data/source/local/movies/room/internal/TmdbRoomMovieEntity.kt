@@ -1,12 +1,12 @@
-package eu.benayoun.androidmoviedatabase.data.source.local.movies.room
+package eu.benayoun.androidmoviedatabase.data.source.local.movies.room.internal
 
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 
-@Entity(tableName = TmdbDataBase.DB_NAME)
-internal class TmdbMovieEntity(
+@Entity(tableName = TmdbRoomDataBase.DB_NAME)
+internal class TmdbRoomMovieEntity(
     @NonNull
     @PrimaryKey
     val id: Long,

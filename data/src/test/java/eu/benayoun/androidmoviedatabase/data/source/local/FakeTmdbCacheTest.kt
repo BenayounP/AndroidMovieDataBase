@@ -5,6 +5,8 @@ import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.fake.FakeTmdbMovieListGenerator
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
+import eu.benayoun.androidmoviedatabase.data.source.local.metadata.FakeTmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.FakeTmdbMoviesCache
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -13,7 +15,7 @@ import org.junit.Before
 import org.junit.Test
 
 class FakeTmdbCacheTest {
-    val fakeTmdbCache = FakeTmdbCache()
+    private val fakeTmdbCache = TmdbCache(FakeTmdbMoviesCache(), FakeTmdbMetaDataCache())
 
     @Before
     fun setUp() {

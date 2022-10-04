@@ -27,7 +27,7 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context) :
     TmdbMetaDataCache {
     private  val tmdbOriginDataStore = appContext.tmdbOriginDataStore
 
-    override fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
+    override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
         TmdbMetadata(
             mapToSourceStatus(
                 tmdbMetadataSerialized

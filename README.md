@@ -8,14 +8,11 @@ AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/
 
 It's a personal project to be up to date on Android latest "official" tools for a simple but realistic app
 
-### What it does
-It get a list of movie on IMDB, cache data to be consulted offline.
+### Quick user manual
+The app is minimal, you can find more details in the [user manual](./documentation/manual/UserManual.md). 
 
-## How to build on your environment
-Add your API key in `local.properties` file.
-```
-tmdb_api_key=YOUR_API_KEY
-```
+### HowTo
+You need to do some few manipulations to compile and use the app. More details in the [HowTo](./documentation/technical/HowTo.md) document. 
 
 ### Android official tools
 This app uses:

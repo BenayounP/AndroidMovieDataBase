@@ -5,20 +5,21 @@ import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.fake.FakeTmdbMovieListGenerator
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
-import eu.benayoun.androidmoviedatabase.data.source.local.FakeTmdbCache
+import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
+import eu.benayoun.androidmoviedatabase.data.source.local.metadata.FakeTmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.data.source.local.movies.FakeTmdbMoviesCache
 import eu.benayoun.androidmoviedatabase.data.source.network.FakeTmdbDataSource
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class DefaultTmdbRepositoryTest {
     private val fakeTmdbDataSource = FakeTmdbDataSource()
-    private val fakeTmdbCache = FakeTmdbCache()
+    private val fakeTmdbCache = TmdbCache(FakeTmdbMoviesCache(),FakeTmdbMetaDataCache())
     private val dispatcher = UnconfinedTestDispatcher()
     internal val defaultTmdbRepository = DefaultTmdbRepository(fakeTmdbDataSource,fakeTmdbCache,MainScope(), dispatcher)
 

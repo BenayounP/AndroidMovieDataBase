@@ -1,7 +1,6 @@
 # Global ToDo
 
-##Architecture/Meta
-* Add Build variants ? (for testing with fake classes for example)
+## Architecture/Meta
 * Add [Fastlane](https://docs.fastlane.tools/getting-started/android/setup/) for CI? 
 * The FakeRepository class is not `internal` and we should change that (exposing just an interface ?)
 
@@ -12,6 +11,11 @@
 
 ## Data
 * Paging Data from TMDB API?
+* Try to make "all" classes internal?
+
+## DI
+* Replace `@provides` by `@binds` when necessary like [here](https://www.valueof.io/blog/inject-provides-binds-dependencies-dagger-hilt)
+
 
 ## UI
 * Add a config screen to change theme (light or dark)?
@@ -19,6 +23,12 @@
 ## Tests
 * Use lib [Turbine](https://github.com/cashapp/turbine) to test Flow?
 * Test Room DB and data store (with robolectric!)
+* Test UI (especially the push to refresh) with espresso
+* Complete test part in HowTo.md
+
+
+
+
 
 
 

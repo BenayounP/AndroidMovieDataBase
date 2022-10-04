@@ -17,5 +17,4 @@ internal class FakeDataSourceManager() {
         fakeResultIsSuccess=!fakeResultIsSuccess
     }
 
-
 }

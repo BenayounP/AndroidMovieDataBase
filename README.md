@@ -26,7 +26,7 @@ This app uses:
   * Fetching data on API: [Retrofit](https://square.github.io/retrofit/)
   * Repository
     * Data Base: [Room](https://developer.android.com/jetpack/androidx/releases/room)
-    * Other cache:  [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
+    * Other cache for metadata:  [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
 * UI:
   * Global system: [Compose](https://developer.android.com/jetpack/compose)
   * Image loading: [Coil](https://coil-kt.github.io/coil/compose/)

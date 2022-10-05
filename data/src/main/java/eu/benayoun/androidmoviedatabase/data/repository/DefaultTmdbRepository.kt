@@ -49,7 +49,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
 
                 // Step 2 Success : save films in db and update metadata
                 if (tmdbAPIResponse is TmdbAPIResponse.Success) {
-                    tmdbSourceStatus = TmdbSourceStatus.Internet()
+                    tmdbSourceStatus = TmdbSourceStatus.Internet
                     lastInternetSuccessTimeStamp = System.currentTimeMillis()
                     tmdbPopularMovieList = tmdbAPIResponse.tmdbMovieList
                     tmdbCache.saveTmdbMovieList(tmdbPopularMovieList)

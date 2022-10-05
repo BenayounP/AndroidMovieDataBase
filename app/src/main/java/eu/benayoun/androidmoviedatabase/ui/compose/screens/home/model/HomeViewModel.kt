@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.model
+package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.model
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner

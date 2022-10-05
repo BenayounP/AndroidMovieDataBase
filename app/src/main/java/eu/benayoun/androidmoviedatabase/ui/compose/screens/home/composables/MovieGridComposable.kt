@@ -45,18 +45,13 @@ private fun LazyGridState.isPullingToRefresh(): Boolean {
     var wasScrolling by remember(this) { mutableStateOf(false) }
 
     //tests
-    // LogUtils.v("******************************************")
     val firstItemIsDisplayed = firstVisibleItemIndex ==0
     val isStuckOnTop = firstItemIsDisplayed && currentScrollOffset==0 && oldScrollOffset ==0
-    // LogUtils.v("isStuckOnTop:$firstItemIsDisplayed|$oldScrollOffset|$currentScrollOffset -> $isStuckOnTop")
     val isBeginningToPull= isScrolling && !wasScrolling
-    // LogUtils.v("isBeginningToPull:$wasScrolling|$isScrolling -> $isBeginningToPull")
     val isPullingToRefresh = isStuckOnTop && isBeginningToPull
-    // LogUtils.v("isPullingToRefresh: $isPullingToRefresh")
 
     // update values
     oldScrollOffset = currentScrollOffset
     wasScrolling = isScrolling
     return isPullingToRefresh
-
 }

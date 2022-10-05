@@ -63,14 +63,14 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context) :
 
     private fun mapToSourceStatus(tmdbMetadataSerialized: TmdbMetadataSerialized) : TmdbSourceStatus {
         return when(tmdbMetadataSerialized.tmdbSourceEnum){
-            TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_NONE -> TmdbSourceStatus.None()
-            TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_INTERNET -> TmdbSourceStatus.Internet()
+            TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_NONE -> TmdbSourceStatus.None
+            TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_INTERNET -> TmdbSourceStatus.Internet
             TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_CACHE -> {
                 TmdbSourceStatus.Cache(
                     extractTmdbAPIError(tmdbMetadataSerialized)
                 )
             }
-            TmdbMetadataSerialized.TmdbSourceEnum.UNRECOGNIZED -> TmdbSourceStatus.Unknown()
+            TmdbMetadataSerialized.TmdbSourceEnum.UNRECOGNIZED -> TmdbSourceStatus.Unknown
         }
     }
 

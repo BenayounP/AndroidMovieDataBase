@@ -50,7 +50,7 @@ class FakeTmdbCacheTest {
     fun saveTmdbMetaData()  = runTest(UnconfinedTestDispatcher()){
         // Arrange
         val expectedLastInternetSuccessTimeStamp = 4200L
-        var expectedTmdbMetaData= TmdbMetadata(TmdbSourceStatus.None(),expectedLastInternetSuccessTimeStamp)
+        var expectedTmdbMetaData= TmdbMetadata(TmdbSourceStatus.None,expectedLastInternetSuccessTimeStamp)
         var testTmdbMetaData = TmdbMetadata()
 
         // Act

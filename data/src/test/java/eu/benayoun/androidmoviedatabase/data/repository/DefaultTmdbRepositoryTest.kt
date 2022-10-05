@@ -34,8 +34,8 @@ class DefaultTmdbRepositoryTest {
     @Test
     fun updateTmdbMovies_SourceStatus_SUCCESS() = runTest(UnconfinedTestDispatcher()){
         // Arrange
-        val expectedStatus = TmdbSourceStatus.Internet()
-        var testStatus : TmdbSourceStatus = TmdbSourceStatus.None()
+        val expectedStatus = TmdbSourceStatus.Internet
+        var testStatus : TmdbSourceStatus = TmdbSourceStatus.None
 
         // Act
         defaultTmdbRepository.updateTmdbMovies()
@@ -70,7 +70,7 @@ class DefaultTmdbRepositoryTest {
     private suspend  fun updateTmdbMovies_SourceStatus_ERROR(expectedAPIError : TmdbAPIError) {
         // Arrange
         val expectedStatus = TmdbSourceStatus.Cache(expectedAPIError)
-        var testedStatus : TmdbSourceStatus = TmdbSourceStatus.None()
+        var testedStatus : TmdbSourceStatus = TmdbSourceStatus.None
 
         fakeTmdbDataSource.setErrorResponse(expectedAPIError)
 

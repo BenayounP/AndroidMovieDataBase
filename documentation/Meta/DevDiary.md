@@ -94,5 +94,8 @@ Worked on documentation and....noticed that there was in my architecture.
 A proof that documentation can be useful and not just for help others understand what you did 
 
 ### 04/10/22
-I reorganized the classes in data layer to be cleaner: Feeled like a electrician trying to wire some strange material.
+I reorganized the classes in data layer to be cleaner: Felt like a electrician trying to wire some strange material.
 Also did some documentation. OMG it's complicated to work with video in Markdown!
+
+### 05/10/22
+Worked on documentation. It begins to looks like a good one. By the way, I realised that I had never worked on projects with good documentation. At the same time, it is very time consuming. 

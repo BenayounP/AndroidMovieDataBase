@@ -30,7 +30,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
         Column(){
             UpdateStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value, tmdbUpdateStatus = viewModel.tmdbUpdateStatus.collectAsState().value)
             fun onPullToRefresh()= viewModel.updateTmdbMovies()
-            MovieGridComposable(tmdbMovieList = viewModel.movieListState.collectAsState().value,::onPullToRefresh)
+            MovieGridComposable(tmdbMovieList = viewModel.movieListState.collectAsState().value, onPullToRefresh = ::onPullToRefresh)
         }
     }
 }

@@ -16,9 +16,8 @@
 * Add a config screen to change theme (light or dark)?
 
 ## Tests
-* Use lib [Turbine](https://github.com/cashapp/turbine) to test Flow?
+* Clean the test part of build.gradle
 * Test Room DB and data store (with robolectric!)
-* Test UI (especially the push to refresh) with espresso
 * Complete test part in HowTo.md
 
 

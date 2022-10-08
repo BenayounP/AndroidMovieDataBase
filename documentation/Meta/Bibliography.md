@@ -34,12 +34,18 @@ This is the "main" bibliography. You should also see references that helped me d
   * [Medium post](https://betterprogramming.pub/jetpack-compose-with-lifecycle-aware-composables-7bd5d6793e0)
 
 ### Tests
+#### Data layer tests
 * Testing flows in Android
   * [Android developers post](https://developer.android.com/kotlin/flow/test)
-  * [Medium post introducing library Turbine](https://medium.com/google-developer-experts/unit-testing-kotlin-flow-76ea5f4282c5)
-  * [Turbine Library](https://github.com/cashapp/turbine)
 * Test Dispatchers
   * [Android developers post](https://developer.android.com/kotlin/coroutines/test#testdispatchers)
-* Posts that helped me to avoid crashs in local test while using `android.util.Log` 🤷
-  * [Medium post](https://medium.com/@gal_41749/android-unitests-and-log-class-9546b6480006) that resolves it with...one class!
+
+#### UI tests
+* Testing Compose layout
+  * [Introduction Android developers post](https://developer.android.com/jetpack/compose/testing)
+  * So useful [CheatSheet](https://developer.android.com/jetpack/compose/testing-cheatsheet)
+
+#### Miscellaneous
+* Posts that helped me to avoid crashs in local test while using `android.util.Log` 🤷 
+  * [Medium post](https://medium.com/@gal_41749/android-unitests-and-log-class-9546b6480006) that resolves it with...one [class](../../data/src/test/java/android/util/Log.kt)!
   * [Stack overflow](https://stackoverflow.com/a/69634728/1859993) to add `@JvmStatic`

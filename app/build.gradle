@@ -5,6 +5,7 @@ plugins {
     id "kotlin-kapt"
 }
 
+
 android {
 
     compileSdk rootProject.ext.compileSdk
@@ -84,7 +85,6 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     implementation "androidx.compose.material3:material3:1.0.0-beta03"
     implementation "androidx.activity:activity-compose:1.6.0"
     implementation "io.coil-kt:coil-compose:2.2.2"
@@ -94,4 +94,31 @@ dependencies {
 
     // **  UTILS **
     implementation project(path: ':utils')
+
+    // ** TESTS **
+
+    // INSTRUMENTED
+    //global
+    androidTestImplementation "androidx.test:core:1.4.0"
+    androidTestImplementation "androidx.test:monitor:1.5.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "androidx.test:runner:1.4.0"
+
+    // yes it's implementation and not androidTestImplementation
+    // this post saved my life
+    // https://github.com/android/android-test/issues/1118#issuecomment-1142068028
+    debugImplementation "androidx.test:core-ktx:1.4.0"
+
+    androidTestImplementation "androidx.test.ext:junit:1.1.3"
+    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.3"
+
+
+    // Test rules and transitive dependencies for compose
+    androidTestImplementation "androidx.compose.ui:ui-test:$compose_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    //assertion
+    def truth_version='1.1.3'
+    debugImplementation "com.google.truth:truth:$truth_version"
 }

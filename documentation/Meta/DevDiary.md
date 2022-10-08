@@ -98,4 +98,18 @@ I reorganized the classes in data layer to be cleaner: Felt like a electrician t
 Also did some documentation. OMG it's complicated to work with video in Markdown!
 
 ### 05/10/22
-Worked on documentation. It begins to looks like a good one. By the way, I realised that I had never worked on projects with good documentation. At the same time, it is very time consuming. 
+Worked on documentation. It begins to looks like a good one. By the way, I realised that I had never worked on projects with good documentation. From another perspective, it is very time consuming. 
+
+### 06/10/22
+Worked on gradle files (in order to simplify them).   
+
+Worked also on dependencies. To be honest I do not totally understand how the plugins and libraries work together. So i was fail and try before manage to make all of this work together.   
+And begin to writing tests for Compose. Didn't worked...
+
+### 07/10/22
+Worked on Compose test. Well...it's complicated.  
+
+In order to make work these tests, I battled again with dependencies in `build.gradle`. 
+
+### 08/10/22
+Yes it's saturday. BUT THESE FUCKING TESTS WEREN'T WORKING. And now it's working. And my week end is saved. 

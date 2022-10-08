@@ -10,17 +10,16 @@ import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding1
 
 
 @Composable
-fun  MovieGridComposable(tmdbMovieList: List<TmdbMovie>, onPullToRefresh: () -> Unit) {
+fun  MovieGridComposable(modifier:Modifier = Modifier, tmdbMovieList: List<TmdbMovie>, onPullToRefresh: () -> Unit) {
     val gridState = rememberLazyGridState()
     updateOnPullToRefresh(gridState,onPullToRefresh)
     LazyVerticalGrid(columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(padding1),
         horizontalArrangement = Arrangement.spacedBy(padding1),
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = padding1),
         state = gridState
     ) {
-
         items(items = tmdbMovieList){tmdbMovie ->
             MovieItemComposable(tmdbMovie)
         }

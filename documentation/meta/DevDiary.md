@@ -115,4 +115,13 @@ In order to make work these tests, I battled again with dependencies in `build.g
 Yes it's saturday. BUT THESE FUCKING TESTS WEREN'T WORKING. And now it's working. And my week end is saved.
 
 ### 09/10/22
-Continue working on compose test. It's a shame that you can't easily identify a composable without adding a testTag. 
+Continue working on Compose test. It's a shame that you can't easily identify a composable without adding a testTag.
+
+### 10/10/22
+Finished Compose tests. 
+
+Did you know that by default the method `assertTextContains` check if the two texts are equals? And that you have to add `substring = true` to effectively check that the text **contains** the other? 🤦‍️
+
+Also wrote many documentation. 
+
+And did the local test for Room database with Robolectric. Did this in 30 minutes. Why was it so fast? because it took me 3 days on another side project 🤦‍️🤦‍️🤦‍️🤦‍️🤦‍️

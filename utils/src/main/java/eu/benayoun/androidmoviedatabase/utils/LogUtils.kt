@@ -19,4 +19,8 @@ object LogUtils {
         fun e(message : String){
             Log.e(GLOBAL_TAG + ERROR_TAG,message)
         }
+
+    fun getTag():String{
+        return GLOBAL_TAG
+    }
 }

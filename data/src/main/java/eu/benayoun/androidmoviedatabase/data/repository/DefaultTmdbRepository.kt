@@ -24,7 +24,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
 
     private val popularMoviesMutex = Mutex()
 
-    private val _updateFlow = MutableStateFlow<TmdbUpdateStatus>(TmdbUpdateStatus.Off())
+    private val _updateFlow = MutableStateFlow<TmdbUpdateStatus>(TmdbUpdateStatus.Off)
 
     override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbCache.getTmdbMetaDataFlow()
 
@@ -39,7 +39,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
         externalScope.launch(dispatcher) {
             popularMoviesMutex.withLock() {
                 // we are updating and we say it!
-                _updateFlow.value=TmdbUpdateStatus.Updating()
+                _updateFlow.value=TmdbUpdateStatus.Updating
 
                 var lastInternetSuccessTimeStamp: Long = -1
                 var tmdbSourceStatus: TmdbSourceStatus
@@ -62,7 +62,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                     saveMetaData(tmdbSourceStatus, lastInternetSuccessTimeStamp)
                 }
                 // we stop updating and we say it!
-                _updateFlow.value=TmdbUpdateStatus.Off()
+                _updateFlow.value=TmdbUpdateStatus.Off
             }
         }
     }

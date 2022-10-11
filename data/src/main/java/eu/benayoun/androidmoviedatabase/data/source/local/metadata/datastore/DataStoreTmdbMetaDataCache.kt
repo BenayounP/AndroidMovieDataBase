@@ -87,14 +87,14 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context) :
         }
     }
 
-    private fun extractTmdbAPIError(tmdbOriginSerialized: TmdbMetadataSerialized) : eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError {
+    private fun extractTmdbAPIError(tmdbOriginSerialized: TmdbMetadataSerialized) : TmdbAPIError {
         val  serializedError = tmdbOriginSerialized.tmdbAPIError
         return when(serializedError){
-            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_NO_INTERNET -> eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError.NoInternet()
-            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_TOOL_ERROR -> eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError.ToolError()
-            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_NO_DATA -> eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError.NoData()
-            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_EXCEPTION -> eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError.Exception(tmdbOriginSerialized.exceptionLocalizedMessage)
-            TmdbMetadataSerialized.TmdbAPIErrorEnum.UNRECOGNIZED ->  eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError.Unknown()
+            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_NO_INTERNET -> TmdbAPIError.NoInternet
+            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_TOOL_ERROR -> TmdbAPIError.ToolError
+            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_NO_DATA -> TmdbAPIError.NoData
+            TmdbMetadataSerialized.TmdbAPIErrorEnum.TMDB_API_ERROR_EXCEPTION -> TmdbAPIError.Exception(tmdbOriginSerialized.exceptionLocalizedMessage)
+            TmdbMetadataSerialized.TmdbAPIErrorEnum.UNRECOGNIZED ->  TmdbAPIError.Unknown
         }
     }
 

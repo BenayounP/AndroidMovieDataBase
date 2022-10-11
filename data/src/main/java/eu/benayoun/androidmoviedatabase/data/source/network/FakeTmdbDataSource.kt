@@ -11,7 +11,7 @@ import kotlinx.coroutines.delay
 internal class FakeTmdbDataSource(val beforeGettingPopularMovies: () -> Unit={}): TmdbDataSource {
     private var delayInMs : Long = 0
     private var nextResponseIsSuccess = true
-    private var tmdbAPIError = TmdbAPIError.Unknown() as TmdbAPIError
+    private var tmdbAPIError = TmdbAPIError.Unknown as TmdbAPIError
     private val defaultList = FakeTmdbMovieListGenerator.getDefaultList()
 
 
@@ -37,15 +37,15 @@ internal class FakeTmdbDataSource(val beforeGettingPopularMovies: () -> Unit={})
     // errors
 
     fun setNoInternetErrorResponse(){
-        setErrorResponse(TmdbAPIError.NoInternet())
+        setErrorResponse(TmdbAPIError.NoInternet)
     }
 
     fun setToolErrorResponse(){
-        setErrorResponse(TmdbAPIError.ToolError())
+        setErrorResponse(TmdbAPIError.ToolError)
     }
 
     fun setNoDataErrorResponse(){
-        setErrorResponse(TmdbAPIError.NoData())
+        setErrorResponse(TmdbAPIError.NoData)
     }
 
     fun setExceptionErrorResponse(localizedMessage: String){

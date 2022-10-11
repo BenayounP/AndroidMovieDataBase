@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(@TmdbRepositoryProvider private val tmdb
     val tmdbMetadataState : StateFlow<TmdbMetadata>
     get() = _tmdbMetadataState
 
-    private val _tmdbUpdateStatus = MutableStateFlow<TmdbUpdateStatus>(TmdbUpdateStatus.Off())
+    private val _tmdbUpdateStatus = MutableStateFlow<TmdbUpdateStatus>(TmdbUpdateStatus.Updating)
     val tmdbUpdateStatus : StateFlow<TmdbUpdateStatus>
     get() = _tmdbUpdateStatus
 

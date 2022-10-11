@@ -112,4 +112,7 @@ Worked on Compose test. Well...it's complicated.
 In order to make work these tests, I battled again with dependencies in `build.gradle`. 
 
 ### 08/10/22
-Yes it's saturday. BUT THESE FUCKING TESTS WEREN'T WORKING. And now it's working. And my week end is saved. 
+Yes it's saturday. BUT THESE FUCKING TESTS WEREN'T WORKING. And now it's working. And my week end is saved.
+
+### 09/10/22
+Continue working on compose test. It's a shame that you can't easily identify a composable without adding a testTag. 

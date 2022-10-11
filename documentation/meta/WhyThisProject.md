@@ -20,7 +20,7 @@ You can find a bazilion of tutorials, post, codelabs or projects for each part o
 
 You can also have a real complex app from Google team that do that: [Now In Android](https://github.com/android/nowinandroid). 
 
-But..it's a complex project with 21 gradle modules. 
+But..it's a complex project with 21 Gradle modules. 
 
 So my objective is to create the simplest project that helps you understand how they work together and to use it at a template.  
 

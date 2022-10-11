@@ -3,7 +3,7 @@
 ## Disclaimer
 I recommend you to try the app or at least to read the [Quick User Manual](../manual/QuickUserManual.md) before reading this documentation!
 
-## From user Journey to Implementation
+## From user journey to implementation
 The application is basically doing this:
 * Fetch data from TMDB API
 * Save data in a cache
@@ -47,19 +47,32 @@ Default implementation with [Proto DataStore](https://developer.android.com/topi
 #### Interact
 * Pull to refresh system can be found at the end of this [file](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/composables/MovieGridComposable.kt).
 
-#### About theming
+#### Theming
 The app can use light and dark theme linked to device configuration.  
 It's managed [here](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/theme/Theme.kt) (with very few modifications from code generated on creation by Android Studio)
+
+#### Languages supported
+The app manage two langages with the classical `strings.xml` system
+* [english version](../../app/src/main/res/values/strings.xml)
+* [french version](../../app/src/main/res/values-fr/strings.xml) (oh que oui)
 
 ##Project organisation
 
 ### Global architecture
-The app try to respect [Android app architecture](https://developer.android.com/topic/architecture) with two layers: ui and data.
+The app try to respect [Android app architecture](https://developer.android.com/topic/architecture) with two layers: `ui` and `data`.
+
+### Interfaces everywhere
+Interfaces are central to this project. I use them whenever I can. And I comment them as much as I can to explain what they do.
+
+I also use "Default" implementation where I must and more specific words where I can: `Retrofit`, `Room` and so on...
+
+When I need i also use "Fake" implementations to help me test the application (manually or with automatic tests)
+
 
 #### Modules
 This application is decomposed in two **Gradle** modules:
-* [app](../../app): Regroups the `AMDBApplication` class and all the UI layer
-* [data](../../data): Contains the data layer
+* [app](../../app): Regroups the `AMDBApplication` class and all the `ui` layer
+* [data](../../data): Contains the `data` layer
 
 #### UI
 

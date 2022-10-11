@@ -16,7 +16,7 @@
 * Add a config screen to change theme (light or dark)?
 
 ## Tests
-* Clean the test part of build.gradle
+* Clean the test part of `build.gradle`
 * Test Room DB and data store (with robolectric!)
 * Complete test part in HowTo.md
 

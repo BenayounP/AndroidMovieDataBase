@@ -3,16 +3,16 @@
 ## August 2022
 
 ### 16/08/22
-First day. Configured project and already some questions (Will I make many gradle modules?)
+First day. Configured project and already some questions (Will I make many Gradle modules?)
 
 ### 17/08/22
-Began from data source. Some retrofit. Copy pasted some old code that worked with...coroutines, not flow!
+Began from data source. Some Retrofit. Copy pasted some old code that worked with...coroutines, not flow!
 
 ### 18/08/22
 Worked on retrofit and flow. Found some nice medium article. Created Bibliography and almost overengineered the app with a Flow to monitor internet connection status
 
 ### 22/08/22
-Added Hilt and...project cannot compile. Seems to have some incompatibility between Compose Compiler and/or gradle and/or kotlin version. Tried "random" values (and look at how it was made on an recent project) to make it work!
+Added Hilt and...project cannot compile. Seems to have some incompatibility between Compose Compiler and/or Gradle and/or kotlin version. Tried "random" values (and look at how it was made on an recent project) to make it work!
 
 ### 23/08/22
 Repository created and "ok" to create the Flooooooow (so much preparation before the fun)
@@ -44,7 +44,7 @@ Yes no log from yesterday. What have I done? (ter) There is so boiler plates cod
 And the cache with both room and datasource works (basically)?. Just forgot to fully implement timestamp for last successful connection  
 
 ### 07/09/22
-(no code yesterday) Fully implement timestamp for last successful connection ! No I have to display it on homeScreen   
+(No work yesterday) Fully implement timestamp for last successful connection ! No I have to display it on homeScreen   
 
 ### 08/09/22
 Worked yesterday and today on displaying data on the screen with compose. Miss `dimens.xml` badly
@@ -53,7 +53,7 @@ Worked yesterday and today on displaying data on the screen with compose. Miss `
 Worked on documentation. So many "where do I put this information"?
 
 ### 13/09/22
-Created gradle module. I feel like I'm lost in the middle of a move....
+Created Gradle modules. I feel like I'm lost in the middle of a move....
 
 ### 14/09/22
 * The data layer module works fine. Just exposing the repository interface is sooooo rewarding.
@@ -101,7 +101,7 @@ Also did some documentation. OMG it's complicated to work with video in Markdown
 Worked on documentation. It begins to looks like a good one. By the way, I realised that I had never worked on projects with good documentation. From another perspective, it is very time consuming. 
 
 ### 06/10/22
-Worked on gradle files (in order to simplify them).   
+Worked on Gradle files (in order to simplify them).   
 
 Worked also on dependencies. To be honest I do not totally understand how the plugins and libraries work together. So i was fail and try before manage to make all of this work together.   
 And begin to writing tests for Compose. Didn't worked...

@@ -49,17 +49,17 @@ class DefaultTmdbRepositoryTest {
 
     @Test
     fun updateTmdbMovies_SourceStatus_Error_noInternet() = runTest(UnconfinedTestDispatcher()){
-        updateTmdbMovies_SourceStatus_ERROR(TmdbAPIError.NoInternet())
+        updateTmdbMovies_SourceStatus_ERROR(TmdbAPIError.NoInternet)
     }
 
     @Test
     fun updateTmdbMovies_SourceStatus_Error_ToolError() = runTest(UnconfinedTestDispatcher()){
-        updateTmdbMovies_SourceStatus_ERROR(TmdbAPIError.ToolError())
+        updateTmdbMovies_SourceStatus_ERROR(TmdbAPIError.ToolError)
     }
 
     @Test
     fun updateTmdbMovies_SourceStatus_Error_NoData() = runTest(UnconfinedTestDispatcher()){
-        updateTmdbMovies_SourceStatus_ERROR(TmdbAPIError.NoData())
+        updateTmdbMovies_SourceStatus_ERROR(TmdbAPIError.NoData)
     }
 
     @Test

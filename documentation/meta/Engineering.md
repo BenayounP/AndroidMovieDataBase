@@ -49,7 +49,7 @@ There is only **TWO** `for` loops in this application. And they are trivial.
 
 I haven't had any optimisation like bisection or what so ever. 
 
-**But** I spent many time to understand how flow works through the layers of the application and how to plug dependencies with Gradle. 
+**But** I spent many time to understand how Flow works through the layers of the application and how to plug dependencies with Gradle. 
 
 ### This simple app took more than two months!
 #### What I did

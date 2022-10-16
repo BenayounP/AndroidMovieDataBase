@@ -9,6 +9,7 @@ import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
 import eu.benayoun.androidmoviedatabase.data.source.local.metadata.FakeTmdbMetaDataCache
 import eu.benayoun.androidmoviedatabase.data.source.local.movies.FakeTmdbMoviesCache
 import eu.benayoun.androidmoviedatabase.data.source.network.FakeTmdbDataSource
+import eu.benayoun.androidmoviedatabase.testutils.TmdbSourceStatusTester
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -21,7 +22,7 @@ class DefaultTmdbRepositoryTest {
     private val fakeTmdbDataSource = FakeTmdbDataSource()
     private val fakeTmdbCache = TmdbCache(FakeTmdbMoviesCache(),FakeTmdbMetaDataCache())
     private val dispatcher = UnconfinedTestDispatcher()
-    internal val defaultTmdbRepository = DefaultTmdbRepository(fakeTmdbDataSource,fakeTmdbCache,MainScope(), dispatcher)
+    private val defaultTmdbRepository = DefaultTmdbRepository(fakeTmdbDataSource,fakeTmdbCache,MainScope(), dispatcher)
 
     @Before
     fun setUp() {
@@ -67,29 +68,21 @@ class DefaultTmdbRepositoryTest {
         updateTmdbMovies_SourceStatus_ERROR(TmdbAPIError.Exception("an exception occurred"))
     }
 
-    private suspend  fun updateTmdbMovies_SourceStatus_ERROR(expectedAPIError : TmdbAPIError) {
+    private suspend fun updateTmdbMovies_SourceStatus_ERROR(expectedAPIError : TmdbAPIError) {
         // Arrange
         val expectedStatus = TmdbSourceStatus.Cache(expectedAPIError)
-        var testedStatus : TmdbSourceStatus = TmdbSourceStatus.None
+        var actualStatus : TmdbSourceStatus = TmdbSourceStatus.None
 
         fakeTmdbDataSource.setErrorResponse(expectedAPIError)
 
         // Act
         defaultTmdbRepository.updateTmdbMovies()
         defaultTmdbRepository.getTmdbMetaDataFlow().take(1).collect{
-            testedStatus = it.tmdbSourceStatus
+            actualStatus = it.tmdbSourceStatus
         }
 
         // Assert
-        Truth.assertThat(testedStatus).isInstanceOf(expectedStatus::class.java)
-        if (testedStatus is TmdbSourceStatus.Cache){
-            val testedAPIError = (testedStatus as TmdbSourceStatus.Cache).tmdbAPIError
-            Truth.assertThat(testedAPIError).isInstanceOf(expectedAPIError::class.java)
-            if (testedAPIError is TmdbAPIError.Exception){
-                val testedLocalizedMessage = (testedAPIError as TmdbAPIError.Exception).localizedMessage
-                Truth.assertThat(testedLocalizedMessage).isEqualTo((expectedAPIError as TmdbAPIError.Exception).localizedMessage)
-            }
-        }
+        TmdbSourceStatusTester.assertEquality(actualStatus,expectedStatus)
     }
 
     @Test
@@ -97,7 +90,6 @@ class DefaultTmdbRepositoryTest {
         // Arrange
         val expectedList = FakeTmdbMovieListGenerator.getDefaultList()
         var testList : List<TmdbMovie> = listOf()
-
 
         // Act
         defaultTmdbRepository.updateTmdbMovies()

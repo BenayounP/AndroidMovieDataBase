@@ -16,7 +16,7 @@ This is the "main" bibliography. You should also see references that helped me d
   * [Medium post](https://www.valueof.io/blog/inject-provides-binds-dependencies-dagger-hilt)
 
 ### Data source
-* How to use retrofit with Room and especially flow
+* How to use retrofit with Room and especially Flow
   * [Medium post](https://narendrasinhdodiya.medium.com/android-architecture-mvvm-with-coroutines-retrofit-hilt-kotlin-flow-room-48e67ca3b2c8)
   * [Github repository](https://github.com/devnarendra08/DemoTMDB)
 * An example of use of TMDB API that helped me to "secure" the api key
@@ -28,17 +28,19 @@ This is the "main" bibliography. You should also see references that helped me d
   * [Medium post](https://medium.com/androiddevelopers/all-about-proto-datastore-1b1af6cd2879)
 
 ### UI
-* How to handle flow and state in ViewModel and Composables
+* How to handle Flow and state in ViewModel and Composables
   * [Medium post](https://proandroiddev.com/better-handling-states-between-viewmodel-and-composable-7ca14af379cb)
 * How to handle **Lifecycle** in ViewModel and Composables
   * [Medium post](https://betterprogramming.pub/jetpack-compose-with-lifecycle-aware-composables-7bd5d6793e0)
 
 ### Tests
 #### Data layer tests
-* Testing flows in Android
-  * [Android developers post](https://developer.android.com/kotlin/flow/test)
 * Test Dispatchers
   * [Android developers post](https://developer.android.com/kotlin/coroutines/test#testdispatchers)
+* Testing Flows in Android
+  * [Android developers post](https://developer.android.com/kotlin/flow/test)
+* Testing DataStore
+  * [Medium post](https://medium.com/androiddevelopers/datastore-and-testing-edf7ae8df3d8)
 
 #### UI tests
 * Testing Compose layout

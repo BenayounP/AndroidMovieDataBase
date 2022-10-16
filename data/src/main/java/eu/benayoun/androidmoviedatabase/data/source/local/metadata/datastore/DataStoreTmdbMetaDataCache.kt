@@ -14,40 +14,47 @@ import kotlinx.coroutines.flow.map
 // this class wouldn't have exist without this response on StackOverflow
 // https://stackoverflow.com/a/66101769/1859993
 
-private val Context.tmdbOriginDataStore by dataStore(
-    fileName = "tmdb_meta",
-    serializer = TmdbMetadataSerializer,
-    corruptionHandler = ReplaceFileCorruptionHandler(
-        produceNewData = { TmdbMetadataSerialized.getDefaultInstance()}
-    )
-)
 
-internal class DataStoreTmdbMetaDataCache(appContext: Context) :
+internal class DataStoreTmdbMetaDataCache(appContext: Context, filename:String="DataStoreTmdbMetaDataCache") :
     TmdbMetaDataCache {
+    private val Context.tmdbOriginDataStore by dataStore(
+        fileName = filename,
+        serializer = TmdbMetadataSerializer,
+        corruptionHandler = ReplaceFileCorruptionHandler(
+            produceNewData = { TmdbMetadataSerialized.getDefaultInstance()}
+        )
+    )
+
     private  val tmdbOriginDataStore = appContext.tmdbOriginDataStore
 
     override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
         TmdbMetadata(
             mapToSourceStatus(
                 tmdbMetadataSerialized
-            ), tmdbMetadataSerialized.lastInternetSuccessTimeStamp
+            ), tmdbMetadataSerialized.lastInternetSuccessTimestamp
         )
     }
 
     override suspend fun saveTmdbMetaData(tmdbMetadata: TmdbMetadata){
         tmdbOriginDataStore.updateData{tmdbMetadataSerialized: TmdbMetadataSerialized ->
             val builder = tmdbMetadataSerialized.toBuilder()
-            val tmdbSourceStatus = tmdbMetadata.tmdbSourceStatus
-            when(tmdbSourceStatus){
-                is TmdbSourceStatus.None -> null // nothing to do here
-                is TmdbSourceStatus.Internet -> builder.lastInternetSuccessTimeStamp = System.currentTimeMillis()
-                is TmdbSourceStatus.Cache -> processTmdbAPIError(tmdbSourceStatus.tmdbAPIError,builder)
-                is TmdbSourceStatus.Unknown -> null // nothing to do here
+
+            if (tmdbMetadata.lastInternetSuccessTimestamp != TmdbMetadata.INVALID_TIMESTAMP){
+                builder.lastInternetSuccessTimestamp=tmdbMetadata.lastInternetSuccessTimestamp
             }
+
+            val tmdbSourceStatus = tmdbMetadata.tmdbSourceStatus
+            if (tmdbSourceStatus is TmdbSourceStatus.Cache  ){
+                processTmdbAPIError(tmdbSourceStatus.tmdbAPIError,builder)
+            }
+
             builder.tmdbSourceEnum = extractTmdbSourceEnum(tmdbSourceStatus)
+
             builder.build()
         }
     }
+
+
 
     // internal cooking
 

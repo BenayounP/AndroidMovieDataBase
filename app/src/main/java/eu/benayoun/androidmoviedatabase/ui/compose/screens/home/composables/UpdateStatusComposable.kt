@@ -90,7 +90,7 @@ private fun getMetadataText(tmdbUpdateStatus : TmdbUpdateStatus, tmdbMetadata: T
             }
             is TmdbSourceStatus.Unknown -> metadataTextBuilder.append(stringResource(R.string.source_status_unknown))
         }
-        metadataTextBuilder.append(stringResource(R.string.source_status_last_update).plus(getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimeStamp)))
+        metadataTextBuilder.append(stringResource(R.string.source_status_last_update).plus(getReadableTimeStamp(tmdbMetadata.lastInternetSuccessTimestamp)))
     }
     return metadataTextBuilder.toString()
 }

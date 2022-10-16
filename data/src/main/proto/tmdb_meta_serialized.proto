@@ -11,7 +11,7 @@ message TmdbMetadataSerialized {
   TmdbSourceEnum tmdbSourceEnum =1;
   TmdbAPIErrorEnum tmdbAPIError =2;
   string exceptionLocalizedMessage=3;
-  int64 lastInternetSuccessTimeStamp=4; // mapped to Long in Java/Kotlin
+  int64 lastInternetSuccessTimestamp=4; // mapped to Long in Java/Kotlin
 
   enum TmdbSourceEnum {
     TMDB_ORIGIN_NONE=0;

@@ -1,8 +1,10 @@
 # Global ToDo
 
+## Product
+* Specific use case to handle: The user use the app for first time with no connection. The app should display something like: "It's embarrassing. It's the firts launch and we can't fetch any data. Try later" 
+
 ## Architecture/Meta
-* Add [Fastlane](https://docs.fastlane.tools/getting-started/android/setup/) for CI? 
-* The FakeRepository class is not `internal` and we should change that (exposing just an interface ?)
+* Add [Fastlane](https://docs.fastlane.tools/getting-started/android/setup/) for CI?
 
 ## Code cleanness
 * Change the "compose" package name?

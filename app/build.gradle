@@ -99,13 +99,12 @@ dependencies {
 
     // INSTRUMENTED
     //global
-    androidTestImplementation "androidx.test:core:1.4.0"
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
-
+    androidTestImplementation "androidx.test:core:$androidx_test_version"
     // yes it's implementation and not androidTestImplementation
     // this post saved my life
     // https://github.com/android/android-test/issues/1118#issuecomment-1142068028
-    debugImplementation "androidx.test:core-ktx:1.4.0"
+    debugImplementation "androidx.test:core-ktx:$androidx_test_version"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
 
     // Test rules and transitive dependencies for compose
     androidTestImplementation "androidx.compose.ui:ui-test:$compose_version"

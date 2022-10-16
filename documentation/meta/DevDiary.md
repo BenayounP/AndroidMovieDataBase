@@ -6,10 +6,10 @@
 First day. Configured project and already some questions (Will I make many Gradle modules?)
 
 ### 17/08/22
-Began from data source. Some Retrofit. Copy pasted some old code that worked with...coroutines, not flow!
+Began from data source. Some Retrofit. Copy pasted some old code that worked with...coroutines, not Flow!
 
 ### 18/08/22
-Worked on retrofit and flow. Found some nice medium article. Created Bibliography and almost overengineered the app with a Flow to monitor internet connection status
+Worked on retrofit and Flow. Found some nice medium article. Created Bibliography and almost overengineered the app with a Flow to monitor internet connection status
 
 ### 22/08/22
 Added Hilt and...project cannot compile. Seems to have some incompatibility between Compose Compiler and/or Gradle and/or kotlin version. Tried "random" values (and look at how it was made on an recent project) to make it work!
@@ -125,3 +125,24 @@ Did you know that by default the method `assertTextContains` check if the two te
 Also wrote many documentation. 
 
 And did the local test for Room database with Robolectric. Did this in 30 minutes. Why was it so fast? because it took me 3 days on another side project 🤦‍️🤦‍️🤦‍️🤦‍️🤦‍️
+
+### 11/10/22
+Coding in the train. Got an strange exception while trying to do an instrumented test of the DataStore ...🤷
+
+### 15/10/22
+(Yes I'm coding the week end, bad habit). 
+
+Using Robolectric to test the DataStore (to avoid the annoying exception).
+
+Works like a charm...until I try to save two data in a row...Have a strange problem that could be linked to...[Windows](https://issuetracker.google.com/issues/203087070#comment3) ?
+
+And...I recoded many thing to bypass this problem. Change the way the DataStore (it's nicier now), and redone test (with some redesign of some tests with `TmdbSourceStatusTester`)
+
+### 16/10/22
+(Yes I'm coding the week end, again. Bad habit again).
+
+Finalized at last DataStore tests. 
+
+Fought with the windows bug (see above) but it works now!
+
+

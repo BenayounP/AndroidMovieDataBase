@@ -15,6 +15,7 @@
 * Paging Data from TMDB API?
 
 ## UI
+* use the [experimental pullToRefresh](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean)) native function? 
 * Add a config screen to change theme (light or dark)?
 
 ## Tests

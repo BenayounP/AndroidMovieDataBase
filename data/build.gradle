@@ -36,6 +36,7 @@ android {
     productFlavors {
         fake {
             dimension "reality"
+            getIsDefault().set(true)
         }
         prod{
             dimension "reality"

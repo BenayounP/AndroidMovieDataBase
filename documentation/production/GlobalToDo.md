@@ -1,6 +1,7 @@
 # Global ToDo
 
 ## Architecture/Meta
+* Make the project usable without TMDB API key? (using fakeRepository for example)
 * Add [Fastlane](https://docs.fastlane.tools/getting-started/android/setup/) for CI?
 
 ## Code cleanness
@@ -17,7 +18,6 @@
 
 ## Tests
 * Clean the test part of `build.gradle`
-* Test Room DB and data store (with robolectric!)
 * Complete test part in HowTo.md
 
 

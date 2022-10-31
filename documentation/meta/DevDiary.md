@@ -9,7 +9,7 @@ First day. Configured project and already some questions (Will I make many Gradl
 Began from data source. Some Retrofit. Copy pasted some old code that worked with...coroutines, not Flow!
 
 ### 18/08/22
-Worked on retrofit and Flow. Found some nice medium article. Created Bibliography and almost overengineered the app with a Flow to monitor internet connection status
+Worked on retrofit and Flow. Found some nice medium article. Created Bibliography and almost over engineered the app with a Flow to monitor internet connection status
 
 ### 22/08/22
 Added Hilt and...project cannot compile. Seems to have some incompatibility between Compose Compiler and/or Gradle and/or kotlin version. Tried "random" values (and look at how it was made on an recent project) to make it work!
@@ -145,4 +145,11 @@ Finalized at last DataStore tests.
 
 Fought with the windows bug (see above) but it works now!
 
+### 31/10/22
+Long time, no see! Google has made its traditional Android Developer Summit last week and there was some [important news for android and especially Compose](https://android-developers.googleblog.com/2022/10/modern-android-development-at-ads-22.html).
 
+So I dealt with them today. I'm at the same time glad and concerned about the fact that there is always some improvements in Android development. 
+
+Glad that the Google's dev team improve regularly the tools wit this time the [Gradle BOM for Compose](https://developer.android.com/jetpack/compose/setup#using-the-bom) that simplify the mess with gradle management of dependencies. 
+
+Concerned that in less than 3 months of development I have to develop some functionality (the `pull to refresh` one) to see just after that...Google propose it as an [experimental version](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean))

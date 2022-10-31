@@ -9,7 +9,7 @@ buildscript {
         ext.androidx_core_version = '1.9.0'
 
         // plugins
-        ext.android_plugin = '7.3.0'
+        ext.android_plugin = '7.3.1'
 
         // dependencies
         ext.hilt_version = '2.44'

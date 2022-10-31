@@ -41,7 +41,7 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
                 // we are updating and we say it!
                 _updateFlow.value=TmdbUpdateStatus.Updating
 
-                var lastInternetSuccessTimeStamp: Long = -1
+                var lastInternetSuccessTimeStamp: Long = TmdbMetadata.INVALID_TIMESTAMP
                 var tmdbSourceStatus: TmdbSourceStatus
                 var tmdbPopularMovieList: List<TmdbMovie>
                 // Step 1: try to get data on TMDB Server

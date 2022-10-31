@@ -8,6 +8,7 @@ import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
+import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -28,11 +29,7 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context, filename:String="
     private  val tmdbOriginDataStore = appContext.tmdbOriginDataStore
 
     override suspend fun getTmdbMetaDataFlow(): Flow<TmdbMetadata> = tmdbOriginDataStore.data.map{ tmdbMetadataSerialized: TmdbMetadataSerialized ->
-        TmdbMetadata(
-            mapToSourceStatus(
-                tmdbMetadataSerialized
-            ), tmdbMetadataSerialized.lastInternetSuccessTimestamp
-        )
+        mapToTmdbMetadata(tmdbMetadataSerialized)
     }
 
     override suspend fun saveTmdbMetaData(tmdbMetadata: TmdbMetadata){
@@ -68,6 +65,17 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context, filename:String="
 
     }
 
+
+    private fun mapToTmdbMetadata(tmdbMetadataSerialized: TmdbMetadataSerialized): TmdbMetadata{
+        val tmdbSourceStatus = mapToSourceStatus(tmdbMetadataSerialized)
+        val serializedLastInternetSuccessTimestamp = tmdbMetadataSerialized.lastInternetSuccessTimestamp
+        val lastInternetSuccessTimestamp = when(serializedLastInternetSuccessTimestamp){
+            0L -> TmdbMetadata.INVALID_TIMESTAMP // because 0 is the default value for a Long in a DataStore
+            else -> serializedLastInternetSuccessTimestamp
+        }
+        return TmdbMetadata(tmdbSourceStatus,lastInternetSuccessTimestamp)
+    }
+
     private fun mapToSourceStatus(tmdbMetadataSerialized: TmdbMetadataSerialized) : TmdbSourceStatus {
         return when(tmdbMetadataSerialized.tmdbSourceEnum){
             TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_NONE -> TmdbSourceStatus.None
@@ -80,6 +88,8 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context, filename:String="
             TmdbMetadataSerialized.TmdbSourceEnum.UNRECOGNIZED -> TmdbSourceStatus.Unknown
         }
     }
+
+
 
     private fun processTmdbAPIError(tmdbAPIError: TmdbAPIError, builder :  TmdbMetadataSerialized.Builder) {
         when(tmdbAPIError){

@@ -15,6 +15,7 @@ import androidx.lifecycle.LifecycleObserver
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.model.HomeViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.MovieGridComposable
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.UpdateStatusComposable
+import eu.benayoun.androidmoviedatabase.utils.LogUtils
 
 
 // Lifecycle observation found here : https://betterprogramming.pub/jetpack-compose-with-lifecycle-aware-composables-7bd5d6793e0
@@ -22,15 +23,21 @@ import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     Surface(
-    modifier = Modifier.fillMaxSize(),
-    color = MaterialTheme.colorScheme.background
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
     ) {
         viewModel.observeLifecycle(LocalLifecycleOwner.current.lifecycle)
 
         Column(){
-            UpdateStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value, tmdbUpdateStatus = viewModel.tmdbUpdateStatus.collectAsState().value)
-            fun onPullToRefresh()= viewModel.updateTmdbMovies()
-            MovieGridComposable(tmdbMovieList = viewModel.movieListState.collectAsState().value, onPullToRefresh = ::onPullToRefresh)
+            val tmdbMovieList = viewModel.movieListState.collectAsState().value
+            fun updateTmdbMovies()= viewModel.updateTmdbMovies()
+            UpdateStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value,
+                tmdbUpdateStatus = viewModel.tmdbUpdateStatus.collectAsState().value,
+                tmdbMovieList = tmdbMovieList,
+                updateMovies = ::updateTmdbMovies
+            )
+
+            MovieGridComposable(tmdbMovieList = tmdbMovieList, onPullToRefresh = ::updateTmdbMovies)
         }
     }
 }

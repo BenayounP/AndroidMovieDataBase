@@ -14,8 +14,8 @@ It's a personal project to be up to date on Android latest "official" tools for 
 ### Quick user manual
 The app is minimal, you can find more details in the [user manual](./documentation/manual/QuickUserManual.md). 
 
-### HowTo
-You need to do some few manipulations to compile and use the app. More details in the [HowTo](./documentation/technical/HowTo.md) document. 
+### Get real data
+By default this app works with fake data from fake server. See [HowTo](./documentation/technical/HowTo.md) document to use real data from TMDB servers. 
 
 ### Android official tools
 This app uses:

@@ -18,11 +18,7 @@ android {
         // For local tests
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
 
-        // For IMDB API KEY
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
-        def tmdb_api_key = properties.getProperty("tmdb_api_key")
-        buildConfigField "String", "TMDB_API_KEY", tmdb_api_key
+
     }
 
     buildTypes {
@@ -32,14 +28,21 @@ android {
         }
     }
 
-    flavorDimensions "reality"
+    flavorDimensions "server"
     productFlavors {
-        fake {
-            dimension "reality"
+        fakeserver {
+            dimension "server"
             getIsDefault().set(true)
+            buildConfigField "String", "TMDB_API_KEY", '""'
         }
-        prod{
-            dimension "reality"
+        tmdbserver{
+            dimension "server"
+            // For IMDB API KEY
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file("local.properties").newDataInputStream())
+            def tmdb_api_key = properties.getProperty("tmdb_api_key")
+            if (tmdb_api_key == null) tmdb_api_key = '""'
+            buildConfigField "String", "TMDB_API_KEY", tmdb_api_key
         }
     }
 

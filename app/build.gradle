@@ -32,13 +32,13 @@ android {
         }
     }
 
-    flavorDimensions "reality"
+    flavorDimensions "server"
     productFlavors {
-        fake {
-            dimension "reality"
+        fakeserver {
+            dimension "server"
         }
-        prod{
-            dimension "reality"
+        tmdbserver {
+            dimension "server"
         }
     }
 

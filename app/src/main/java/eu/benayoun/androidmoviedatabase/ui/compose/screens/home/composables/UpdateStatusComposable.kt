@@ -16,14 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.hilt.navigation.compose.hiltViewModel
 import eu.benayoun.androidmoviedatabase.R
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
-import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.model.HomeViewModel
 import eu.benayoun.androidmoviedatabase.ui.theme.BackgroundAndContentColor
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeColors
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding1
@@ -92,15 +90,14 @@ private fun getMetadataText(tmdbMovieList: List<TmdbMovie>,tmdbUpdateStatus : Tm
             metadataTextBuilder.append(stringResource(R.string.source_status_none))
             metadataTextBuilder.append("\n")
             metadataTextBuilder.append("\n")
-            if (tmdbSourceStatus is TmdbSourceStatus.Cache) {
+            if (tmdbSourceStatus is TmdbSourceStatus.Cache || tmdbSourceStatus is TmdbSourceStatus.SerializationProblem) {
                 metadataTextBuilder.append(stringResource(R.string.update_status_cause))
                 metadataTextBuilder.append("\n")
-                metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus.tmdbAPIError))
+                metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus))
                 metadataTextBuilder.append("\n")
                 metadataTextBuilder.append("\n")
             }
             metadataTextBuilder.append(stringResource(R.string.click_to_refresh))
-
         }
         // There is data
         else {
@@ -108,15 +105,15 @@ private fun getMetadataText(tmdbMovieList: List<TmdbMovie>,tmdbUpdateStatus : Tm
             when (tmdbSourceStatus) {
                 is TmdbSourceStatus.None -> metadataTextBuilder.append(stringResource(R.string.source_status_none))
                 is TmdbSourceStatus.Internet -> null // nothing to do
-                is TmdbSourceStatus.Cache -> {
+                is TmdbSourceStatus.Cache,
+                is TmdbSourceStatus.SerializationProblem-> {
                     metadataTextBuilder.append(stringResource(R.string.source_status_cache))
                     metadataTextBuilder.append("\n")
                     metadataTextBuilder.append(stringResource(R.string.update_status_cause))
                     metadataTextBuilder.append("\n")
-                    metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus.tmdbAPIError))
+                    metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus))
                     metadataTextBuilder.append("\n")
                 }
-                is TmdbSourceStatus.Unknown -> metadataTextBuilder.append(stringResource(R.string.source_status_unknown))
             }
             LogUtils.v("timestamp: ${tmdbMetadata.lastInternetSuccessTimestamp}")
             if (tmdbMetadata.lastInternetSuccessTimestamp != TmdbMetadata.INVALID_TIMESTAMP) {
@@ -130,17 +127,28 @@ private fun getMetadataText(tmdbMovieList: List<TmdbMovie>,tmdbUpdateStatus : Tm
     }
     return metadataTextBuilder.toString()
 }
+
+// get string error only with TmdbSourceStatus.SerializationProblem and TmdbSourceStatus.Cache
 @Composable
-private fun getRefreshErrorCause(tmdbAPIError: TmdbAPIError) : String {
-    return when (tmdbAPIError) {
-        is TmdbAPIError.NoInternet -> stringResource(R.string.source_status_no_internet)
-        is TmdbAPIError.ToolError -> stringResource(R.string.source_status_tool_error)
-        is TmdbAPIError.NoData -> stringResource(R.string.source_status_no_data)
-        is TmdbAPIError.Exception -> stringResource(R.string.source_status_exception).plus(
-            tmdbAPIError.localizedMessage
-        )
-        is TmdbAPIError.Unknown -> stringResource(R.string.source_status_unknown)
+private fun getRefreshErrorCause(tmdbSourceStatus: TmdbSourceStatus) : String {
+    var refreshErrorCause:String = ""
+
+    if (tmdbSourceStatus is TmdbSourceStatus.SerializationProblem){
+        refreshErrorCause =  stringResource(R.string.source_status_serialization_problem)
     }
+    else if (tmdbSourceStatus is TmdbSourceStatus.Cache){
+        val tmdbAPIError = tmdbSourceStatus.tmdbAPIError
+        refreshErrorCause =  when (tmdbAPIError) {
+            is TmdbAPIError.NoInternet -> stringResource(R.string.source_status_no_internet)
+            is TmdbAPIError.ToolError -> stringResource(R.string.source_status_tool_error)
+            is TmdbAPIError.NoData -> stringResource(R.string.source_status_no_data)
+            is TmdbAPIError.Exception -> stringResource(R.string.source_status_exception).plus(
+                tmdbAPIError.localizedMessage
+            )
+            is TmdbAPIError.Unknown -> stringResource(R.string.source_status_unknown)
+        }
+    }
+    return refreshErrorCause
 }
 
 private fun getReadableTimeStamp(timeStamp : Long): String{

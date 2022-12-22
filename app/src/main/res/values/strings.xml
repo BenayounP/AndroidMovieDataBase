@@ -15,6 +15,7 @@
     <string name="source_status_no_data">No data from TMDB</string>
     <string name="source_status_exception">Exception: </string>
     <string name="source_status_unknown">Unknown 🤔</string>
+    <string name="source_status_serialization_problem">Problem with device data</string>
     <string name="source_status_last_update">Last internet update: </string>
 
     <!-- ACTIONS-->

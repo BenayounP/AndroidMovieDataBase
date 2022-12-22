@@ -7,8 +7,8 @@ import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 sealed class TmdbSourceStatus{
     object None : TmdbSourceStatus() // used if no data has been fetched
     object Internet : TmdbSourceStatus()
-    class Cache(val tmdbAPIError : TmdbAPIError) : TmdbSourceStatus()
-    object Unknown : TmdbSourceStatus() // used for processing problems with serialization
+    class Cache(val tmdbAPIError : TmdbAPIError) : TmdbSourceStatus() // used if data is fetched from local cache (and explaining why)
+    object SerializationProblem : TmdbSourceStatus() // used for processing problems with serialization
 
     override fun toString(): String {
         val stringBuffer = StringBuffer()

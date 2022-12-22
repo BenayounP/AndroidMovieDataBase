@@ -8,7 +8,6 @@ import eu.benayoun.androidmoviedatabase.data.model.api.TmdbAPIError
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.source.local.metadata.TmdbMetaDataCache
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -60,7 +59,7 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context, filename:String="
             is TmdbSourceStatus.None -> TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_NONE
             is TmdbSourceStatus.Internet -> TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_INTERNET
             is TmdbSourceStatus.Cache -> TmdbMetadataSerialized.TmdbSourceEnum.TMDB_ORIGIN_CACHE
-            is TmdbSourceStatus.Unknown -> TmdbMetadataSerialized.TmdbSourceEnum.UNRECOGNIZED
+            is TmdbSourceStatus.SerializationProblem -> TmdbMetadataSerialized.TmdbSourceEnum.UNRECOGNIZED
         }
 
     }
@@ -85,7 +84,7 @@ internal class DataStoreTmdbMetaDataCache(appContext: Context, filename:String="
                     extractTmdbAPIError(tmdbMetadataSerialized)
                 )
             }
-            TmdbMetadataSerialized.TmdbSourceEnum.UNRECOGNIZED -> TmdbSourceStatus.Unknown
+            TmdbMetadataSerialized.TmdbSourceEnum.UNRECOGNIZED -> TmdbSourceStatus.SerializationProblem
         }
     }
 

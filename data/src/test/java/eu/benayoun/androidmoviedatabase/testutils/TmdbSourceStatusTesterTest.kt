@@ -34,7 +34,7 @@ class TmdbSourceStatusTesterTest {
         status = TmdbSourceStatus.Cache(error)
         TmdbSourceStatusTester.assertEquality(status,status)
 
-        status = TmdbSourceStatus.Unknown
+        status = TmdbSourceStatus.SerializationProblem
         TmdbSourceStatusTester.assertEquality(status,status)
     }
 

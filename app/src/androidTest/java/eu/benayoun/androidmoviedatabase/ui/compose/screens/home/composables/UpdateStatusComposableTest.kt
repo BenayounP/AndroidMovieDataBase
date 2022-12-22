@@ -1,7 +1,6 @@
 package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -11,7 +10,6 @@ import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbSourceStatus
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.UpdateStatusComposable
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import org.junit.Rule
 import org.junit.Test
 
@@ -92,23 +90,25 @@ class UpdateStatusComposableTest{
     }
 
     @Test
-    fun test_display_metaData_Unknown(){
+    fun test_display_metaData_SerializationProblem(){
         // Arrange
         val tmdbUpdateStatus = TmdbUpdateStatus.Off
-        val tmdbMetadata = TmdbMetadata(tmdbSourceStatus = TmdbSourceStatus.Unknown)
+        val tmdbMetadata = TmdbMetadata(tmdbSourceStatus = TmdbSourceStatus.SerializationProblem)
 
         // Act and assert
-        testTextPresence(tmdbUpdateStatus,tmdbMetadata,R.string.source_status_unknown)
+        testTextPresence(tmdbUpdateStatus,tmdbMetadata,R.string.source_status_serialization_problem)
     }
 
     private fun testTextPresence(tmdbUpdateStatus: TmdbUpdateStatus, tmdbMetadata: TmdbMetadata, expectedTextId:Int){
         val testTag = "UpdateStatusComposableTestTag"
         var expectedText :  String = ""
 
+        fun emptyUpdateTmdbMovies(): () -> Unit = {}
+
         composeTestRule.setContent {
-            UpdateStatusComposable(modifier = Modifier, tmdbUpdateStatus =tmdbUpdateStatus, tmdbMetadata = tmdbMetadata, textTestTag = testTag)
+            UpdateStatusComposable(modifier = Modifier, tmdbUpdateStatus =tmdbUpdateStatus, tmdbMetadata = tmdbMetadata, textTestTag = testTag, tmdbMovieList = listOf(), updateMovies = ::emptyUpdateTmdbMovies )
             expectedText= stringResource(expectedTextId)
         }
-        composeTestRule.onNode(hasTestTag(testTag)).assertTextContains(expectedText, substring = true)
+        composeTestRule.onNode(hasTestTag(testTag),useUnmergedTree = true).assertTextContains(expectedText, substring = true)
     }
 }

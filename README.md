@@ -1,4 +1,5 @@
 # AMDB (Android Movie Data Base)
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
@@ -6,41 +7,70 @@
   <img alt="Light" src="./documentation/assets/app_demo.gif" width="60%">
 </p>
 
-### TLDR
-AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/3). 
+## TLDR
 
-It's a personal project to be up to date on Android latest "official" tools for a simple but realistic app
+AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/3).
 
-### Quick user manual
-The app is minimal, you can find more details in the [user manual](./documentation/manual/QuickUserManual.md). 
+It's a personal project to be up to date on Android
+latest ["official" tools](./documentation/technical/androidtools.md) and best practices for the the
+simplest realistic app.
 
-### Get real data
-By default this app works with fake data from fake server. See [HowTo](./documentation/technical/HowTo.md) document to use real data from TMDB servers. 
-
-### Android official tools
-This app uses:
-* Global Architecture: [Android app architecture](https://developer.android.com/topic/architecture)
-* Language: [Kotlin](https://developer.android.com/kotlin)
-  * Data Stream: [Flow](https://developer.android.com/kotlin/flow)
-* Data Layer
-  * Fetching data on API: [Retrofit](https://square.github.io/retrofit/)
-  * Repository
-    * Data Base: [Room](https://developer.android.com/jetpack/androidx/releases/room)
-    * Other cache for metadata:  [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
-* UI:
-  * Global system: [Compose](https://developer.android.com/jetpack/compose)
-  * Image loading: [Coil](https://coil-kt.github.io/coil/compose/)
-* Tests :
-  * Simulate device for local tests: [Robolectric](http://robolectric.org/)
-  * Assert tooling: [Google Truth](https://github.com/google/truth)
+More details [here](./documentation/meta/WhyThisProject.md).
 
 ## Disclaimer
-This is the first POC version for pair reviews
+
+This is the first POC version for pair reviews.
+
+Some difficulties to read markdown files on Android
+studio? [Fix this in less than 3 minutes](https://joachimschuster.de/posts/android-studio-fix-markdown-plugin-again/)
+.
+
+🙏 You can show support by starring ⭐ this repository.
+
+## Quick user manual
+
+The app is minimal but you can find all functionalities in
+the [user manual](./documentation/manual/QuickUserManual.md).
+
+## HowTo
+
+There is a little [HowTo](./documentation/technical/HowTo.md) for two things:
+
+* By default this app works with static data from fake server. HowTo explains how to use real data
+  from TMDB servers.
+* How to launch the tests.
+
+## Engineering
+
+* The [technical presentation](./documentation/technical/TechnicalPresentation.md) helps you to
+  understand how I did this app
+* The [engineering doc](./documentation/meta/Engineering.md) That explains the technical choices I
+  had to do
+
+## More documents
+
+* [Why this project?](./documentation/meta/WhyThisProject.md)
+* [Bibliography](./documentation/meta/Bibliography.md)
+
+### Backstage
+
+* This [todoList](./documentation/production/ToDoList.md) explains some idea and task to improve
+  this project
+* The [dev diary](./documentation/meta/DevDiary.md): a day to day diary of this project
 
 ## Contributing
+
 if you want to help in any way, just send me an [email](mailto:pierre@cabnum.fr)
 
+## Who Am I (TLDR)
+
+* Computer Engineer since 20 years
+* Android developer since 11 years
+* French Living in Bordeaux (best 🍷 in the world)
+* [linkedin](https://www.linkedin.com/in/pierrebenayoun1976/)
+
 ## License
+
 This project is licensed under the [Apache License 2.0](https://opensource.org/licenses/Apache-2.0) 
 
 

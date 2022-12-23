@@ -13,7 +13,9 @@ By default this app works with fake data from fake server.
 2. Follow these steps to get your API key [here](https://developers.themoviedb.org/3/getting-started/introduction)
 
 ### Step 2: Include API key in the project
+
 Add your API key in `local.properties` file.
+
 ```
 tmdb_api_key="[YOUR_API_KEY]"
 ```
@@ -21,4 +23,9 @@ tmdb_api_key="[YOUR_API_KEY]"
 Et voilà !
 
 ## Tests
+
+There is two set of tests:
+
+* local/unit tests for data layer are [here](../../data/src/test).
+* Instrumented tests with compose tests for UI layer are [here](../../app/src/androidTest)
  

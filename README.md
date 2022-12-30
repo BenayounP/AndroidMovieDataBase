@@ -12,10 +12,11 @@
 AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/3).
 
 It's a personal project to be up to date on Android
-latest ["official" tools](./documentation/technical/androidtools.md) and best practices for the the
+latest ["official" tools](./documentation/technical/AndroidTools.md) and best practices for the the
 simplest realistic app.
 
-More details [here](./documentation/meta/WhyThisProject.md).
+More details here:
+[Why this project](documentation/backstage/WhyThisProject.md).
 
 ## Disclaimer
 
@@ -44,19 +45,22 @@ There is a little [HowTo](./documentation/technical/HowTo.md) for two things:
 
 * The [technical presentation](./documentation/technical/TechnicalPresentation.md) helps you to
   understand how I did this app
-* The [engineering doc](./documentation/meta/Engineering.md) That explains the technical choices I
-  had to do
+* The [engineering doc](documentation/backstage/Engineering.md) That explains the technical choices
+  I had to do
+* This [todoList](./documentation/production/ToDoList.md) explains some idea and task to improve
+  this project
 
 ## More documents
 
-* [Why this project?](./documentation/meta/WhyThisProject.md)
-* [Bibliography](./documentation/meta/Bibliography.md)
+* [Bibliography](documentation/backstage/Bibliography.md): Some links to interesting sites that
+  helped me in this project
 
-### Backstage
+## Backstage
 
-* This [todoList](./documentation/production/ToDoList.md) explains some idea and task to improve
-  this project
-* The [dev diary](./documentation/meta/DevDiary.md): a day to day diary of this project
+* [Why this project?](documentation/backstage/WhyThisProject.md): The reasons I created this project
+* [Post Partum](documentation/backstage/PostPartum.md): Some thought after some months on this "
+  simple" projects
+* [The dev diary](documentation/backstage/DevDiary.md): a day to day diary of this project
 
 ## Contributing
 
@@ -67,7 +71,7 @@ if you want to help in any way, just send me an [email](mailto:pierre@cabnum.fr)
 * Computer Engineer since 20 years
 * Android developer since 11 years
 * French Living in Bordeaux (best 🍷 in the world)
-* [linkedin](https://www.linkedin.com/in/pierrebenayoun1976/)
+* [Linkedin](https://www.linkedin.com/in/pierrebenayoun1976/)
 
 ## License
 

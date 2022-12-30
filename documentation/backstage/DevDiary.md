@@ -80,22 +80,30 @@ Found a nice medium post about life cycle and allow app to refresh screen onResu
 And I tried to test my data classes so I needed to test some Flow methods. Not easy at all....(maybe [Turbine](https://github.com/cashapp/turbine) can help?)
 
 ### 27/09/22
-Ok, Turbine wasn't needed (for now). Finalized to test the main data class `DefaultTmdbRepository`. Did some QA tests using fake datasource and fixed some bugs in...DataStore(🤷). The app is almost ready to be presented to the world!
+
+Ok, Turbine wasn't needed (for now). Finalized to test the main data class `DefaultTmdbRepository`.
+Did some QA tests using fake datasource and fixed some bugs in...DataStore(🤷). The app is almost
+ready to be presented to the world!
 
 ### 30/09/22
+
 Oops, forgot to write on previous days.
 
-I worked on flavors. Surprisingly I wasn't worked many time with this concept. 
+I worked on flavors. Surprisingly I wasn't worked many time with this concept.
 
-Used it to do a `fake` flavor to handle a FakeDatasource to easier some QA. 
+Used it to do a `fake` flavor to handle a FakeDatasource to easier some QA.
+
+## October 2022
 
 ### 03/10/22
-Worked on documentation and....noticed that there was in my architecture. 
-A proof that documentation can be useful and not just for help others understand what you did 
+
+Worked on documentation and....noticed that there was in my architecture. A proof that documentation
+can be useful and not just for help others understand what you did
 
 ### 04/10/22
-I reorganized the classes in data layer to be cleaner: Felt like a electrician trying to wire some strange material.
-Also did some documentation. OMG it's complicated to work with video in Markdown!
+
+I reorganized the classes in data layer to be cleaner: Felt like a electrician trying to wire some
+strange material. Also did some documentation. OMG it's complicated to work with video in Markdown!
 
 ### 05/10/22
 Worked on documentation. It begins to looks like a good one. By the way, I realised that I had never worked on projects with good documentation. From another perspective, it is very time consuming. 
@@ -146,10 +154,33 @@ Finalized at last DataStore tests.
 Fought with the windows bug (see above) but it works now!
 
 ### 31/10/22
-Long time, no see! Google has made its traditional Android Developer Summit last week and there was some [important news for android and especially Compose](https://android-developers.googleblog.com/2022/10/modern-android-development-at-ads-22.html).
 
-So I dealt with them today. I'm at the same time glad and concerned about the fact that there is always some improvements in Android development. 
+Long time, no see! Google has made its traditional Android Developer Summit last week and there was
+some [important news for android and especially Compose](https://android-developers.googleblog.com/2022/10/modern-android-development-at-ads-22.html)
+.
 
-Glad that the Google's dev team improve regularly the tools wit this time the [Gradle BOM for Compose](https://developer.android.com/jetpack/compose/setup#using-the-bom) that simplify the mess with gradle management of dependencies. 
+So I dealt with them today. I'm at the same time glad and concerned about the fact that there is
+always some improvements in Android development.
 
-Concerned that in less than 3 months of development I have to develop some functionality (the `pull to refresh` one) to see just after that...Google propose it as an [experimental version](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean))
+Glad that the Google's dev team improve regularly the tools wit this time
+the [Gradle BOM for Compose](https://developer.android.com/jetpack/compose/setup#using-the-bom) that
+simplify the mess with gradle management of dependencies.
+
+Concerned that in less than 3 months of development I have to develop some functionality (
+the `pull to refresh` one) to see just after that...Google propose it as
+an [experimental version](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean))
+
+## November 2022
+
+Ain't nobody got time for that
+
+## December 22
+
+### 23/12/22
+
+"Just" upgraded dependencies version and fought with tests that weren't works anymore. But found a
+bug that had gone under the radar.
+
+### 30/12/22
+
+"Finished" documentation. I'm sure there is many typo but it's doooone.

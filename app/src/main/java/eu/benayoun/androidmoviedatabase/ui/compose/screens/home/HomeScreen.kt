@@ -12,10 +12,9 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.model.HomeViewModel
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.MovieGridComposable
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.home.UpdateStatusComposable
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
+import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.model.HomeViewModel
 
 
 // Lifecycle observation found here : https://betterprogramming.pub/jetpack-compose-with-lifecycle-aware-composables-7bd5d6793e0
@@ -26,11 +25,12 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        viewModel.observeLifecycle(LocalLifecycleOwner.current.lifecycle)
+        viewModel.ObserveLifecycle(LocalLifecycleOwner.current.lifecycle)
 
         Column(){
             val tmdbMovieList = viewModel.movieListState.collectAsState().value
             fun updateTmdbMovies()= viewModel.updateTmdbMovies()
+
             UpdateStatusComposable(tmdbMetadata = viewModel.tmdbMetadataState.collectAsState().value,
                 tmdbUpdateStatus = viewModel.tmdbUpdateStatus.collectAsState().value,
                 tmdbMovieList = tmdbMovieList,
@@ -43,11 +43,11 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun <LO : LifecycleObserver> LO.observeLifecycle(lifecycle: Lifecycle) {
+fun <LO : LifecycleObserver> LO.ObserveLifecycle(lifecycle: Lifecycle) {
     DisposableEffect(lifecycle) {
-        lifecycle.addObserver(this@observeLifecycle)
+        lifecycle.addObserver(this@ObserveLifecycle)
         onDispose {
-            lifecycle.removeObserver(this@observeLifecycle)
+            lifecycle.removeObserver(this@ObserveLifecycle)
         }
     }
 }

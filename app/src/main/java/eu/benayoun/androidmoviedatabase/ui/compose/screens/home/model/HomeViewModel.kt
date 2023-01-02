@@ -10,10 +10,10 @@ import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,16 +23,13 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(@TmdbRepositoryProvider private val tmdbRepository: TmdbRepository) : ViewModel(), DefaultLifecycleObserver {
 
     private val _movieListState = MutableStateFlow<List<TmdbMovie>>(listOf())
-    val movieListState : StateFlow<List<TmdbMovie>>
-    get() = _movieListState
+    val movieListState: StateFlow<List<TmdbMovie>> = _movieListState.asStateFlow()
 
     private val _tmdbMetadataState = MutableStateFlow(TmdbMetadata())
-    val tmdbMetadataState : StateFlow<TmdbMetadata>
-    get() = _tmdbMetadataState
+    val tmdbMetadataState: StateFlow<TmdbMetadata> = _tmdbMetadataState.asStateFlow()
 
     private val _tmdbUpdateStatus = MutableStateFlow<TmdbUpdateStatus>(TmdbUpdateStatus.Updating)
-    val tmdbUpdateStatus : StateFlow<TmdbUpdateStatus>
-    get() = _tmdbUpdateStatus
+    val tmdbUpdateStatus: StateFlow<TmdbUpdateStatus> = _tmdbUpdateStatus.asStateFlow()
 
     init{
         getFlows()

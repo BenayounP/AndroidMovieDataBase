@@ -2,8 +2,10 @@
 
 ## Build Variants
 There is two flavors:
-* `fakeServer`: That works with a **fake** server with static data that you can find [here](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/model/fake/FakeTmdbMovieListGenerator.kt). It gives you once in two refresh a server error
-* `tmdbServer`: That works with the **real** TMDB API server
+* `fakeServer`: That works with a **fake** server with static data that you can
+  find [here](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/model/fake/FakeTmdbMovieListGenerator.kt)
+  . It gives you once in two refresh a **fake** server error
+* `tmdbServer`: That works with the **real** TMDB API server. You need a TMDB API key to use it.
 
 ## Get real data from TMDB server
 By default this app works with fake data from fake server.
@@ -25,7 +27,6 @@ Et voilà !
 ## Tests
 
 There is two set of tests:
-
 * local/unit tests for data layer are [here](../../data/src/test).
 * Instrumented tests with compose tests for UI layer are [here](../../app/src/androidTest)
  

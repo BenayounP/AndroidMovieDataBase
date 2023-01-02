@@ -52,21 +52,22 @@ flowchart TD
 Don't see this diagram in Android studio? (see
 this [tip](https://www.jetbrains.com/help/idea/markdown.html#enable-diagrams))
 
+### Modules
+
+This application is decomposed in 3 **Gradle** modules:
+
+* [app](../../app): Regroups the `AMDBApplication` class and all the `ui` layer
+* [data](../../data): Contains the `data` layer
+* [utils](../../utils): Contains only a little Log helper both used in data and app layers
+
 ### Interfaces everywhere
 
-Interfaces are central to this project. I use them whenever I can. And I comment them as much as I
-can to explain what they do.
+Interfaces are central to this project. I use them whenever I can, especially in data layer. And I
+comment them as much as I can to explain what they do.
 
 I also use "Default" implementation where I must and more specific words where I can: `Retrofit`
 , `Room` and so on...
 
-When I need i also use "Fake" implementations to help me test the application (manually or with
+When I need I also use "Fake" implementations to help me test the application (manually or with
 automatic tests)
-
-### Modules
-
-This application is decomposed in 3 **Gradle** modules:
-* [app](../../app): Regroups the `AMDBApplication` class and all the `ui` layer
-* [data](../../data): Contains the `data` layer
-* [utils](../../utils): Contains only a little Log helper both used in data and app layers
 

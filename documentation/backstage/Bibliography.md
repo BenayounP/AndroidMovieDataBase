@@ -1,14 +1,15 @@
 # Bibliography
 
 ## Disclaimer
-This is the "main" bibliography. You should also see references that helped me directly in the code. 
+This is the "main" bibliography. You should also see references that helped me straight in the code.
 
 ## Links
 
 ### Architecture
+
 * How to create a multi Gradle module app
   * [Personal blog from Nikola K.](https://cinnamon.agency/blog/post/multi_module_apps_with_kotlin_and_dagger)
-* How to create an offline first app :
+* How to create an offline first app
   * [Android developers post](https://developer.android.com/topic/architecture/data-layer/offline-first)
 
 ### Dependency Injection

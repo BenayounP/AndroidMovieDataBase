@@ -23,6 +23,7 @@ flowchart TD
 Don't see this diagram in Android studio? (see
 this [tip](https://www.jetbrains.com/help/idea/markdown.html#enable-diagrams))
 
+
 ## Fetching Data
 
 The application basically fetches data from [TMDB API](https://developers.themoviedb.org/3)
@@ -36,8 +37,9 @@ Interface: [TmdbDataSource](../../data/src/main/java/eu/benayoun/androidmoviedat
 
 It saves this in a dataBase with metadata.
 
-* Global
-  TmdbCache: [TmdbCache](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/source/local/TmdbCache.kt)
+The entry class
+is [TmdbCache](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/source/local/TmdbCache.kt)
+that regroups classes that manages movie list and Metadata.
 
 ### Movie List
 
@@ -63,7 +65,9 @@ Metadata are about:
 * [TmdbMetadata](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/model/meta/TmdbMetadata.kt)
   with last internet update time stamp
 * [TmdbSourceStatus](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/model/meta/TmdbSourceStatus.kt)
+  that details the source of the data: Internet or Cache
 * [TmdbUpdateStatus](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/model/meta/TmdbUpdateStatus.kt)
+  the status: is it updating?
 
 #### Interface
 
@@ -81,11 +85,15 @@ with [Proto DataStore](https://developer.android.com/topic/libraries/architectur
 
 * Main
   Class: [HomeScreen](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/HomeScreen.kt)
+  * Composable for update
+    status: [UpdateStatusComposable](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/composables/UpdateStatusComposable.kt)
+  * Composable for
+    MovieGrid: [MovieGrid](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/composables/MovieGridComposable.kt)
 * View
   model: [HomeViewModel](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/model/HomeViewModel.kt)
 
 ### Interactions
 
-* Pull to refresh system can be found at the end of
-  this [file](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/composables/MovieGridComposable.kt)
+* Pull to refresh system can be found **at the end** of this
+  class [file](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/composables/MovieGridComposable.kt)
   .

@@ -15,8 +15,10 @@ treat it as a real, professional project, with the highest level of engineering 
 ### Do it the Google way with latest tools
 
 Android was developed by Google, and while the company used to allow developers a lot of freedom in
-the early days of the OS, this is no longer the case. Now, the company provides official tools and
-guidelines that are increasingly becoming the standard way of doing things.
+the early days of the OS, this is no longer the case.
+
+Now, the company provides official tools and guidelines that are increasingly becoming the standard
+way of doing things.
 
 This is why I use these [Android Tools](../technical/AndroidTools.md).
 
@@ -34,13 +36,13 @@ difficult to do in the classic way: "here's your Jira ticket, see you tomorrow f
 ### Step 2 POC: Just a log with a movie title
 
 * Concentrate on data layer. Create a repository without cache that "just" get data on the net
-* for ui part: just logs
+* For UI part: just logs
 
 ### Step 3: "just" complete layers walktrough with log
 
 * Add cache mainly with Room (and begin to do some redesign when needed)
 
-### Step 4: Display moviiiiies
+### Step 4: Display movies (at last)
 
 * Create Composable, ViewModel. Use Coil to display posters!
 
@@ -63,14 +65,18 @@ difficult to do in the classic way: "here's your Jira ticket, see you tomorrow f
 
 #### Compose
 
-* I had to create Dimensions class to handle global dimensions (padding1, Padding2)
-* I had to create Color class to handle global colors with light and dark theme
+* I had to
+  create [Dimensions class](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/theme/Dimensions.kt)
+  to handle global dimensions (padding1, padding2)
+* I had to
+  create [Color class](../../app/src/main/java/eu/benayoun/androidmoviedatabase/ui/theme/Color.kt)
+  to handle global colors with light and dark theme
 
 ## About comments
 
 My policy is the following:
 
-* I comment all interface
+* I comment all interface class
 * I comment all models linked to business
 * I explain the tricky parts or the "illogical" hacks I had to do
 * I give a link to useful online resources (like...stack overflow 😉)

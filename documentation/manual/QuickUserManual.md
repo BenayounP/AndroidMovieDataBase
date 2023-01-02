@@ -10,8 +10,8 @@ AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/
 
 ### What it does
 
-It fetches the most popular movies on IMDB Data base and save it on the device for offline for
-further reference.
+It fetches the most popular movies on TMDB Data base and save it on the device for offline further
+reference.
 
 #### In details
 
@@ -21,7 +21,7 @@ further reference.
 * There is a card on top of the screen that displays:
   * If the app is updating data
   * The time of last internet update
-  * if the last internet update has failed, the reason why.
+  * if the last internet update has failedand the reason why.
 
 ### Theming and languages
 
@@ -33,6 +33,3 @@ further reference.
 &nbsp; &nbsp; &nbsp; &nbsp;
   <img alt="Dark" src="../assets/dark_theme_screenshot.png" width="45%">
 </p>
-
-
-

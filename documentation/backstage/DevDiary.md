@@ -184,3 +184,9 @@ bug that had gone under the radar.
 ### 30/12/22
 
 "Finished" documentation. I'm sure there is many typo but it's doooone.
+
+## January 2023
+
+### 02/01/23
+
+Public Release date!

@@ -9,10 +9,10 @@
 
 ## TLDR
 
-AMDB is a movie data base based on [TMDB API](https://developers.themoviedb.org/3).
+AMDB is a movie app based on [TMDB API](https://developers.themoviedb.org/3).
 
 It's a personal project to be up to date on Android
-latest ["official" tools](./documentation/technical/AndroidTools.md) and best practices for the the
+latest ["official" tools](./documentation/technical/AndroidTools.md) and best practices for a
 simplest realistic app.
 
 More details here:
@@ -22,11 +22,13 @@ More details here:
 
 This is the first POC version for pair reviews.
 
+🙏 You can show support by starring ⭐ this repository.
+
+#### Markdown tip
+
 Some difficulties to read markdown files on Android
 studio? [Fix this in less than 3 minutes](https://joachimschuster.de/posts/android-studio-fix-markdown-plugin-again/)
 .
-
-🙏 You can show support by starring ⭐ this repository.
 
 ## Quick user manual
 
@@ -50,17 +52,14 @@ There is a little [HowTo](./documentation/technical/HowTo.md) for two things:
 * This [todoList](./documentation/production/ToDoList.md) explains some idea and task to improve
   this project
 
-## More documents
-
-* [Bibliography](documentation/backstage/Bibliography.md): Some links to interesting sites that
-  helped me in this project
-
 ## Backstage
 
 * [Why this project?](documentation/backstage/WhyThisProject.md): The reasons I created this project
 * [Post Partum](documentation/backstage/PostPartum.md): Some thought after some months on this "
   simple" projects
 * [The dev diary](documentation/backstage/DevDiary.md): a day to day diary of this project
+* [Bibliography](documentation/backstage/Bibliography.md): Some links to interesting sites that
+  helped me in this project
 
 ## Contributing
 

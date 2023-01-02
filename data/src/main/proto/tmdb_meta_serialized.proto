@@ -1,0 +1,28 @@
+// Documentation
+// https://developers.google.com/protocol-buffers/docs/proto3
+
+syntax = "proto3";
+
+option java_package = "eu.benayoun.androidmoviedatabase";
+option java_multiple_files = true;
+
+
+message TmdbMetadataSerialized {
+  TmdbSourceEnum tmdbSourceEnum =1;
+  TmdbAPIErrorEnum tmdbAPIError =2;
+  string exceptionLocalizedMessage=3;
+  int64 lastInternetSuccessTimestamp=4; // mapped to Long in Java/Kotlin
+
+  enum TmdbSourceEnum {
+    TMDB_ORIGIN_NONE=0;
+    TMDB_ORIGIN_INTERNET=1;
+    TMDB_ORIGIN_CACHE=2;
+  }
+
+  enum TmdbAPIErrorEnum{
+    TMDB_API_ERROR_NO_INTERNET=0;
+    TMDB_API_ERROR_TOOL_ERROR=1;
+    TMDB_API_ERROR_NO_DATA=2;
+    TMDB_API_ERROR_EXCEPTION=3;
+  }
+}

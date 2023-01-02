@@ -1,0 +1,122 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id "kotlin-kapt"
+    id "com.google.protobuf" version "0.8.17"
+}
+
+android {
+    compileSdk rootProject.ext.compileSdk
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        // For local tests
+        buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
+
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "server"
+    productFlavors {
+        fakeserver {
+            dimension "server"
+            getIsDefault().set(true)
+            buildConfigField "String", "TMDB_API_KEY", '""'
+        }
+        tmdbserver{
+            dimension "server"
+            // For IMDB API KEY
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file("local.properties").newDataInputStream())
+            def tmdb_api_key = properties.getProperty("tmdb_api_key")
+            if (tmdb_api_key == null) tmdb_api_key = '""'
+            buildConfigField "String", "TMDB_API_KEY", tmdb_api_key
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    // ** CORE **
+    implementation "androidx.core:core-ktx:$androidx_core_version"
+
+    // ** DI **
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // ** DATA **
+
+    // DATASOURCE
+    // Retrofit
+    // https://github.com/square/retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // REPOSITORY
+    // Room
+    def room_version = '2.4.3'
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // DataStore
+    implementation  "androidx.datastore:datastore:1.0.0"
+    implementation  "com.google.protobuf:protobuf-javalite:3.21.5"
+
+    // utils
+    implementation project(path: ':utils')
+
+    // ** TESTS **
+    // Global
+    def coroutines_test_version = '1.6.4'
+    implementation 'androidx.test:monitor:1.6.0'
+    implementation 'androidx.test.ext:junit-ktx:1.1.4'
+
+    // Local
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
+    testImplementation "androidx.test:core:$androidx_test_version"
+    testImplementation "androidx.test:runner:1.5.1"
+    testImplementation 'org.robolectric:robolectric:4.8'
+
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.14.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}

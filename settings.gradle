@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AndroidMovieDataBase"
 include ':app'
+include ':data'
+include ':androidmoviedatabase'
+include ':utils'

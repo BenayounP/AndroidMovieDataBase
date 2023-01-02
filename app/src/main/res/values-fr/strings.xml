@@ -1,0 +1,25 @@
+<resources>
+    <!-- GLOBAL -->
+    <string name="app_name">AndroidMovieDataBase</string>
+
+    <!-- HOME SCREEN -->
+
+    <!-- STATUS -->
+    <string name="update_status_cause">Cause :</string>
+    <string name="update_status_updating">Mise à jour</string>
+    <string name="source_status_none">Aucune donnée (pour l\'instant)</string>
+    <string name="source_status_cache">Données issues du cache.</string>
+    <string name="source_status_no_internet">Pas de connection Internet</string>
+    <string name="source_status_tool_error">Probleme d\'outillage (retrofit)</string>
+    <string name="source_status_no_data">Aucune donnée venant de TMDB</string>
+    <string name="source_status_exception">Exception :  </string>
+    <string name="source_status_unknown">Inconnue 🤔</string>
+    <string name="source_status_serialization_problem">Problème avec les données de l\'appareil</string>
+    <string name="source_status_last_update">Dernière MAJ:</string>
+
+    <!-- ACTIONS-->
+    <string name="click_to_refresh">Clickez pour récuperer les données sur Internet</string>
+
+    <!-- MOVIE -->
+    <string name="content_description_poster">Poster du film</string>
+</resources>

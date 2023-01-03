@@ -27,6 +27,8 @@ Et voilà !
 ## Tests
 
 There is two set of tests:
-* local/unit tests for data layer are [here](../../data/src/test).
-* Instrumented tests with compose tests for UI layer are [here](../../app/src/androidTest)
+* local/unit tests for data layer
+  are [here](../../data/src/test/java/eu/benayoun/androidmoviedatabase/).
+* Instrumented tests with compose tests for UI layer
+  are [here](../../app/src/androidTest/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/composables/)
  

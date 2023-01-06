@@ -12,7 +12,7 @@ buildscript {
         ext.android_plugin = '7.3.1'
 
         // dependencies
-        ext.hilt_version = '2.44'
+        ext.hilt_version = '2.44.2'
 
         //test assertions
         ext.truth_version ='1.1.3'

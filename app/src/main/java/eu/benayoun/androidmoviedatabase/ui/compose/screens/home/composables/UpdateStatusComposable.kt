@@ -25,7 +25,6 @@ import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.ui.theme.BackgroundAndContentColor
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeColors
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding1
-import eu.benayoun.androidmoviedatabase.utils.LogUtils
 import java.util.*
 
 @Composable
@@ -36,7 +35,7 @@ fun UpdateStatusComposable(
     updateMovies: () -> Unit,
     modifier: Modifier = Modifier,
     textTestTag: String= "") {
-    var backgroundAndContentColor = getBackgroundAndContentColor(tmdbUpdateStatus, tmdbMetadata)
+    val backgroundAndContentColor = getBackgroundAndContentColor(tmdbUpdateStatus, tmdbMetadata)
     Row(
         modifier
             .padding(padding1)
@@ -45,10 +44,9 @@ fun UpdateStatusComposable(
                 color = backgroundAndContentColor.background,
                 shape = RoundedCornerShape(padding1)
             )
-            .clickable(onClick = {
-                LogUtils.v("click")
-                updateMovies
-            }),
+            .clickable(
+                onClick = updateMovies
+            ),
 
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
@@ -87,15 +85,11 @@ private fun getMetadataText(tmdbMovieList: List<TmdbMovie>,tmdbUpdateStatus : Tm
         val tmdbSourceStatus = tmdbMetadata.tmdbSourceStatus
         // No movie to display
         if (tmdbMovieList.isEmpty()){
-            metadataTextBuilder.append(stringResource(R.string.source_status_none))
-            metadataTextBuilder.append("\n")
-            metadataTextBuilder.append("\n")
+            metadataTextBuilder.append(stringResource(R.string.source_status_none)).append("\n\n")
             if (tmdbSourceStatus is TmdbSourceStatus.Cache || tmdbSourceStatus is TmdbSourceStatus.SerializationProblem) {
                 metadataTextBuilder.append(stringResource(R.string.update_status_cause))
-                metadataTextBuilder.append("\n")
-                metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus))
-                metadataTextBuilder.append("\n")
-                metadataTextBuilder.append("\n")
+                    .append("\n")
+                metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus)).append("\n\n")
             }
             metadataTextBuilder.append(stringResource(R.string.click_to_refresh))
         }
@@ -108,14 +102,12 @@ private fun getMetadataText(tmdbMovieList: List<TmdbMovie>,tmdbUpdateStatus : Tm
                 is TmdbSourceStatus.Cache,
                 is TmdbSourceStatus.SerializationProblem-> {
                     metadataTextBuilder.append(stringResource(R.string.source_status_cache))
-                    metadataTextBuilder.append("\n")
+                        .append("\n")
                     metadataTextBuilder.append(stringResource(R.string.update_status_cause))
-                    metadataTextBuilder.append("\n")
-                    metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus))
-                    metadataTextBuilder.append("\n")
+                        .append("\n")
+                    metadataTextBuilder.append(getRefreshErrorCause(tmdbSourceStatus)).append("\n")
                 }
             }
-            LogUtils.v("timestamp: ${tmdbMetadata.lastInternetSuccessTimestamp}")
             if (tmdbMetadata.lastInternetSuccessTimestamp != TmdbMetadata.INVALID_TIMESTAMP) {
                 metadataTextBuilder.append(
                     stringResource(R.string.source_status_last_update).plus(
@@ -131,7 +123,7 @@ private fun getMetadataText(tmdbMovieList: List<TmdbMovie>,tmdbUpdateStatus : Tm
 // get string error only with TmdbSourceStatus.SerializationProblem and TmdbSourceStatus.Cache
 @Composable
 private fun getRefreshErrorCause(tmdbSourceStatus: TmdbSourceStatus) : String {
-    var refreshErrorCause:String = ""
+    var refreshErrorCause = ""
 
     if (tmdbSourceStatus is TmdbSourceStatus.SerializationProblem){
         refreshErrorCause =  stringResource(R.string.source_status_serialization_problem)
@@ -153,6 +145,6 @@ private fun getRefreshErrorCause(tmdbSourceStatus: TmdbSourceStatus) : String {
 
 private fun getReadableTimeStamp(timeStamp : Long): String{
     val cal: Calendar = Calendar.getInstance()
-    cal.setTimeInMillis(timeStamp)
+    cal.timeInMillis = timeStamp
     return DateFormat.format("hh:mm", cal).toString()
 }

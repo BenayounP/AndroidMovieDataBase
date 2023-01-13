@@ -32,6 +32,8 @@ The application basically fetches data from [TMDB API](https://developers.themov
 Interface: [TmdbDataSource](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/source/network/TmdbDataSource.kt)
 * Default implementation
   with [Retrofit](https://square.github.io/retrofit/): [RetrofitTmdbDataSource](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/source/network/retrofit/RetrofitTmdbDataSource.kt)
+* Fake implementation (that fill data with a static
+  list) : [FakeTmdbDataSource](../../data/src/main/java/eu/benayoun/androidmoviedatabase/data/source/network/FakeTmdbDataSource.kt)
 
 ## Saving Data
 

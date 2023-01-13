@@ -54,6 +54,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'eu.benayoun.androidmoviedatabase'
 }
 
 dependencies {
@@ -74,14 +75,14 @@ dependencies {
 
     // REPOSITORY
     // Room
-    def room_version = '2.4.3'
+    def room_version = '2.5.0'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     // DataStore
-    implementation  "androidx.datastore:datastore:1.0.0"
-    implementation  "com.google.protobuf:protobuf-javalite:3.21.5"
+    implementation "androidx.datastore:datastore:1.0.0"
+    implementation "com.google.protobuf:protobuf-javalite:3.21.5"
 
     // utils
     implementation project(path: ':utils')
@@ -89,20 +90,20 @@ dependencies {
     // ** TESTS **
     // Global
     def coroutines_test_version = '1.6.4'
-    implementation 'androidx.test:monitor:1.6.0'
-    implementation 'androidx.test.ext:junit-ktx:1.1.4'
+    implementation 'androidx.test:monitor:1.6.1'
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
 
     // Local
     testImplementation "junit:junit:4.13.2"
     testImplementation "com.google.truth:truth:$truth_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
     testImplementation "androidx.test:core:$androidx_test_version"
-    testImplementation "androidx.test:runner:1.5.1"
+    testImplementation "androidx.test:runner:1.5.2"
     testImplementation 'org.robolectric:robolectric:4.8'
 
 }
 
-// Generates the java Protobuf-lite code for the Protobufs in this project. See
+// Generates the java Protobuf-lite code for the Protobuf in this project. See
 // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
 // for more information.
 

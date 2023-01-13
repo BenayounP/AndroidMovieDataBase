@@ -190,3 +190,11 @@ bug that had gone under the radar.
 ### 02/01/23
 
 Public Release date!
+
+### 13/01/23
+
+Since first release what didi I do? Essentially fixed typo in documentation and updated
+dependencies.
+I also tried to fix a bug in the display of the movie grid. In certain case movie poster is smaller
+than others. I can't fill the remaining space to have the text aligned with the on on the adjacent
+item...it seem's this is linked to compose LazyGrid...🤷

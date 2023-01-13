@@ -45,6 +45,7 @@ There is a little [HowTo](./documentation/technical/HowTo.md) for two things:
 
 ## Engineering
 
+* The [list of official tools](./documentation/technical/AndroidTools.md) used in this project
 * The [technical presentation](./documentation/technical/TechnicalPresentation.md) helps you to
   understand how I did this app
 * The [engineering doc](documentation/backstage/Engineering.md) That explains the technical choices

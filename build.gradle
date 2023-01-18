@@ -33,3 +33,8 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task testLocalAndInstrumented(type: GradleBuild) {
+    tasks = ['testFakeserverDebugUnitTest', 'connectedFakeserverDebugAndroidTest']
+    group = 'Verification'
+}

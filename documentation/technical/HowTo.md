@@ -26,9 +26,30 @@ Et voilà !
 
 ## Tests
 
+### What
+
 There is two set of tests:
+
 * local/unit tests for data layer
   are [here](../../data/src/test/java/eu/benayoun/androidmoviedatabase/).
 * Instrumented tests with compose tests for UI layer
   are [here](../../app/src/androidTest/java/eu/benayoun/androidmoviedatabase/ui/compose/screens/home/composables/)
- 
+
+### Launch all tests
+
+I created a little script that allow you to launch all local and instrumented tests in debug variant
+with a fake server.
+
+You can launch it
+
+* on Android Studio on Gradle Panel: AndrodiMovieDataBase > Tasks > verification >
+  testLocalAndInstrumented
+* Via your terminal: `./gradlew testLocalAndInstrumented`
+
+On Android Studio, results are available here:
+
+* Local tests [summary](../../data/build/reports/tests/testFakeserverDebugUnitTest/index.html)
+* Instrumented
+  tests [summary](../../app/build/reports/androidTests/connected/flavors/fakeserver/index.html)
+
+

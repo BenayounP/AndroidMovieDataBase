@@ -198,3 +198,11 @@ dependencies.
 I also tried to fix a bug in the display of the movie grid. In certain case movie poster is smaller
 than others. I can't fill the remaining space to have the text aligned with the on on the adjacent
 item...it seem's this is linked to compose LazyGrid...🤷
+
+### 18/01/23
+
+Added a little script on Gradle that launches all local and instrumented tests. I will use it before
+any commit.
+I'm happy because I hadn't coded Gradle scripts in a long time. It got me back in the swing and
+bonus it was for a practical need.  
+

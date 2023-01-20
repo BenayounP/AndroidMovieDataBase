@@ -1,35 +1,50 @@
 package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.ui.theme.ComposeDimensions.padding1
 
 
 @Composable
-fun  MovieGridComposable(modifier:Modifier = Modifier, tmdbMovieList: List<TmdbMovie>, onPullToRefresh: () -> Unit) {
+fun MovieGridComposable(
+    modifier: Modifier = Modifier,
+    viewWidth: Dp,
+    tmdbMovieList: List<TmdbMovie>,
+    onPullToRefresh: () -> Unit
+) {
+    val itemWidth = (viewWidth - padding1) / 2
+    // typical movie poster ratio is 3/2
+    val posterHeight = itemWidth * 3 / 2
+    Log.d(
+        "TMP_DEBUG",
+        "ScreenWidth: $viewWidth | itemWidth: $itemWidth | posterHeight: $posterHeight"
+    )
     val gridState = rememberLazyGridState()
-    updateOnPullToRefresh(gridState,onPullToRefresh)
-    LazyVerticalGrid(columns = GridCells.Fixed(2),
+    UpdateOnPullToRefresh(gridState, onPullToRefresh)
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(padding1),
         horizontalArrangement = Arrangement.spacedBy(padding1),
         modifier = modifier
             .padding(horizontal = padding1),
         state = gridState
     ) {
-        items(items = tmdbMovieList){tmdbMovie ->
-            MovieItemComposable(tmdbMovie)
+        items(items = tmdbMovieList) { tmdbMovie ->
+            MovieItemComposable(tmdbMovie, modifier = modifier, posterHeight = posterHeight)
         }
     }
 }
 
 
 @Composable
-fun updateOnPullToRefresh(gridState : LazyGridState, onPullToRefresh: () -> Unit){
-    if (gridState.isPullingToRefresh()){
+fun UpdateOnPullToRefresh(gridState: LazyGridState, onPullToRefresh: () -> Unit) {
+    if (gridState.isPullingToRefresh()) {
         onPullToRefresh()
     }
 }

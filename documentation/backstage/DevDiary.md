@@ -197,12 +197,20 @@ Since first release what didi I do? Essentially fixed typo in documentation and 
 dependencies.
 I also tried to fix a bug in the display of the movie grid. In certain case movie poster is smaller
 than others. I can't fill the remaining space to have the text aligned with the on on the adjacent
-item...it seem's this is linked to compose LazyGrid...🤷
+item...it seems this is linked to compose LazyGrid...🤷
 
 ### 18/01/23
 
 Added a little script on Gradle that launches all local and instrumented tests. I will use it before
 any commit.
 I'm happy because I hadn't coded Gradle scripts in a long time. It got me back in the swing and
-bonus it was for a practical need.  
+bonus it was for a practical need.
+
+## 23/01/23
+
+Fixed at last the bug I mentioned the 13/01/23. I think it was linked to Compose fundamentals that
+compute dimensions once for all.
+That can be not enough when you have two items in a row that have not the same height. I couldn't
+manage to force the smallest item to fit the height of the biggest one.
+So I computed movies poster size manually and it seems to work. 🤞🤞🤞🤞🤞
 

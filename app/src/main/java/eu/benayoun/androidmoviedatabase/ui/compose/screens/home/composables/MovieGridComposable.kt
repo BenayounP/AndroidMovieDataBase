@@ -1,6 +1,5 @@
 package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.*
@@ -21,10 +20,6 @@ fun MovieGridComposable(
     val itemWidth = (viewWidth - padding1) / 2
     // typical movie poster ratio is 3/2
     val posterHeight = itemWidth * 3 / 2
-    Log.d(
-        "TMP_DEBUG",
-        "ScreenWidth: $viewWidth | itemWidth: $itemWidth | posterHeight: $posterHeight"
-    )
     val gridState = rememberLazyGridState()
     UpdateOnPullToRefresh(gridState, onPullToRefresh)
     LazyVerticalGrid(
@@ -36,7 +31,7 @@ fun MovieGridComposable(
         state = gridState
     ) {
         items(items = tmdbMovieList) { tmdbMovie ->
-            MovieItemComposable(tmdbMovie, modifier = modifier, posterHeight = posterHeight)
+            MovieItemComposable(tmdbMovie, posterHeight = posterHeight)
         }
     }
 }

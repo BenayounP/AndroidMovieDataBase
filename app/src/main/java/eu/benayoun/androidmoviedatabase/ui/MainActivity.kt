@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
 import eu.benayoun.androidmoviedatabase.ui.compose.screens.HomeScreen
@@ -17,7 +16,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val activityWidth = getActivityWidth()
+        val activityWidth = UIUtils.getScreenWidth(resources)
         setContent {
             AndroidMovieDataBaseTheme {
                 HomeScreen(viewWidth = activityWidth)
@@ -25,10 +24,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun getActivityWidth(): Dp {
-        val displayMetrics = resources.displayMetrics
-        return Dp((displayMetrics.widthPixels / displayMetrics.density))
-    }
+
 }
 
 

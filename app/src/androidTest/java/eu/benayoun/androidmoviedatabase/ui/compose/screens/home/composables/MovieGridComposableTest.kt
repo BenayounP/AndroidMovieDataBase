@@ -1,12 +1,14 @@
 package eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables
 
 
+import android.content.res.Resources
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.google.common.truth.Truth.assertThat
 import eu.benayoun.androidmoviedatabase.data.model.fake.FakeTmdbMovieListGenerator
+import eu.benayoun.androidmoviedatabase.ui.UIUtils
 import org.junit.Rule
 import org.junit.Test
 
@@ -91,7 +93,11 @@ class MovieGridComposableTest {
         val movieGridComposableTestTag = "movieGridComposableTestTag"
 
         composeTestRule.setContent {
-            MovieGridComposable(modifier = Modifier.testTag(movieGridComposableTestTag),fakeMovieList,onPullToRefreshTester)
+            MovieGridComposable(
+                modifier = Modifier.testTag(movieGridComposableTestTag),
+                viewWidth = UIUtils.getScreenWidth(Resources.getSystem()),
+                fakeMovieList, onPullToRefreshTester
+            )
         }
         return hasTestTag(movieGridComposableTestTag)
     }

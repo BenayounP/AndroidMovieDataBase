@@ -50,6 +50,6 @@ On Android Studio, results are available here:
 
 * Local tests [summary](../../data/build/reports/tests/testFakeserverDebugUnitTest/index.html)
 * Instrumented
-  tests [summary](../../app/build/reports/androidTests/connected/flavors/fakeserver/index.html)
+  tests [summary](../../app/build/reports/androidTests/connected/flavors/fakeserver/eu.benayoun.androidmoviedatabase.ui.compose.screens.home.composables.html)
 
 

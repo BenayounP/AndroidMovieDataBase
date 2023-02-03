@@ -206,11 +206,26 @@ any commit.
 I'm happy because I hadn't coded Gradle scripts in a long time. It got me back in the swing and
 bonus it was for a practical need.
 
-## 23/01/23
+### 23/01/23
 
 Fixed at last the bug I mentioned the 13/01/23. I think it was linked to Compose fundamentals that
 compute dimensions once for all.
 That can be not enough when you have two items in a row that have not the same height. I couldn't
 manage to force the smallest item to fit the height of the biggest one.
 So I computed movies poster size manually and it seems to work. 🤞🤞🤞🤞🤞
+
+## February 2023
+
+### 03/02/23
+
+And I tried to merge the 0.9.1 version on `main`.
+
+But I did some mistake when doing the 0.9.1 forgetting to "synchronize" `develop` and `main` when
+releasing the previous 0.9.1.
+
+So 1 hour of trying to tidy up the mess and it's...quite better.
+
+I "just" had to rename devlop into develop_legacy and to recreate a develop branch for new devs 🤷
+
+
 

@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
 import eu.benayoun.androidmoviedatabase.data.source.di.TmdbDataStoreRoomMoviesCacheProvider
 import eu.benayoun.androidmoviedatabase.data.source.local.TmdbCache
@@ -28,12 +29,10 @@ class RepositoriesModule {
     internal fun providesRetrofitTMDBRepositoryProvider(
         @TmdbDataSourceProvider TMDBDataSource: TmdbDataSource,
         @TmdbDataStoreRoomMoviesCacheProvider tmdbCache: TmdbCache
-    ): TmdbRepository {
-        return eu.benayoun.androidmoviedatabase.data.repository.DefaultTmdbRepository(
-            TMDBDataSource,
-            tmdbCache,
-            externalScope = MainScope(),
-            dispatcher = Dispatchers.IO
-        )
-    }
+    ): TmdbRepository = DefaultTmdbRepository(
+        TMDBDataSource,
+        tmdbCache,
+        externalScope = MainScope(),
+        dispatcher = Dispatchers.IO
+    )
 }

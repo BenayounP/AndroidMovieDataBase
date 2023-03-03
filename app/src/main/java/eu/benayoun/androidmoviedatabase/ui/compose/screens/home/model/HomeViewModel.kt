@@ -10,11 +10,9 @@ import eu.benayoun.androidmoviedatabase.data.model.TmdbMovie
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbMetadata
 import eu.benayoun.androidmoviedatabase.data.model.meta.TmdbUpdateStatus
 import eu.benayoun.androidmoviedatabase.data.repository.TmdbRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -50,19 +48,19 @@ class HomeViewModel @Inject constructor(@TmdbRepositoryProvider private val tmdb
 
     private fun getFlows() {
         viewModelScope.launch {
-            tmdbRepository.getTmdbUpdateStatusFlow().flowOn(Dispatchers.IO)
+            tmdbRepository.getTmdbUpdateStatusFlow()
                 .collect { tmdbUpdateStatus: TmdbUpdateStatus ->
                     _tmdbUpdateStatus.value = tmdbUpdateStatus
                 }
         }
         viewModelScope.launch {
-            tmdbRepository.getPopularMovieListFlow().flowOn(Dispatchers.IO)
+            tmdbRepository.getPopularMovieListFlow()
                 .collect { tmdbMovieList: List<TmdbMovie> ->
                     _movieListState.value = tmdbMovieList
                 }
         }
         viewModelScope.launch {
-            tmdbRepository.getTmdbMetaDataFlow().flowOn(Dispatchers.IO)
+            tmdbRepository.getTmdbMetaDataFlow()
                 .collect { tmdbMetadata: TmdbMetadata ->
                     _tmdbMetadataState.value = tmdbMetadata
                 }

@@ -27,7 +27,7 @@ This is the first POC version for pair reviews.
 #### Markdown tip
 
 Some difficulties to read markdown files on Android
-studio? [Fix this in less than 3 minutes](https://joachimschuster.de/posts/android-studio-fix-markdown-plugin-again/)
+studio? [Fix it in less than 3 minutes](https://joachimschuster.de/posts/android-studio-fix-markdown-plugin-again/)
 .
 
 ## Quick user manual

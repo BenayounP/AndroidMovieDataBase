@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dagger.hilt.android.AndroidEntryPoint
-import eu.benayoun.androidmoviedatabase.ui.compose.screens.HomeScreen
+import eu.benayoun.androidmoviedatabase.ui.compose.screens.home.HomeScreen
 import eu.benayoun.androidmoviedatabase.ui.theme.AndroidMovieDataBaseTheme
 
 

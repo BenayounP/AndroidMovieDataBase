@@ -8,6 +8,10 @@
 
 [Kotlin](https://developer.android.com/kotlin)
 
+## Dependency Injection
+
+[Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+
 ## Data Stream
 
 [Flow](https://developer.android.com/kotlin/flow)

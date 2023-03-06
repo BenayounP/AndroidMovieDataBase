@@ -32,20 +32,19 @@ internal class DefaultTmdbRepository(private val tmdbDataSource: TmdbDataSource,
         return tmdbCache.getTmdbMovieListFlow()
     }
 
-
     override suspend fun getTmdbUpdateStatusFlow(): Flow<TmdbUpdateStatus> = _updateFlow
 
     override fun updateTmdbMovies() {
         externalScope.launch(dispatcher) {
             popularMoviesMutex.withLock() {
                 // we are updating and we say it!
-                _updateFlow.value=TmdbUpdateStatus.Updating
+                _updateFlow.value = TmdbUpdateStatus.Updating
 
                 var lastInternetSuccessTimeStamp: Long = TmdbMetadata.INVALID_TIMESTAMP
-                var tmdbSourceStatus: TmdbSourceStatus
-                var tmdbPopularMovieList: List<TmdbMovie>
+                val tmdbSourceStatus: TmdbSourceStatus
+                val tmdbPopularMovieList: List<TmdbMovie>
                 // Step 1: try to get data on TMDB Server
-                var tmdbAPIResponse = tmdbDataSource.getPopularMovies()
+                val tmdbAPIResponse = tmdbDataSource.getPopularMovies()
 
                 // Step 2 Success : save films in db and update metadata
                 if (tmdbAPIResponse is TmdbAPIResponse.Success) {

@@ -1,4 +1,4 @@
-package eu.benayoun.androidmoviedatabase.ui.compose.screens
+package eu.benayoun.androidmoviedatabase.ui.compose.screens.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,7 +28,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), viewWidth: Dp) {
     ) {
         viewModel.ObserveLifecycle(LocalLifecycleOwner.current.lifecycle)
 
-        Column() {
+        Column {
             val tmdbMovieList = viewModel.movieListState.collectAsState().value
             fun updateTmdbMovies() = viewModel.updateTmdbMovies()
 

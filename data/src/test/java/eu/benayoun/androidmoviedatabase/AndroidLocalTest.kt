@@ -7,7 +7,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
-// AN abstract class that :
+// An abstract class that :
 // * helps to define tests working with robotelectric
 // * working on min sdk version
 // * give access to context in JVM unit tests

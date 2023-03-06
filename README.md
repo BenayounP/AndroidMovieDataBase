@@ -18,22 +18,18 @@ simplest realistic app.
 More details here:
 [Why this project](documentation/backstage/WhyThisProject.md).
 
-## Disclaimer
-
-This is the first POC version for pair reviews.
-
 🙏 You can show support by starring ⭐ this repository.
 
-#### Markdown tip
+### Markdown tip
 
 Some difficulties to read markdown files on Android
-studio? [Fix this in less than 3 minutes](https://joachimschuster.de/posts/android-studio-fix-markdown-plugin-again/)
+studio? [Fix it in less than 3 minutes](https://joachimschuster.de/posts/android-studio-fix-markdown-plugin-again/)
 .
 
 ## Quick user manual
 
 The app is minimal but you can find all functionalities in
-the [user manual](./documentation/manual/QuickUserManual.md).
+this [user manual](./documentation/manual/QuickUserManual.md).
 
 ## HowTo
 

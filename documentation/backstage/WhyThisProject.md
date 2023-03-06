@@ -1,9 +1,11 @@
 # About this project
 
 ## What's that app? 
-This is a very simple application from a business perspective. it's just fetching data and save them in case the device is offline. 
+This is a very simple application from a business perspective. it's just fetching data and save them
+in case the device is offline.
+But this the core of Android development: fetch, save and display.
 
-But I tried to make it the most perfect in term of computer engineering :
+So I tried to make it the most perfect in term of computer engineering:
 * Use Google recommended architecture
 * Use recommended patterns like [SOLID](https://en.wikipedia.org/wiki/SOLID) principles
 * Use Google latest libraries

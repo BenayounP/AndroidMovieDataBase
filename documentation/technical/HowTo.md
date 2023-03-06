@@ -8,7 +8,8 @@ There is two flavors:
 * `tmdbServer`: That works with the **real** TMDB API server. You need a TMDB API key to use it.
 
 ## Get real data from TMDB server
-By default this app works with fake data from fake server.
+By default this app works with fake data from fake server. To get real data you need to follow these
+steps:
 
 ### Step 1: Get a TMDB API key
 1. Create an account [here](https://www.themoviedb.org/signup) (or [login](https://www.themoviedb.org/login)) on TMDB site

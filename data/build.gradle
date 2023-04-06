@@ -75,14 +75,14 @@ dependencies {
 
     // REPOSITORY
     // Room
-    def room_version = '2.5.0'
+    def room_version = '2.5.1'
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     // DataStore
     implementation "androidx.datastore:datastore:1.0.0"
-    implementation "com.google.protobuf:protobuf-javalite:3.21.5"
+    implementation "com.google.protobuf:protobuf-javalite:3.21.12"
 
     // utils
     implementation project(path: ':utils')

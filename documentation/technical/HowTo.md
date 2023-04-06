@@ -43,7 +43,7 @@ with a fake server.
 
 You can launch it
 
-* on Android Studio on Gradle Panel: AndrodiMovieDataBase > Tasks > verification >
+* on Android Studio on Gradle Panel: AndroidMovieDataBase > Tasks > verification >
   testLocalAndInstrumented
 * Via your terminal: `./gradlew testLocalAndInstrumented`
 
